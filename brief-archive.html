@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brief Archive — Fintech Intelligence</title>
+<style>
+:root {
+  --navy: #0d1b2a;
+  --accent: #00c2cb;
+  --accent2: #f5a623;
+  --bg: #f0f3f7;
+  --white: #fff;
+  --border: #dde3ea;
+  --text-muted: #8fa3b8;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--navy); }
+.header { background: var(--navy); color: white; padding: 28px 40px; border-bottom: 3px solid var(--accent); }
+.header h1 { font-size: 22px; font-weight: normal; margin-bottom: 4px; }
+.header-sub { font-size: 12px; color: var(--text-muted); letter-spacing: 1px; }
+.controls { max-width: 1000px; margin: 28px auto 0; padding: 0 24px; display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+.filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-right: 4px; }
+.filter-btn { padding: 6px 14px; border-radius: 20px; border: 1px solid var(--border); background: white; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; cursor: pointer; color: #555; transition: all 0.15s; }
+.filter-btn:hover, .filter-btn.active { background: var(--navy); color: var(--accent); border-color: var(--navy); }
+.search-box { margin-left: auto; padding: 7px 14px; border: 1px solid var(--border); border-radius: 20px; font-size: 12px; color: var(--navy); outline: none; width: 200px; }
+.search-box:focus { border-color: var(--accent); }
+.grid { max-width: 1000px; margin: 24px auto 60px; padding: 0 24px; display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 16px; }
+.brief-card { background: white; border: 1px solid var(--border); border-radius: 8px; padding: 20px; text-decoration: none; color: inherit; display: block; transition: all 0.15s; border-top: 3px solid var(--navy); }
+.brief-card:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.10); transform: translateY(-2px); border-top-color: var(--accent); }
+.card-date { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px; }
+.card-edition { font-size: 10px; font-weight: 700; color: var(--accent); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+.card-title { font-size: 15px; font-weight: bold; color: var(--navy); margin-bottom: 10px; line-height: 1.4; font-family: 'Georgia', serif; }
+.card-thought-seed { font-size: 12px; color: #555; margin-bottom: 12px; border-left: 3px solid var(--accent); padding-left: 8px; line-height: 1.4; }
+.card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 12px; }
+.ctag { font-size: 9px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 3px 7px; border-radius: 3px; color: white; }
+.ctag.payments { background: #1a6eb5; }
+.ctag.credit { background: #7b2d8b; }
+.ctag.risk { background: #c0392b; }
+.ctag.macro { background: #16a085; }
+.ctag.em { background: #d35400; }
+.ctag.fuel { background: #b35c00; }
+.ctag.fleet { background: #4a5568; }
+.ctag.smb { background: #2c3e50; }
+.card-meta { font-size: 11px; color: var(--text-muted); display: flex; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 10px; margin-top: 4px; }
+.read-link { color: var(--accent); font-weight: 700; font-size: 11px; text-decoration: none; }
+.empty-state { grid-column: 1/-1; text-align: center; padding: 60px; color: var(--text-muted); font-size: 14px; }
+.stats-bar { max-width: 1000px; margin: 0 auto; padding: 16px 24px; display: flex; gap: 32px; }
+.stat { }
+.stat-val { font-size: 22px; font-weight: 700; color: var(--navy); }
+.stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📁 Brief Archive — Fintech Intelligence</h1>
+  <div class="header-sub">All editions · Searchable by date, tag, and Thought Seed topic</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val" id="totalCount">3</div><div class="stat-label">Editions</div></div>
+  <div class="stat"><div class="stat-val" id="weekCount">2</div><div class="stat-label">This Week</div></div>
+  <div class="stat"><div class="stat-val" id="tsCount">3</div><div class="stat-label">Thought Seeds</div></div>
+</div>
+
+<div class="controls">
+  <span class="filter-label">Filter:</span>
+  <button class="filter-btn active" onclick="filterTag('all', this)">All</button>
+  <button class="filter-btn" onclick="filterTag('payments', this)">Payments</button>
+  <button class="filter-btn" onclick="filterTag('credit', this)">Credit</button>
+  <button class="filter-btn" onclick="filterTag('risk', this)">Risk</button>
+  <button class="filter-btn" onclick="filterTag('macro', this)">Macro</button>
+  <button class="filter-btn" onclick="filterTag('fuel', this)">Fuel &amp; Fleet</button>
+  <button class="filter-btn" onclick="filterTag('em', this)">Emerging Markets</button>
+  <button class="filter-btn" onclick="filterTag('smb', this)">SMB</button>
+  <input class="search-box" type="text" placeholder="Search editions..." oninput="searchBriefs(this.value)">
+</div>
+
+<div class="grid" id="briefGrid">
+  <!-- Populated by JS from briefs array -->
+</div>
+
+<script>
+// ── BRIEF INDEX ──────────────────────────────────────────
+// Each new edition is added here automatically by the scheduled task.
+// Format: { date, edition, file, headline, thoughtSeed, tags, readTime }
+const briefs = [
+  {
+    date: "April 8, 2026",
+    dateSort: "2026-04-08",
+    edition: "003",
+    file: "briefs/brief-2026-04-08.html",
+    headline: "Diesel at $5.64 and Falling Off a Cliff: Inside the Tariff-Fuel-Credit Shock Hitting Fleet Card Portfolios Right Now",
+    thoughtSeed: "AI and Machine Learning in Credit Risk — Dil (SSRN 5260027): Fuel Card Behavioral Underwriting as a 45-Day Early Warning Signal",
+    tags: ["fuel", "credit", "risk", "macro", "smb", "regulatory", "payments"],
+    readTime: "~20 min",
+    macro: "SLOOS Easing Window vs. Diesel Shock — The Credit Cycle Inflection Nobody Is Pricing Yet"
+  },
+  {
+    date: "April 6, 2026",
+    dateSort: "2026-04-06",
+    edition: "002",
+    file: "briefs/brief-2026-04-06.html",
+    headline: "Liberation Day, One Year On: What Tariff Chaos Did to Commercial Credit — And What's Still Coming",
+    thoughtSeed: "AI-Driven Credit Risk Assessment Framework for SME Lending — SSRN Rizvi (Jan 2026): Fuel Card Behavioral Underwriting as the real play",
+    tags: ["payments", "credit", "risk", "macro", "fuel", "smb", "regulatory"],
+    readTime: "~20 min",
+    macro: "DAT Spot-Contract Convergence: 90-Day Leading Indicator for Trucking Portfolio Stress"
+  },
+  {
+    date: "April 6, 2026",
+    dateSort: "2026-04-06",
+    edition: "001",
+    file: "brief-v2.html",
+    headline: "Fed Tightening + Trucking Stress + Nubank's AI Underwriting — What It Means For Commercial Credit Now",
+    thoughtSeed: "Graph Neural Networks for Credit Risk: Modeling Buyer-Supplier Payment Networks",
+    tags: ["payments", "credit", "risk", "macro", "fuel", "em", "smb"],
+    readTime: "~22 min",
+    macro: "Oil → Credit Transmission Mechanism: The 90-Day Lag You Can Trade On"
+  }
+];
+
+// ── RENDER ───────────────────────────────────────────────
+function renderBriefs(filtered) {
+  const grid = document.getElementById('briefGrid');
+  if (filtered.length === 0) {
+    grid.innerHTML = '<div class="empty-state">No editions match this filter.</div>';
+    return;
+  }
+  grid.innerHTML = filtered.map(b => `
+    <a class="brief-card" href="${b.file}" data-tags="${b.tags.join(' ')}" data-search="${(b.headline + b.thoughtSeed + b.macro).toLowerCase()}">
+      <div class="card-edition">Edition #${b.edition}</div>
+      <div class="card-date">${b.date} · ${b.readTime}</div>
+      <div class="card-title">${b.headline}</div>
+      <div class="card-thought-seed">🌱 ${b.thoughtSeed}</div>
+      <div class="card-tags">
+        ${b.tags.map(t => `<span class="ctag ${t}">${t}</span>`).join('')}
+      </div>
+      <div class="card-meta">
+        <span>📡 ${b.macro}</span>
+      </div>
+    </a>
+  `).join('');
+}
+
+function filterTag(tag, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const filtered = tag === 'all' ? briefs : briefs.filter(b => b.tags.includes(tag));
+  renderBriefs(filtered);
+}
+
+function searchBriefs(query) {
+  const q = query.toLowerCase();
+  const filtered = q ? briefs.filter(b =>
+    b.headline.toLowerCase().includes(q) ||
+    b.thoughtSeed.toLowerCase().includes(q) ||
+    (b.macro && b.macro.toLowerCase().includes(q)) ||
+    b.date.toLowerCase().includes(q)
+  ) : briefs;
+  renderBriefs(filtered);
+}
+
+// Update stats
+document.getElementById('totalCount').textContent = briefs.length;
+document.getElementById('tsCount').textContent = briefs.length;
+const thisWeek = briefs.filter(b => {
+  const d = new Date(b.dateSort);
+  const now = new Date();
+  const diff = (now - d) / (1000 * 60 * 60 * 24);
+  return diff <= 7;
+});
+document.getElementById('weekCount').textContent = thisWeek.length;
+
+// Initial render
+renderBriefs(briefs);
+</script>
+
+</body>
+</html>

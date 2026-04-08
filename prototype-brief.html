@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fintech Intelligence Brief — Prototype</title>
+<style>
+  :root {
+    --navy: #0d1b2a;
+    --navy-mid: #1b2e45;
+    --navy-light: #243b55;
+    --accent: #00c2cb;
+    --accent2: #f5a623;
+    --green: #27ae60;
+    --red: #e74c3c;
+    --yellow: #f39c12;
+    --text: #e8edf2;
+    --text-muted: #8fa3b8;
+    --text-dark: #1a2535;
+    --bg: #f4f6f9;
+    --white: #ffffff;
+    --border: #dde3ea;
+    --zone2: #fff8ee;
+    --zone3: #f0f7ff;
+    --tag-payments: #1a6eb5;
+    --tag-credit: #7b2d8b;
+    --tag-risk: #c0392b;
+    --tag-macro: #16a085;
+    --tag-em: #d35400;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Georgia', serif;
+    background: var(--bg);
+    color: var(--text-dark);
+    line-height: 1.7;
+  }
+
+  /* ─── ZONE LABEL ─────────────────────────────── */
+  .zone-label {
+    text-align: center;
+    padding: 10px 0;
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .zone-label.z1 { background: var(--navy); color: var(--accent); }
+  .zone-label.z2 { background: #7b4f00; color: #ffe5a0; }
+  .zone-label.z3 { background: #1a3a5c; color: #a8d4ff; }
+
+  /* ─── HEADER ─────────────────────────────────── */
+  .header {
+    background: var(--navy);
+    color: var(--text);
+    padding: 32px 48px 24px;
+    border-bottom: 3px solid var(--accent);
+  }
+  .header-meta {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .header h1 {
+    font-size: 28px;
+    font-weight: normal;
+    letter-spacing: 1px;
+    color: var(--white);
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: var(--text-muted);
+  }
+  .header-stats {
+    display: flex;
+    gap: 32px;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--navy-light);
+  }
+  .stat {
+    font-family: 'Arial', sans-serif;
+  }
+  .stat-val {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  .stat-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+  }
+
+  /* ─── MAIN LAYOUT ────────────────────────────── */
+  .main { max-width: 860px; margin: 0 auto; padding: 0 24px 60px; }
+
+  /* ─── SECTION HEADERS ────────────────────────── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 36px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--navy);
+  }
+  .section-icon {
+    font-size: 18px;
+  }
+  .section-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--navy);
+  }
+  .section-count {
+    margin-left: auto;
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ─── TAGS ───────────────────────────────────── */
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; }
+  .tag {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 3px;
+    color: white;
+  }
+  .tag.payments { background: var(--tag-payments); }
+  .tag.credit { background: var(--tag-credit); }
+  .tag.risk { background: var(--tag-risk); }
+  .tag.macro { background: var(--tag-macro); }
+  .tag.em { background: var(--tag-em); }
+  .tag.geo { background: #555; }
+  .tag.signal { background: #2c3e50; border: 1px solid #555; }
+
+  /* ─── STORY CARDS ────────────────────────────── */
+  .story-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 14px;
+    border-left: 4px solid var(--navy);
+    position: relative;
+  }
+  .story-card.high { border-left-color: var(--red); }
+  .story-card.medium { border-left-color: var(--yellow); }
+  .story-card.watch { border-left-color: var(--accent); }
+
+  .story-headline {
+    font-size: 17px;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .story-body {
+    font-size: 14px;
+    color: #3a4a5c;
+    margin-bottom: 12px;
+  }
+  .story-source {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .story-source a { color: var(--accent); text-decoration: none; }
+
+  /* ─── BIAS METER ─────────────────────────────── */
+  .bias-meter {
+    background: #f0f3f7;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 12px;
+  }
+  .bias-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+  }
+  .bias-axis {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .bias-axis-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    color: #666;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  .bias-track {
+    flex: 1;
+    height: 6px;
+    background: linear-gradient(to right, #e74c3c, #ecf0f1, #2ecc71);
+    border-radius: 3px;
+    position: relative;
+  }
+  .bias-dot {
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    background: var(--navy);
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  }
+  .bias-ends {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Arial', sans-serif;
+    font-size: 9px;
+    color: #999;
+    margin-top: 2px;
+  }
+  .other-side {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px dashed #ccc;
+    font-size: 12px;
+    color: #555;
+    font-style: italic;
+  }
+  .other-side strong {
+    font-style: normal;
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--accent2);
+  }
+
+  /* ─── DEEP DIVE ──────────────────────────────── */
+  .deep-dive {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 28px 32px;
+    margin-bottom: 20px;
+  }
+  .deep-dive h3 {
+    font-size: 21px;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .deep-dive-meta {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .deep-dive p {
+    font-size: 15px;
+    color: #2c3e50;
+    margin-bottom: 14px;
+  }
+  .so-what {
+    background: var(--navy);
+    color: var(--text);
+    border-radius: 5px;
+    padding: 16px 20px;
+    margin-top: 18px;
+  }
+  .so-what-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 6px;
+  }
+  .so-what p {
+    font-size: 14px;
+    color: var(--text);
+    margin: 0;
+  }
+
+  /* ─── EMERGING RISKS ─────────────────────────── */
+  .risk-card {
+    background: var(--white);
+    border: 1px solid #f5c6cb;
+    border-left: 4px solid var(--red);
+    border-radius: 6px;
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+  .risk-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+  }
+  .risk-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .risk-body { font-size: 13px; color: #444; }
+
+  /* ─── DATA SNAPSHOT ──────────────────────────── */
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .data-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 18px 20px;
+    text-align: center;
+  }
+  .data-number {
+    font-family: 'Arial', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+  }
+  .data-number.up { color: var(--green); }
+  .data-number.down { color: var(--red); }
+  .data-metric {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    margin: 4px 0;
+  }
+  .data-context { font-size: 12px; color: #666; }
+
+  /* ─── SMB PULSE ──────────────────────────────── */
+  .smb-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+
+  /* ─── THOUGHT SEED ───────────────────────────── */
+  .thought-seed {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  .ts-header {
+    background: var(--navy);
+    color: var(--text);
+    padding: 20px 28px;
+  }
+  .ts-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+  .ts-title {
+    font-size: 19px;
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+  .ts-authors {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+  .ts-body { padding: 24px 28px; }
+  .ts-section {
+    margin-bottom: 20px;
+  }
+  .ts-section-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent2);
+    margin-bottom: 8px;
+  }
+  .ts-section p { font-size: 14px; color: #2c3e50; }
+  .confidence {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .confidence.green { background: #d5f5e3; color: #1a7a40; }
+  .confidence.yellow { background: #fef9e7; color: #9a6f00; }
+  .confidence.red { background: #fdecea; color: #a93226; }
+  .ts-counterarg {
+    background: #f8f9fa;
+    border-left: 3px solid #aaa;
+    padding: 12px 16px;
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* ─── ZONE DIVIDERS ──────────────────────────── */
+  .zone-divider {
+    margin: 48px -24px 0;
+    padding: 20px 48px;
+    text-align: center;
+  }
+  .zone-divider.z2 {
+    background: var(--zone2);
+    border-top: 3px solid var(--accent2);
+    border-bottom: 3px solid var(--accent2);
+  }
+  .zone-divider.z3 {
+    background: var(--zone3);
+    border-top: 3px solid #1a6eb5;
+    border-bottom: 3px solid #1a6eb5;
+  }
+  .zone-divider-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .zone-divider.z2 .zone-divider-title { color: #7b4f00; }
+  .zone-divider.z3 .zone-divider-title { color: #1a3a5c; }
+  .zone-divider-sub {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: #666;
+  }
+
+  /* ─── LINKEDIN ZONE ──────────────────────────── */
+  .linkedin-zone { background: var(--zone2); padding-top: 8px; }
+  .linkedin-post-box {
+    background: white;
+    border: 1px solid #e8d5b0;
+    border-radius: 8px;
+    padding: 24px 28px;
+    margin-bottom: 16px;
+  }
+  .li-post-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0077b5;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .li-post-label::before {
+    content: "in";
+    background: #0077b5;
+    color: white;
+    font-size: 9px;
+    font-weight: 900;
+    padding: 2px 5px;
+    border-radius: 2px;
+  }
+  .li-post-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 14px;
+    color: #1a1a1a;
+    line-height: 1.6;
+    white-space: pre-wrap;
+    border: 1px dashed #ccc;
+    padding: 16px;
+    border-radius: 4px;
+    background: #fafafa;
+  }
+  .li-instruction {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    color: #888;
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .carousel-outline {
+    background: white;
+    border: 1px solid #e8d5b0;
+    border-radius: 8px;
+    padding: 20px 28px;
+  }
+  .carousel-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #0077b5;
+    margin-bottom: 14px;
+  }
+  .carousel-slide {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #f0e8d8;
+  }
+  .slide-num {
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #0077b5;
+    background: #e8f4fd;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .slide-content {
+    font-family: 'Arial', sans-serif;
+    font-size: 13px;
+    color: #333;
+  }
+  .slide-content strong { display: block; color: #111; margin-bottom: 2px; }
+
+  /* ─── MEDIUM ZONE ────────────────────────────── */
+  .medium-zone { background: var(--zone3); padding-top: 8px; }
+  .medium-scaffold {
+    background: white;
+    border: 1px solid #c5ddf4;
+    border-radius: 8px;
+    padding: 24px 28px;
+  }
+  .med-label {
+    font-family: 'Arial', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #1a6eb5;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .med-label::before {
+    content: "M";
+    background: #000;
+    color: white;
+    font-size: 11px;
+    font-weight: 900;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .med-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--navy);
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+  .med-subtitle {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 20px;
+    font-style: italic;
+  }
+  .med-section {
+    margin-bottom: 16px;
+    padding-left: 16px;
+    border-left: 3px solid #c5ddf4;
+  }
+  .med-section-title {
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--navy);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .med-section-notes {
+    font-size: 13px;
+    color: #555;
+    font-style: italic;
+  }
+  .med-cta {
+    background: #e8f4fd;
+    border-radius: 6px;
+    padding: 14px 18px;
+    margin-top: 18px;
+    font-family: 'Arial', sans-serif;
+    font-size: 12px;
+    color: #1a4a7a;
+  }
+  .med-cta strong { display: block; margin-bottom: 4px; }
+
+  /* ─── FOOTER ─────────────────────────────────── */
+  .footer {
+    background: var(--navy);
+    color: var(--text-muted);
+    padding: 20px 48px;
+    font-family: 'Arial', sans-serif;
+    font-size: 11px;
+    text-align: center;
+  }
+  .footer strong { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  ZONE 1 — THE BRIEF (PRIVATE INTELLIGENCE READ)        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="zone-label z1">⬛ Zone 1 of 3 — The Brief &nbsp;|&nbsp; Private Intelligence Read &nbsp;|&nbsp; ~20 min</div>
+
+<div class="header">
+  <div class="header-meta">Fintech Intelligence Brief &nbsp;·&nbsp; Monday, April 6, 2026 &nbsp;·&nbsp; Edition #001 &nbsp;·&nbsp; Prototype</div>
+  <h1>The Credit & Payments Brief</h1>
+  <div class="header-sub">Payments · Commercial Credit · Credit Risk · Emerging Markets · Macro Influence</div>
+  <div class="header-stats">
+    <div class="stat">
+      <div class="stat-val">5</div>
+      <div class="stat-label">Top Stories</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">2</div>
+      <div class="stat-label">Deep Dives</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">3</div>
+      <div class="stat-label">Emerging Risks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">1</div>
+      <div class="stat-label">Thought Seed</div>
+    </div>
+    <div class="stat">
+      <div class="stat-val">~20 min</div>
+      <div class="stat-label">Read Time</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <!-- EXECUTIVE BRIEF -->
+  <div class="section-header">
+    <span class="section-icon">📰</span>
+    <span class="section-title">Executive Brief</span>
+    <span class="section-count">Top 5 Stories</span>
+  </div>
+
+  <!-- Story 1 -->
+  <div class="story-card high">
+    <div class="tags">
+      <span class="tag credit">Commercial Credit</span>
+      <span class="tag macro">Macro</span>
+      <span class="tag geo">North America</span>
+      <span class="tag signal">Regulatory</span>
+    </div>
+    <div class="story-headline">Fed's Beige Book Flags Tightening Commercial Credit Standards Across Six Districts</div>
+    <div class="story-body">
+      The Federal Reserve's latest Beige Book report shows commercial lenders in six of twelve districts have tightened underwriting standards for mid-market borrowers, citing elevated delinquency rates in discretionary sectors. Credit line utilization among commercial card holders rose 4.2% quarter-over-quarter — a signal historically preceding broader portfolio stress by 60–90 days.
+    </div>
+    <div class="story-source">📎 Source: <a href="https://federalreserve.gov">Federal Reserve Beige Book</a> · Free · High credibility</div>
+    <div class="bias-meter">
+      <div class="bias-title">⚖ Bias Meter</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Monetary</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:25%"></div></div>
+          <div class="bias-ends"><span>Hawk</span><span>Dove</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Regulatory</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:35%"></div></div>
+          <div class="bias-ends"><span>Interventionist</span><span>Free Market</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Business</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:50%"></div></div>
+          <div class="bias-ends"><span>Pro-Incumbent</span><span>Pro-Disruption</span></div>
+        </div>
+      </div>
+      <div class="other-side">
+        <strong>Other Side →</strong> Some economists argue tightening standards reflect prudent risk management, not systemic stress — and that utilization increases signal economic activity, not distress.
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 2 -->
+  <div class="story-card medium">
+    <div class="tags">
+      <span class="tag payments">Payments</span>
+      <span class="tag geo">Global</span>
+      <span class="tag signal">Trend</span>
+    </div>
+    <div class="story-headline">Visa and Mastercard Report Cross-Border B2B Volume Up 11% YoY as Corporate Card Spend Rebounds</div>
+    <div class="story-body">
+      Both networks disclosed strong B2B cross-border payment growth driven by supply chain normalization and renewed international procurement activity. Notably, commercial card interchange revenue outpaced consumer for the first time since Q3 2022, suggesting corporate credit appetite is recovering even as consumer credit tightens.
+    </div>
+    <div class="story-source">📎 Source: <a href="https://investor.visa.com">Visa Investor Relations</a> · <a href="https://investor.mastercard.com">Mastercard IR</a> · Free · High credibility</div>
+    <div class="bias-meter">
+      <div class="bias-title">⚖ Bias Meter</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Business</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:15%"></div></div>
+          <div class="bias-ends"><span>Pro-Incumbent</span><span>Pro-Disruption</span></div>
+        </div>
+      </div>
+      <div class="other-side">
+        <strong>Other Side →</strong> Critics note that network-reported volumes include inflationary pricing effects — real transaction growth may be overstated. Fintechs are quietly capturing the same corridors at lower interchange.
+      </div>
+    </div>
+  </div>
+
+  <!-- Story 3 -->
+  <div class="story-card watch">
+    <div class="tags">
+      <span class="tag risk">Credit Risk</span>
+      <span class="tag geo">LATAM</span>
+      <span class="tag signal">Emerging</span>
+    </div>
+    <div class="story-headline">Brazil's Open Finance Framework Enables First AI-Native Commercial Credit Underwriting at Scale</div>
+    <div class="story-body">
+      Nubank's B2B lending arm disclosed it is underwriting SMB credit lines using real-time open finance data — account flows, receivables, and supplier payment history — with no human review for facilities under $50K. Early vintage data shows 40% lower default rates vs. bureau-only models. North America is watching.
+    </div>
+    <div class="story-source">📎 Source: <a href="https://www.pymnts.com">PYMNTS</a> · <a href="https://www.finextra.com">Finextra</a> · Free</div>
+    <div class="bias-meter">
+      <div class="bias-title">⚖ Bias Meter</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Business</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:80%"></div></div>
+          <div class="bias-ends"><span>Pro-Incumbent</span><span>Pro-Disruption</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Regulatory</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:70%"></div></div>
+          <div class="bias-ends"><span>Interventionist</span><span>Free Market</span></div>
+        </div>
+      </div>
+      <div class="other-side">
+        <strong>Other Side →</strong> Early vintage data is inherently optimistic — adverse selection and economic cycle effects won't appear for 18–24 months. Incumbent lenders argue AI underwriting hasn't been stress-tested through a real downturn.
+      </div>
+    </div>
+  </div>
+
+  <!-- DEEP DIVES -->
+  <div class="section-header">
+    <span class="section-icon">🔬</span>
+    <span class="section-title">Deep Dives</span>
+    <span class="section-count">2 analyses · ~8 min</span>
+  </div>
+
+  <div class="deep-dive">
+    <div class="tags" style="margin-bottom:12px">
+      <span class="tag credit">Commercial Credit</span>
+      <span class="tag risk">Credit Risk</span>
+      <span class="tag geo">North America</span>
+    </div>
+    <h3>The Charge-Off Curve Is Bending: What Commercial Card Lenders Need to Watch in Q2 2026</h3>
+    <div class="deep-dive-meta">Deep Dive #1 · ~4 min · Sources: CFPB, Fed G.19, Payments Dive</div>
+    <p>Commercial charge-off rates in the sub-$5M revenue segment ticked up 18bps in Q1 2026, the third consecutive quarterly increase. What's notable is the distribution — losses are concentrated in three sectors: transportation, food service, and professional services staffing. For commercial card lenders with fleet or fuel card exposure, transportation delinquency is the leading signal to watch.</p>
+    <p>The CFPB's latest supervisory report flagged that 34% of commercial card issuers reviewed had inadequate early warning systems for small business portfolio stress. Most are still relying on static FICO pulls and monthly statement analysis rather than real-time behavioral signals embedded in transaction data.</p>
+    <p>The implication is structural: issuers sitting on rich transactional data — every fuel purchase, every vendor payment — are not systematically mining it for credit signals. The lenders who build that capability in the next 18 months will have a measurable underwriting advantage as the charge-off curve continues to bend.</p>
+    <div class="so-what">
+      <div class="so-what-label">So What For Commercial Lending →</div>
+      <p>If you're in commercial credit decisioning, this is the moment to pressure-test your early warning indicators. Are you looking at behavioral transaction signals, or are you still waiting for a missed payment? The data you need is already in your systems.</p>
+    </div>
+    <div class="bias-meter" style="margin-top:16px">
+      <div class="bias-title">⚖ Bias Meter — This Analysis</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">Regulatory</div>
+        <div style="flex:1">
+          <div class="bias-track"><div class="bias-dot" style="left:30%"></div></div>
+          <div class="bias-ends"><span>Interventionist</span><span>Free Market</span></div>
+        </div>
+      </div>
+      <div class="other-side">
+        <strong>Other Side →</strong> Rising charge-offs in a post-rate-hike environment may be mean reversion to historical norms, not systemic deterioration. Some analysts argue current levels remain below pre-pandemic baselines and don't warrant alarm.
+      </div>
+    </div>
+  </div>
+
+  <!-- EMERGING RISKS -->
+  <div class="section-header">
+    <span class="section-icon">⚠️</span>
+    <span class="section-title">Emerging Risks</span>
+    <span class="section-count">Signals without headlines yet · ~3 min</span>
+  </div>
+
+  <div class="risk-card">
+    <div class="risk-label">🔴 Risk Signal — Payments Infrastructure</div>
+    <div class="risk-title">Real-Time Payment Network Fraud Losses Are Accelerating Faster Than Fraud Controls</div>
+    <div class="risk-body">RTP and FedNow adoption in B2B contexts is outpacing the fraud detection infrastructure built for them. Commercial accounts are increasingly targeted for push-payment fraud. No major headline yet — but NACHA and FinCEN data show incident volume up 67% YoY. Watch for a major corporate loss event to trigger regulatory response in Q3.</div>
+  </div>
+
+  <div class="risk-card">
+    <div class="risk-label">🟡 Risk Signal — Credit Risk Models</div>
+    <div class="risk-title">AI Underwriting Models Trained on 2020–2024 Data Have a Structural Blind Spot</div>
+    <div class="risk-body">Most ML credit models deployed commercially were trained on data spanning a period of unprecedented fiscal stimulus and near-zero rates. They have never seen a prolonged stagflationary environment. As macro conditions shift, model drift is likely before it's detectable. No lender is publicly discussing this. The ones who are privately stress-testing their vintages are ahead.</div>
+  </div>
+
+  <div class="risk-card">
+    <div class="risk-label">🟡 Risk Signal — Emerging Markets</div>
+    <div class="risk-title">LATAM Dollarization Pressure Creating Hidden FX Risk in Cross-Border Commercial Credit</div>
+    <div class="risk-body">Commercial lenders with cross-border exposure into Argentina, Ecuador, and parts of Central America are underpricing FX volatility in their credit risk frameworks. As dollar pressure mounts, receivables denominated in local currency are deteriorating faster than models predict. A quiet but compounding risk.</div>
+  </div>
+
+  <!-- DATA SNAPSHOT -->
+  <div class="section-header">
+    <span class="section-icon">📊</span>
+    <span class="section-title">Data Snapshot</span>
+    <span class="section-count">Numbers only · ~2 min</span>
+  </div>
+
+  <div class="data-grid">
+    <div class="data-card">
+      <div class="data-number down">+18bps</div>
+      <div class="data-metric">Commercial Charge-Off Rate</div>
+      <div class="data-context">Q1 2026 QoQ increase — 3rd consecutive rise. Source: Fed G.19</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number up">+11%</div>
+      <div class="data-metric">B2B Cross-Border Volume</div>
+      <div class="data-context">YoY growth reported by Visa + Mastercard combined networks</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number down">4.2%</div>
+      <div class="data-metric">Commercial Card Utilization</div>
+      <div class="data-context">QoQ increase — historically a 60–90 day leading stress indicator</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number">5.33%</div>
+      <div class="data-metric">Fed Funds Rate</div>
+      <div class="data-context">Unchanged. Next FOMC decision May 7. Market pricing 1 cut in 2026.</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number down">67%</div>
+      <div class="data-metric">RTP Fraud Incidents YoY</div>
+      <div class="data-context">B2B push-payment fraud accelerating. Source: NACHA incident data</div>
+    </div>
+    <div class="data-card">
+      <div class="data-number up">34%</div>
+      <div class="data-metric">Issuers With Weak EWS</div>
+      <div class="data-context">Commercial card issuers flagged by CFPB for inadequate early warning systems</div>
+    </div>
+  </div>
+
+  <!-- SMB PULSE -->
+  <div class="section-header">
+    <span class="section-icon">🏪</span>
+    <span class="section-title">Small Business Pulse</span>
+    <span class="section-count">SMB credit signals · ~2 min</span>
+  </div>
+
+  <div class="smb-card">
+    <div class="tags" style="margin-bottom:10px">
+      <span class="tag credit">SMB Lending</span>
+      <span class="tag geo">North America</span>
+    </div>
+    <p style="font-size:14px; color:#2c3e50">SBA loan approval rates fell to 61% in Q1 2026, the lowest since Q2 2020. Community banks — historically the primary SMB credit channel — are contracting their small business books as deposit costs rise. The vacuum is being filled by fintech lenders and commercial card issuers extending higher revolving credit to the same borrowers. Credit quality of this substitution cohort is untested.</p>
+    <p style="font-size:14px; color:#2c3e50; margin-top:10px"><strong>Watch:</strong> NFIB Small Business Optimism Index releases April 8. Last reading was 98.1, below the 50-year average of 98.7. A further decline correlates with credit tightening in the following quarter.</p>
+  </div>
+
+  <!-- THOUGHT SEED -->
+  <div class="section-header">
+    <span class="section-icon">🌱</span>
+    <span class="section-title">Thought Seed</span>
+    <span class="section-count">Weekly · Research → Commercial Credit translation · ~3 min</span>
+  </div>
+
+  <div class="thought-seed">
+    <div class="ts-header">
+      <div class="ts-label">🌱 Thought Seed — Week of April 6, 2026</div>
+      <div class="ts-title">"Graph Neural Networks for Credit Risk: Modeling Buyer-Supplier Payment Networks to Predict Default Contagion"</div>
+      <div class="ts-authors">Zhang et al., 2024 · arXiv:2401.01751 · Free access</div>
+    </div>
+    <div class="ts-body">
+
+      <div class="ts-section">
+        <div class="ts-section-label">What It Actually Says</div>
+        <p>Researchers built a Graph Neural Network (GNN) that treats commercial entities as nodes and payment relationships as edges. Rather than scoring each borrower in isolation, the model propagates credit signals through the network — if a major buyer starts paying suppliers late, the model flags financial stress in those suppliers before any bureau data reflects it. Tested on a dataset of 180,000 Chinese SMBs, it outperformed XGBoost-based individual scoring by 23% on AUC.</p>
+      </div>
+
+      <div class="ts-section">
+        <div class="ts-section-label">Why It Doesn't Exist in Commercial Credit Yet</div>
+        <p>Three blockers: (1) Data siloing — most commercial card issuers can see their own portfolio's payment behavior but not cross-institution network relationships. (2) Regulatory interpretability requirements — "the network flagged it" doesn't satisfy adverse action notice standards under ECOA. (3) Organizational inertia — credit risk teams are trained on individual obligor analysis, not network topology thinking.</p>
+      </div>
+
+      <div class="ts-section">
+        <div class="ts-section-label">The Implementation Path</div>
+        <p>A commercial card issuer with fleet or fuel card exposure already has the raw material: every vendor transaction is a network edge. A GNN built on internal transaction data alone — without needing cross-institution data — could identify supplier concentration risk and payment network stress in the portfolio before it surfaces as delinquency. Start with a single industry vertical (e.g., transportation) where the buyer-supplier graph is densest.</p>
+      </div>
+
+      <div class="ts-section">
+        <div class="ts-section-label">Confidence Level</div>
+        <div class="confidence yellow">🟡 Emerging — methodology proven, translation gap exists. 2–3 year commercial viability.</div>
+      </div>
+
+      <div class="ts-section">
+        <div class="ts-section-label">Counterargument</div>
+        <div class="ts-counterarg">Commercial payment networks in North America are far less structured than the Chinese B2B ecosystem studied. Sparse graph density outside of specific verticals may render the network signal too noisy to be actionable. The interpretability problem is also non-trivial — regulators will not accept black-box adverse actions on commercial credit without major explainability investment.</div>
+      </div>
+
+    </div>
+  </div>
+
+</div><!-- end main zone 1 -->
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  ZONE 2 — LINKEDIN READY                              -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="zone-divider z2">
+  <div class="zone-divider-title">⬛ Zone 2 of 3 — LinkedIn Ready</div>
+  <div class="zone-divider-sub">Pre-drafted content. Edit your voice → copy → post. ~10 min of work becomes 3.</div>
+</div>
+
+<div class="main linkedin-zone">
+
+  <div class="section-header" style="margin-top:28px">
+    <span class="section-icon">💼</span>
+    <span class="section-title">This Week's Thought Seed Post</span>
+    <span class="section-count">Edit → Post on LinkedIn</span>
+  </div>
+
+  <div class="linkedin-post-box">
+    <div class="li-post-label">LinkedIn Post Draft — Thought Seed</div>
+    <div class="li-post-text">Most commercial credit models score borrowers in isolation.
+
+But credit risk doesn't work in isolation.
+
+A new direction in AI research — Graph Neural Networks applied to buyer-supplier payment networks — suggests that default risk is contagious. When a major buyer starts paying late, their suppliers are under stress too, often 60–90 days before any bureau data shows it.
+
+The data to build this already exists inside every commercial card issuer's transaction history.
+
+The blockers aren't technical. They're organizational:
+→ Siloed data thinking
+→ Interpretability requirements that black-box models can't satisfy
+→ Credit teams trained on individual obligor analysis, not network topology
+
+The lenders who figure out how to see the network — not just the node — will have a structural underwriting advantage.
+
+Curious whether anyone is actively working on this in North American commercial credit. Drop a comment.
+
+#CommercialCredit #CreditRisk #AIinFinance #MachineLearning #Fintech</div>
+    <div class="li-instruction">✏️ Add your voice: Edit the middle section to reflect your own experience or a specific observation from your work. The hook and CTA are ready to go.</div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">🎠</span>
+    <span class="section-title">Carousel Outline — Thought Seed Visual</span>
+    <span class="section-count">5-slide structure for LinkedIn carousel</span>
+  </div>
+
+  <div class="carousel-outline">
+    <div class="carousel-label">LinkedIn Carousel — 5 Slides</div>
+    <div class="carousel-slide">
+      <div class="slide-num">1</div>
+      <div class="slide-content"><strong>Hook Slide</strong>"Your credit model is scoring nodes. The risk is in the network." — Bold text, dark background, your name.</div>
+    </div>
+    <div class="carousel-slide">
+      <div class="slide-num">2</div>
+      <div class="slide-content"><strong>The Problem</strong>Traditional underwriting treats every borrower as an island. But commercial credit is a web of buyer-supplier relationships. Visualize with a simple node-edge diagram.</div>
+    </div>
+    <div class="carousel-slide">
+      <div class="slide-num">3</div>
+      <div class="slide-content"><strong>The Research Signal</strong>GNNs applied to payment networks outperformed standard models by 23% AUC. The signal: late payment contagion spreads through the network before bureaus see it.</div>
+    </div>
+    <div class="carousel-slide">
+      <div class="slide-num">4</div>
+      <div class="slide-content"><strong>The Commercial Credit Opportunity</strong>Fleet and commercial card transaction data = a payment network map. The data exists. The model can be built on internal data alone, one vertical at a time.</div>
+    </div>
+    <div class="carousel-slide">
+      <div class="slide-num">5</div>
+      <div class="slide-content"><strong>Call to Action</strong>"Are you thinking about network effects in your credit portfolio? Follow for weekly Thought Seeds at the intersection of AI research and commercial lending."</div>
+    </div>
+  </div>
+
+  <div class="section-header" style="margin-top:28px">
+    <span class="section-icon">📌</span>
+    <span class="section-title">Quick Take Post</span>
+    <span class="section-count">Data point → 200-word take for mid-week post</span>
+  </div>
+
+  <div class="linkedin-post-box">
+    <div class="li-post-label">LinkedIn Quick Take — Data Point</div>
+    <div class="li-post-text">34% of commercial card issuers reviewed by the CFPB had inadequate early warning systems for small business portfolio stress.
+
+Not 34% of small community lenders. 34% of issuers in a supervisory review — meaning the ones large enough to attract regulatory attention.
+
+Most are still relying on static FICO pulls and monthly statement analysis.
+
+Meanwhile, every fuel swipe, every vendor payment, every utilization spike is a real-time signal sitting unused.
+
+The gap between the data lenders have and the intelligence they're extracting from it is the most underutilized opportunity in commercial credit risk right now.
+
+#CommercialCredit #CreditRisk #Fintech #DataScience</div>
+    <div class="li-instruction">✏️ Ready to post as-is or add one sentence of personal commentary at the top.</div>
+  </div>
+
+</div><!-- end linkedin zone -->
+
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!--  ZONE 3 — MEDIUM SEED                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="zone-divider z3">
+  <div class="zone-divider-title">⬛ Zone 3 of 3 — Medium Seed</div>
+  <div class="zone-divider-sub">Article scaffold from this week's Thought Seed. Write into this over the weekend. Target: 1,200–1,500 words.</div>
+</div>
+
+<div class="main medium-zone">
+
+  <div class="section-header" style="margin-top:28px">
+    <span class="section-icon">✍️</span>
+    <span class="section-title">Article Scaffold</span>
+    <span class="section-count">Write into this. Don't start from scratch.</span>
+  </div>
+
+  <div class="medium-scaffold">
+    <div class="med-label">Medium Article Draft</div>
+    <div class="med-title">The Credit Network Problem: Why Scoring Borrowers in Isolation is a 30-Year-Old Mistake</div>
+    <div class="med-subtitle">How Graph Neural Networks could give commercial lenders a risk signal they've been sitting on for years — and why almost no one is building it yet.</div>
+
+    <div class="med-section">
+      <div class="med-section-title">Opening Hook (~150 words)</div>
+      <div class="med-section-notes">Start with a real scenario: a fuel card issuer who saw no red flags in a trucking company's bureau file — right up until they defaulted. Then their three largest clients defaulted in the same quarter. The signal was in the network. Not the node. Set up the central tension: credit risk is modeled as individual, but experienced as networked.</div>
+    </div>
+
+    <div class="med-section">
+      <div class="med-section-title">The Research Foundation (~300 words)</div>
+      <div class="med-section-notes">Walk through Zhang et al. (arXiv:2401.01751) accessibly. No jargon. Explain GNNs with an analogy — "think of it like Google Maps for credit risk: the road network matters, not just the destination." Cover the 23% AUC improvement and what that means in practical terms (fewer missed defaults, fewer false positives).</div>
+    </div>
+
+    <div class="med-section">
+      <div class="med-section-title">The Commercial Credit Translation (~300 words)</div>
+      <div class="med-section-notes">This is your original contribution. Draw the line from academic research to your operational context. Explain why fleet/fuel card data is uniquely well-suited to this approach — it captures real economic activity, not just repayment behavior. Explain the one-vertical strategy as a practical first step.</div>
+    </div>
+
+    <div class="med-section">
+      <div class="med-section-title">The Real Blockers (~250 words)</div>
+      <div class="med-section-notes">Be honest about why this isn't happening. Data siloing, interpretability, org inertia. This section is what separates a practitioner's voice from an academic's — you know why good ideas don't get implemented. This is where your credibility lands.</div>
+    </div>
+
+    <div class="med-section">
+      <div class="med-section-title">What Needs to Be True (~150 words)</div>
+      <div class="med-section-notes">Not a call to action — a prediction. What regulatory, technical, and organizational conditions need to shift for this to become mainstream? Give a 3-year horizon. Be specific.</div>
+    </div>
+
+    <div class="med-section">
+      <div class="med-section-title">Closing (~100 words)</div>
+      <div class="med-section-notes">End with a question, not a summary. "The lenders who get there first won't announce it. You'll see it in their loss rates." Point readers to your LinkedIn for weekly Thought Seeds.</div>
+    </div>
+
+    <div class="med-cta">
+      <strong>📎 Source to cite:</strong> Zhang et al. (2024). "Graph Neural Networks for Credit Risk." arXiv:2401.01751. Free access at arxiv.org — link directly in your article. Cite CFPB supervisory data and Fed Beige Book for the commercial credit context. All free, all credible.
+    </div>
+  </div>
+
+</div><!-- end medium zone -->
+
+<div class="footer">
+  <strong>Fintech Intelligence Brief</strong> &nbsp;·&nbsp; Private Edition &nbsp;·&nbsp; April 6, 2026 &nbsp;·&nbsp; Prototype<br>
+  Sources: Federal Reserve · OCC · CFPB · BIS · PYMNTS · Finextra · Payments Dive · arXiv · SSRN &nbsp;·&nbsp; All free, legally sourced.
+</div>
+
+</body>
+</html>

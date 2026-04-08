@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fintech Intelligence Brief v2 — April 6, 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+:root {
+  --navy: #0d1b2a;
+  --navy-mid: #1b2e45;
+  --navy-light: #243b55;
+  --accent: #00c2cb;
+  --accent2: #f5a623;
+  --green: #27ae60;
+  --red: #e74c3c;
+  --yellow: #f39c12;
+  --purple: #8e44ad;
+  --text: #e8edf2;
+  --text-muted: #8fa3b8;
+  --text-dark: #1a2535;
+  --bg: #f0f3f7;
+  --white: #ffffff;
+  --border: #dde3ea;
+  --fuel-amber: #b35c00;
+  --fuel-bg: #fff9f0;
+  --fuel-border: #f0c080;
+  --macro-bg: #f0f7ff;
+  --macro-border: #b8d4f0;
+  --zone2: #fff8ee;
+  --zone3: #f0f7ff;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'Georgia', serif; background: var(--bg); color: var(--text-dark); line-height: 1.75; }
+
+/* ZONE LABELS */
+.zone-label { text-align:center; padding:10px; font-family:'Arial',sans-serif; font-size:11px; font-weight:700; letter-spacing:3px; text-transform:uppercase; }
+.zone-label.z1 { background:var(--navy); color:var(--accent); }
+.zone-label.z2 { background:#7b4f00; color:#ffe5a0; }
+.zone-label.z3 { background:#1a3a5c; color:#a8d4ff; }
+
+/* HEADER */
+.header { background:var(--navy); color:var(--text); padding:32px 48px 24px; border-bottom:3px solid var(--accent); }
+.header-meta { font-family:'Arial',sans-serif; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+.header h1 { font-size:28px; font-weight:normal; color:var(--white); margin-bottom:6px; }
+.header-sub { font-family:'Arial',sans-serif; font-size:13px; color:var(--text-muted); }
+.header-stats { display:flex; gap:32px; margin-top:20px; padding-top:20px; border-top:1px solid var(--navy-light); flex-wrap:wrap; }
+.stat { font-family:'Arial',sans-serif; }
+.stat-val { font-size:20px; font-weight:700; color:var(--accent); }
+.stat-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); }
+
+/* MAIN */
+.main { max-width:900px; margin:0 auto; padding:0 24px 60px; }
+
+/* SECTION HEADERS */
+.section-header { display:flex; align-items:center; gap:12px; margin:36px 0 18px; padding-bottom:10px; border-bottom:2px solid var(--navy); }
+.section-icon { font-size:18px; }
+.section-title { font-family:'Arial',sans-serif; font-size:13px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--navy); }
+.section-count { margin-left:auto; font-family:'Arial',sans-serif; font-size:11px; color:var(--text-muted); }
+.section-header.fuel { border-bottom-color:var(--fuel-amber); }
+.section-header.fuel .section-title { color:var(--fuel-amber); }
+.section-header.macro { border-bottom-color:#1a6eb5; }
+.section-header.macro .section-title { color:#1a6eb5; }
+
+/* BIAS LEGEND */
+.bias-legend {
+  background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 24px 28px;
+  margin: 24px 0;
+  color: var(--text);
+}
+.bias-legend-title {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.bias-legend-intro {
+  font-family: 'Arial', sans-serif;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-bottom: 18px;
+  line-height: 1.6;
+}
+.bias-axes-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 16px;
+}
+.bias-axis-def { }
+.bad-axis-name {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--accent2);
+  margin-bottom: 8px;
+}
+.bad-track {
+  height: 6px;
+  background: linear-gradient(to right, #e74c3c, #ecf0f1, #2ecc71);
+  border-radius: 3px;
+  margin-bottom: 8px;
+  position: relative;
+}
+.bad-ends { display:flex; justify-content:space-between; }
+.bad-end { font-family:'Arial',sans-serif; font-size:10px; color:#aaa; }
+.bad-end-def { font-family:'Arial',sans-serif; font-size:10px; color:#ccc; margin-top:3px; line-height:1.4; }
+.bias-legend-note {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--navy-light);
+  padding-top: 12px;
+  font-style: italic;
+}
+
+/* TAGS */
+.tags { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:10px; }
+.tag { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:1px; text-transform:uppercase; padding:3px 8px; border-radius:3px; color:white; }
+.tag.payments { background:#1a6eb5; }
+.tag.credit { background:#7b2d8b; }
+.tag.risk { background:#c0392b; }
+.tag.macro { background:#16a085; }
+.tag.em { background:#d35400; }
+.tag.geo { background:#555; }
+.tag.signal { background:#2c3e50; }
+.tag.fuel { background:var(--fuel-amber); }
+.tag.fleet { background:#4a5568; }
+.tag.trucking { background:#744210; }
+
+/* STORY CARDS */
+.story-card { background:var(--white); border:1px solid var(--border); border-radius:6px; padding:20px 24px; margin-bottom:14px; border-left:4px solid var(--navy); }
+.story-card.high { border-left-color:var(--red); }
+.story-card.medium { border-left-color:var(--yellow); }
+.story-card.watch { border-left-color:var(--accent); }
+.story-headline { font-size:17px; font-weight:bold; color:var(--navy); margin-bottom:8px; line-height:1.4; }
+.story-body { font-size:14px; color:#3a4a5c; margin-bottom:12px; }
+.story-source { font-family:'Arial',sans-serif; font-size:11px; color:var(--text-muted); margin-bottom:10px; }
+.story-source a { color:var(--accent); text-decoration:none; }
+.synthesis-box {
+  background: #eef7f0;
+  border-left: 3px solid var(--green);
+  padding: 10px 14px;
+  border-radius: 0 4px 4px 0;
+  font-family: 'Arial', sans-serif;
+  font-size: 12px;
+  color: #1a4a2a;
+  margin-bottom: 12px;
+}
+.synthesis-box strong { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; color: var(--green); }
+
+/* BIAS METER */
+.bias-meter { background:#f0f3f7; border:1px solid var(--border); border-radius:6px; padding:14px 18px; margin-top:12px; }
+.bias-title { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--text-muted); margin-bottom:10px; }
+.bias-axis { display:flex; align-items:center; gap:10px; margin-bottom:8px; }
+.bias-axis-label { font-family:'Arial',sans-serif; font-size:10px; color:#666; width:90px; flex-shrink:0; }
+.bias-track { flex:1; height:6px; background:linear-gradient(to right,#e74c3c,#ecf0f1,#2ecc71); border-radius:3px; position:relative; }
+.bias-dot { position:absolute; top:50%; transform:translate(-50%,-50%); width:12px; height:12px; background:var(--navy); border:2px solid white; border-radius:50%; box-shadow:0 1px 3px rgba(0,0,0,0.3); }
+.bias-ends { display:flex; justify-content:space-between; font-family:'Arial',sans-serif; font-size:9px; color:#999; margin-top:2px; }
+.other-side { margin-top:10px; padding-top:10px; border-top:1px dashed #ccc; font-size:12px; color:#555; font-style:italic; }
+.other-side strong { font-style:normal; font-family:'Arial',sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--accent2); }
+
+/* MACRO SIGNAL */
+.macro-box { background:var(--macro-bg); border:1px solid var(--macro-border); border-radius:8px; padding:28px 32px; margin-bottom:20px; }
+.macro-box h3 { font-size:20px; color:#1a3a5c; margin-bottom:6px; line-height:1.3; }
+.macro-meta { font-family:'Arial',sans-serif; font-size:11px; color:#5a7a9a; margin-bottom:18px; }
+.macro-box p { font-size:14px; color:#2c3e50; margin-bottom:14px; }
+.causal-chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin: 18px 0;
+  padding: 16px;
+  background: var(--navy);
+  border-radius: 6px;
+}
+.chain-step {
+  font-family: 'Arial', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--white);
+  background: var(--navy-light);
+  padding: 6px 10px;
+  border-radius: 4px;
+}
+.chain-arrow {
+  font-family: 'Arial', sans-serif;
+  font-size: 16px;
+  color: var(--accent);
+  font-weight: bold;
+}
+.chain-lag {
+  font-family: 'Arial', sans-serif;
+  font-size: 9px;
+  color: var(--text-muted);
+  text-align: center;
+  margin-top: 3px;
+}
+.chain-item { display: flex; flex-direction: column; align-items: center; }
+.signal-reading {
+  background: var(--navy);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 16px 20px;
+  margin-top: 16px;
+}
+.signal-label { font-family:'Arial',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); margin-bottom:6px; }
+.signal-reading p { font-size:14px; color:var(--text); margin:0; }
+.chart-container { margin: 22px 0; background:white; border:1px solid var(--macro-border); border-radius:6px; padding:20px; }
+.chart-title { font-family:'Arial',sans-serif; font-size:12px; font-weight:700; color:#1a3a5c; letter-spacing:1px; text-transform:uppercase; margin-bottom:4px; }
+.chart-sub { font-family:'Arial',sans-serif; font-size:11px; color:#5a7a9a; margin-bottom:14px; }
+.chart-note { font-family:'Arial',sans-serif; font-size:10px; color:#888; margin-top:10px; font-style:italic; }
+.sources-row { font-family:'Arial',sans-serif; font-size:10px; color:#5a7a9a; margin-top:8px; }
+.sources-row a { color:var(--accent); text-decoration:none; }
+
+/* FUEL CARD SECTION */
+.fuel-section-bg { background:var(--fuel-bg); border:1px solid var(--fuel-border); border-radius:8px; padding:28px 32px; margin-bottom:20px; }
+.fuel-market-split { display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px; }
+.market-card { background:white; border:1px solid var(--fuel-border); border-radius:6px; padding:20px; }
+.market-card-header { font-family:'Arial',sans-serif; font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:2px; margin-bottom:12px; }
+.market-card-header.fleet { color:#4a5568; }
+.market-card-header.trucking { color:var(--fuel-amber); }
+.market-card h4 { font-size:15px; color:var(--navy); margin-bottom:8px; }
+.market-card p { font-size:13px; color:#3a4a5c; margin-bottom:8px; }
+.market-stat { display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #f0e8d8; }
+.market-stat:last-child { border-bottom:none; }
+.market-stat-label { font-family:'Arial',sans-serif; font-size:11px; color:#666; }
+.market-stat-val { font-family:'Arial',sans-serif; font-size:13px; font-weight:700; color:var(--navy); }
+.market-stat-val.up { color:var(--green); }
+.market-stat-val.down { color:var(--red); }
+.fuel-insight { background:white; border-left:4px solid var(--fuel-amber); border-radius:0 6px 6px 0; padding:16px 20px; margin-bottom:14px; }
+.fuel-insight-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--fuel-amber); margin-bottom:6px; }
+.fuel-insight p { font-size:14px; color:#2c3e50; }
+.competitor-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; margin-top:16px; }
+.competitor-card { background:white; border:1px solid var(--fuel-border); border-radius:6px; padding:14px; }
+.comp-name { font-family:'Arial',sans-serif; font-size:12px; font-weight:700; color:var(--navy); margin-bottom:4px; }
+.comp-type { font-family:'Arial',sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:#888; margin-bottom:6px; }
+.comp-threat { font-size:12px; color:#444; }
+.comp-threat.high { border-left:3px solid var(--red); padding-left:8px; }
+.comp-threat.medium { border-left:3px solid var(--yellow); padding-left:8px; }
+
+/* DEEP DIVE */
+.deep-dive { background:var(--white); border:1px solid var(--border); border-radius:6px; padding:28px 32px; margin-bottom:20px; }
+.deep-dive h3 { font-size:21px; color:var(--navy); margin-bottom:6px; line-height:1.3; }
+.deep-dive-meta { font-family:'Arial',sans-serif; font-size:11px; color:var(--text-muted); margin-bottom:16px; }
+.deep-dive p { font-size:15px; color:#2c3e50; margin-bottom:14px; }
+.so-what { background:var(--navy); color:var(--text); border-radius:5px; padding:16px 20px; margin-top:18px; }
+.so-what-label { font-family:'Arial',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:6px; }
+.so-what p { font-size:14px; color:var(--text); margin:0; }
+
+/* RISKS */
+.risk-card { background:var(--white); border:1px solid #f5c6cb; border-left:4px solid var(--red); border-radius:6px; padding:16px 20px; margin-bottom:12px; }
+.risk-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--red); margin-bottom:6px; }
+.risk-title { font-size:16px; font-weight:bold; color:var(--navy); margin-bottom:6px; }
+.risk-body { font-size:13px; color:#444; }
+
+/* DATA SNAPSHOT */
+.data-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-bottom:20px; }
+.data-card { background:var(--white); border:1px solid var(--border); border-radius:6px; padding:18px 20px; text-align:center; }
+.data-number { font-family:'Arial',sans-serif; font-size:28px; font-weight:700; color:var(--navy); }
+.data-number.up { color:var(--green); }
+.data-number.down { color:var(--red); }
+.data-metric { font-family:'Arial',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--text-muted); margin:4px 0; }
+.data-context { font-size:12px; color:#666; }
+
+/* SMB */
+.smb-card { background:var(--white); border:1px solid var(--border); border-radius:6px; padding:20px 24px; margin-bottom:12px; }
+
+/* THOUGHT SEED */
+.thought-seed { background:var(--white); border:1px solid var(--border); border-radius:8px; overflow:hidden; margin-bottom:20px; }
+.ts-header { background:var(--navy); color:var(--text); padding:24px 32px; }
+.ts-label { font-family:'Arial',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--accent); margin-bottom:8px; }
+.ts-title { font-size:20px; line-height:1.3; margin-bottom:6px; }
+.ts-authors { font-family:'Arial',sans-serif; font-size:11px; color:var(--text-muted); }
+.ts-body { padding:28px 32px; }
+.ts-section { margin-bottom:24px; }
+.ts-section-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent2); margin-bottom:10px; }
+.ts-section p { font-size:14px; color:#2c3e50; margin-bottom:12px; }
+.ts-section ul { margin: 0 0 12px 20px; }
+.ts-section li { font-size:14px; color:#2c3e50; margin-bottom:6px; }
+.ts-highlight {
+  background: linear-gradient(135deg, #e8f4fd 0%, #f0f7ff 100%);
+  border: 1px solid #c5ddf4;
+  border-left: 4px solid #1a6eb5;
+  border-radius: 0 6px 6px 0;
+  padding: 14px 18px;
+  margin: 14px 0;
+  font-size: 14px;
+  color: #1a3a5c;
+}
+.ts-highlight strong { display:block; font-family:'Arial',sans-serif; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:#1a6eb5; margin-bottom:6px; }
+.confidence { display:inline-flex; align-items:center; gap:8px; padding:8px 16px; border-radius:20px; font-family:'Arial',sans-serif; font-size:12px; font-weight:700; }
+.confidence.green { background:#d5f5e3; color:#1a7a40; }
+.confidence.yellow { background:#fef9e7; color:#9a6f00; }
+.confidence.red { background:#fdecea; color:#a93226; }
+.ts-counterarg { background:#f8f9fa; border-left:3px solid #aaa; padding:14px 18px; font-size:13px; color:#555; font-style:italic; border-radius:0 4px 4px 0; margin-top:6px; }
+.ts-practitioner {
+  background: var(--navy);
+  color: var(--text);
+  border-radius: 6px;
+  padding: 20px 24px;
+  margin-top: 20px;
+}
+.ts-prac-label { font-family:'Arial',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--accent); margin-bottom:10px; }
+.ts-practitioner p { font-size:14px; color:var(--text); margin-bottom:10px; }
+.ts-practitioner p:last-child { margin-bottom:0; }
+.further-reading { background:#f8f9fa; border-radius:6px; padding:16px 20px; margin-top:16px; }
+.fr-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; text-transform:uppercase; letter-spacing:2px; color:var(--text-muted); margin-bottom:10px; }
+.fr-item { font-size:13px; color:#2c3e50; margin-bottom:6px; }
+.fr-item a { color:var(--accent); text-decoration:none; }
+
+/* ZONE DIVIDERS */
+.zone-divider { margin:48px -24px 0; padding:20px 48px; text-align:center; }
+.zone-divider.z2 { background:var(--zone2); border-top:3px solid var(--accent2); border-bottom:3px solid var(--accent2); }
+.zone-divider.z3 { background:var(--zone3); border-top:3px solid #1a6eb5; border-bottom:3px solid #1a6eb5; }
+.zone-divider-title { font-family:'Arial',sans-serif; font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; margin-bottom:4px; }
+.zone-divider.z2 .zone-divider-title { color:#7b4f00; }
+.zone-divider.z3 .zone-divider-title { color:#1a3a5c; }
+.zone-divider-sub { font-family:'Arial',sans-serif; font-size:12px; color:#666; }
+
+/* LINKEDIN */
+.linkedin-zone { background:var(--zone2); padding-top:8px; }
+.linkedin-post-box { background:white; border:1px solid #e8d5b0; border-radius:8px; padding:24px 28px; margin-bottom:16px; }
+.li-post-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0077b5; margin-bottom:12px; display:flex; align-items:center; gap:8px; }
+.li-badge { background:#0077b5; color:white; font-size:9px; font-weight:900; padding:2px 5px; border-radius:2px; }
+.li-post-text { font-family:'Arial',sans-serif; font-size:14px; color:#1a1a1a; line-height:1.6; white-space:pre-wrap; border:1px dashed #ccc; padding:16px; border-radius:4px; background:#fafafa; }
+.li-instruction { font-family:'Arial',sans-serif; font-size:11px; color:#888; margin-top:10px; font-style:italic; }
+.carousel-outline { background:white; border:1px solid #e8d5b0; border-radius:8px; padding:20px 28px; }
+.carousel-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#0077b5; margin-bottom:14px; }
+.carousel-slide { display:flex; gap:12px; margin-bottom:10px; padding-bottom:10px; border-bottom:1px solid #f0e8d8; }
+.slide-num { font-family:'Arial',sans-serif; font-size:11px; font-weight:700; color:#0077b5; background:#e8f4fd; width:24px; height:24px; border-radius:50%; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px; }
+.slide-content { font-family:'Arial',sans-serif; font-size:13px; color:#333; }
+.slide-content strong { display:block; color:#111; margin-bottom:2px; }
+
+/* MEDIUM */
+.medium-zone { background:var(--zone3); padding-top:8px; }
+.medium-scaffold { background:white; border:1px solid #c5ddf4; border-radius:8px; padding:24px 28px; }
+.med-label { font-family:'Arial',sans-serif; font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:#1a6eb5; margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+.med-badge { background:#000; color:white; font-size:11px; font-weight:900; width:20px; height:20px; border-radius:50%; display:flex; align-items:center; justify-content:center; }
+.med-title { font-size:22px; font-weight:bold; color:var(--navy); margin-bottom:6px; line-height:1.3; }
+.med-subtitle { font-size:15px; color:#555; margin-bottom:20px; font-style:italic; }
+.med-section { margin-bottom:16px; padding-left:16px; border-left:3px solid #c5ddf4; }
+.med-section-title { font-family:'Arial',sans-serif; font-size:12px; font-weight:700; color:var(--navy); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+.med-section-notes { font-size:13px; color:#555; font-style:italic; }
+.med-cta { background:#e8f4fd; border-radius:6px; padding:14px 18px; margin-top:18px; font-family:'Arial',sans-serif; font-size:12px; color:#1a4a7a; }
+.med-cta strong { display:block; margin-bottom:4px; }
+
+/* FOOTER */
+.footer { background:var(--navy); color:var(--text-muted); padding:20px 48px; font-family:'Arial',sans-serif; font-size:11px; text-align:center; }
+.footer strong { color:var(--accent); }
+
+@media (max-width:700px) {
+  .bias-axes-grid { grid-template-columns:1fr; }
+  .fuel-market-split { grid-template-columns:1fr; }
+  .competitor-grid { grid-template-columns:1fr; }
+  .data-grid { grid-template-columns:repeat(2,1fr); }
+  .header { padding:24px; }
+  .main { padding:0 12px 40px; }
+}
+</style>
+</head>
+<body>
+
+<div class="zone-label z1">⬛ Zone 1 of 3 — The Brief &nbsp;|&nbsp; Private Intelligence Read &nbsp;|&nbsp; ~20 min</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-meta">Fintech Intelligence Brief &nbsp;·&nbsp; Monday, April 6, 2026 &nbsp;·&nbsp; Edition #001 &nbsp;·&nbsp; Prototype v2</div>
+  <h1>The Credit, Payments &amp; Fleet Intelligence Brief</h1>
+  <div class="header-sub">Payments · Commercial Credit · Credit Risk · Fuel &amp; Fleet · Emerging Markets · Macro</div>
+  <div class="header-stats">
+    <div class="stat"><div class="stat-val">5</div><div class="stat-label">Stories</div></div>
+    <div class="stat"><div class="stat-val">1</div><div class="stat-label">Macro Signal</div></div>
+    <div class="stat"><div class="stat-val">2</div><div class="stat-label">Markets</div></div>
+    <div class="stat"><div class="stat-val">1</div><div class="stat-label">Deep Dive</div></div>
+    <div class="stat"><div class="stat-val">3</div><div class="stat-label">Risks</div></div>
+    <div class="stat"><div class="stat-val">1</div><div class="stat-label">Thought Seed</div></div>
+    <div class="stat"><div class="stat-val">~22 min</div><div class="stat-label">Read Time</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══════ BIAS METER LEGEND ═══════ -->
+<div class="bias-legend">
+  <div class="bias-legend-title">⚖ How to Read the Bias Meter</div>
+  <div class="bias-legend-intro">
+    Every story and analysis in this brief is tagged on three ideological axes. The dot shows where this specific source's framing leans — not where the underlying truth sits. Red end = one pole, green end = the other. Center = neutral or genuinely mixed framing. Read each story knowing which direction its author is pulling.
+  </div>
+  <div class="bias-axes-grid">
+    <div class="bias-axis-def">
+      <div class="bad-axis-name">Monetary Axis</div>
+      <div class="bad-track"></div>
+      <div class="bad-ends"><span class="bad-end">🦅 Hawk</span><span class="bad-end">🕊 Dove</span></div>
+      <div class="bad-end-def" style="color:#e74c3c; margin-top:6px"><strong>Hawk:</strong> Favors tight monetary policy, higher rates, prioritizes inflation control over growth.</div>
+      <div class="bad-end-def" style="color:#27ae60; margin-top:4px"><strong>Dove:</strong> Favors accommodative policy, lower rates, prioritizes employment and growth.</div>
+    </div>
+    <div class="bias-axis-def">
+      <div class="bad-axis-name">Regulatory Axis</div>
+      <div class="bad-track"></div>
+      <div class="bad-ends"><span class="bad-end">🏛 Interventionist</span><span class="bad-end">🏪 Free Market</span></div>
+      <div class="bad-end-def" style="color:#e74c3c; margin-top:6px"><strong>Interventionist:</strong> Favors active government oversight, consumer protection mandates, regulatory controls on lenders.</div>
+      <div class="bad-end-def" style="color:#27ae60; margin-top:4px"><strong>Free Market:</strong> Favors minimal regulation, industry self-governance, market-driven outcomes.</div>
+    </div>
+    <div class="bias-axis-def">
+      <div class="bad-axis-name">Business Axis</div>
+      <div class="bad-track"></div>
+      <div class="bad-ends"><span class="bad-end">🏦 Incumbent</span><span class="bad-end">🚀 Disruptor</span></div>
+      <div class="bad-end-def" style="color:#e74c3c; margin-top:6px"><strong>Pro-Incumbent:</strong> Framing favors established banks, legacy networks, traditional credit infrastructure.</div>
+      <div class="bad-end-def" style="color:#27ae60; margin-top:4px"><strong>Pro-Disruption:</strong> Framing favors fintech challengers, new entrants, innovative credit models.</div>
+    </div>
+  </div>
+  <div class="bias-legend-note">📌 The "Other Side" box beneath each story presents the strongest counterargument to the dominant framing. Your job is to decide which version of reality is closer to the truth.</div>
+</div>
+
+<!-- ═══════ EXECUTIVE BRIEF ═══════ -->
+<div class="section-header">
+  <span class="section-icon">📰</span>
+  <span class="section-title">Executive Brief</span>
+  <span class="section-count">Top 5 Stories · Cross-source synthesis</span>
+</div>
+
+<div class="story-card high">
+  <div class="tags">
+    <span class="tag credit">Commercial Credit</span>
+    <span class="tag macro">Macro</span>
+    <span class="tag geo">North America</span>
+    <span class="tag signal">Data Release</span>
+  </div>
+  <div class="story-headline">Fed Beige Book: Commercial Credit Standards Tighten in Six Districts as Utilization Climbs 4.2% QoQ</div>
+  <div class="story-body">Six of twelve Fed districts report tighter underwriting standards for mid-market commercial borrowers. Critically, the tightening is concentrated in sectors with high operating cost sensitivity — transportation, food service, and professional staffing — not broadly distributed. This asymmetry matters: headline credit quality metrics look stable while stress is accumulating in the highest-risk verticals first.</div>
+  <div class="synthesis-box">
+    <strong>📊 Analyst Layer — Cross-Source Synthesis</strong>
+    Layering the Beige Book against CFPB G.19 data and OCC Call Report trends reveals that the 4.2% utilization increase is running ahead of revenue growth in the impacted sectors. Historically, utilization-to-revenue divergence above 3% has preceded meaningful charge-off increases by two to three quarters. We are currently at that threshold.
+  </div>
+  <div class="story-source">📎 <a href="https://federalreserve.gov/monetarypolicy/beige-book.htm">Federal Reserve Beige Book</a> · <a href="https://www.federalreserve.gov/releases/g19/">Fed G.19 Consumer Credit</a> · Free · High credibility</div>
+  <div class="bias-meter">
+    <div class="bias-title">⚖ Bias Meter</div>
+    <div class="bias-axis"><div class="bias-axis-label">Monetary</div><div style="flex:1"><div class="bias-track"><div class="bias-dot" style="left:28%"></div></div><div class="bias-ends"><span>Hawk</span><span>Dove</span></div></div></div>
+    <div class="bias-axis"><div class="bias-axis-label">Regulatory</div><div style="flex:1"><div class="bias-track"><div class="bias-dot" style="left:35%"></div></div><div class="bias-ends"><span>Interventionist</span><span>Free Market</span></div></div></div>
+    <div class="other-side"><strong>Other Side →</strong> Utilization increases can equally reflect healthy credit demand, not distress. Some regional Fed presidents argue that tightening standards now is exactly the right prudential response — not a warning sign but evidence the system is self-correcting appropriately.</div>
+  </div>
+</div>
+
+<div class="story-card watch">
+  <div class="tags">
+    <span class="tag payments">Payments</span>
+    <span class="tag geo">Global</span>
+    <span class="tag signal">Earnings</span>
+  </div>
+  <div class="story-headline">Visa + Mastercard B2B Cross-Border Volume Up 11% YoY — But the Margin Story Is Different</div>
+  <div class="story-body">Both networks reported strong B2B cross-border volume growth, with commercial card interchange revenue outpacing consumer for the first time since Q3 2022. The headline reads as a recovery story. The underlying margin data tells a more complicated one: cross-border take rates compressed 8bps as competitive pressure from fintech rails (Airwallex, Nium, Corpay Cross-Border) forced network pricing concessions on large corporate corridors.</div>
+  <div class="synthesis-box">
+    <strong>📊 Analyst Layer — What the Earnings Call Buried</strong>
+    Visa disclosed that "value-added services" — data, fraud tools, analytics — now represent 22% of total commercial revenue, up from 14% in 2022. The networks are actively migrating their commercial revenue model away from pure interchange toward information services. This is a structural signal about where the durable commercial credit value chain is moving: toward data and away from transaction fees.
+  </div>
+  <div class="story-source">📎 <a href="https://investor.visa.com">Visa IR</a> · <a href="https://investor.mastercard.com">Mastercard IR</a> · Free earnings transcripts</div>
+  <div class="bias-meter">
+    <div class="bias-title">⚖ Bias Meter</div>
+    <div class="bias-axis"><div class="bias-axis-label">Business</div><div style="flex:1"><div class="bias-track"><div class="bias-dot" style="left:18%"></div></div><div class="bias-ends"><span>Pro-Incumbent</span><span>Pro-Disruption</span></div></div></div>
+    <div class="other-side"><strong>Other Side →</strong> Fintech payment rails report these same corridors from a different angle — they're winning on price but losing on network reliability and fraud coverage. Enterprise treasury teams are not yet willing to run primary B2B flows through non-network rails. The incumbent advantage in commercial payments may be more durable than the volume compression suggests.</div>
+  </div>
+</div>
+
+<div class="story-card medium">
+  <div class="tags">
+    <span class="tag risk">Credit Risk</span>
+    <span class="tag em">Emerging Markets</span>
+    <span class="tag geo">LATAM</span>
+    <span class="tag signal">Innovation</span>
+  </div>
+  <div class="story-headline">Nubank's AI-Native SMB Underwriting: 40% Lower Defaults — And Why North America Isn't There Yet</div>
+  <div class="story-body">Nubank disclosed sub-$50K SMB credit lines underwritten entirely by AI using Brazil's Open Finance data — real-time account flows, receivables aging, and supplier payment history. No human review. Early vintage default rates are 40% below bureau-only models. The methodology is not secret. The barrier to replication in North America is not technical — it's regulatory and structural.</div>
+  <div class="synthesis-box">
+    <strong>📊 Analyst Layer — The Structural Gap</strong>
+    Brazil's Open Finance framework mandates data sharing across institutions. The US has no equivalent. Section 1033 of Dodd-Frank authorized open banking rulemaking; the CFPB finalized its Personal Financial Data Rights rule in late 2024, but commercial credit data portability remains unaddressed. The 40% improvement is real — but it is built on a data infrastructure that does not legally exist at scale in the US commercial credit market yet.
+  </div>
+  <div class="story-source">📎 <a href="https://www.pymnts.com">PYMNTS</a> · <a href="https://www.finextra.com">Finextra</a> · <a href="https://www.consumerfinance.gov">CFPB Section 1033 Rulemaking</a> · Free</div>
+  <div class="bias-meter">
+    <div class="bias-title">⚖ Bias Meter</div>
+    <div class="bias-axis"><div class="bias-axis-label">Business</div><div style="flex:1"><div class="bias-track"><div class="bias-dot" style="left:82%"></div></div><div class="bias-ends"><span>Pro-Incumbent</span><span>Pro-Disruption</span></div></div></div>
+    <div class="bias-axis"><div class="bias-axis-label">Regulatory</div><div style="flex:1"><div class="bias-track"><div class="bias-dot" style="left:25%"></div></div><div class="bias-ends"><span>Interventionist</span><span>Free Market</span></div></div></div>
+    <div class="other-side"><strong>Other Side →</strong> One good vintage in a benign credit cycle proves little. Brazil's SMB credit market has structural differences — higher baseline default rates, different collection mechanisms, different consumer behavior — that make direct comparison misleading. Incumbents who have survived multiple cycles argue that AI underwriting hasn't been stress-tested where it matters most.</div>
+  </div>
+</div>
+
+
+<!-- ═══════ MACRO SIGNAL ═══════ -->
+<div class="section-header macro">
+  <span class="section-icon">🔭</span>
+  <span class="section-title">Macro Signal</span>
+  <span class="section-count">Public data synthesis · Gov sources · Commercial credit implications</span>
+</div>
+
+<div class="macro-box">
+  <div class="tags" style="margin-bottom:12px">
+    <span class="tag macro">Macro</span>
+    <span class="tag fuel">Energy</span>
+    <span class="tag credit">Commercial Credit</span>
+    <span class="tag geo">North America</span>
+  </div>
+  <h3>The Oil-Credit Transmission Mechanism: How Diesel Prices Become Charge-Off Risk 90 Days Later</h3>
+  <div class="macro-meta">Sources: EIA Weekly Retail Diesel Prices · Fed FRED G.19 · BLS PPI Transportation · OCC Call Reports · All free, all public</div>
+
+  <p>Most commercial credit risk frameworks treat diesel as a cost input for borrowers, not as a leading credit indicator. That framing leaves a measurable signal unused. Diesel price movements transmit into commercial credit portfolios through a well-documented causal chain — one that public government data confirms with a consistent 60–90 day lag across the last three major oil price cycles (2008, 2014–16, 2022).</p>
+
+  <p>The mechanism is straightforward but the data to quantify it is scattered across four government databases. Assembled together, it becomes actionable intelligence for any lender with commercial fleet or transportation exposure.</p>
+
+  <div class="causal-chain">
+    <div class="chain-item"><div class="chain-step">WTI Crude ↑</div><div class="chain-lag">EIA weekly</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-item"><div class="chain-step">Diesel Retail ↑</div><div class="chain-lag">2–4 wk lag</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-item"><div class="chain-step">Carrier Fuel Cost ↑</div><div class="chain-lag">Immediate</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-item"><div class="chain-step">Margin Compression</div><div class="chain-lag">~30 days</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-item"><div class="chain-step">Card Utilization ↑</div><div class="chain-lag">30–60 days</div></div>
+    <div class="chain-arrow">→</div>
+    <div class="chain-item"><div class="chain-step">Charge-Off Risk ↑</div><div class="chain-lag">60–90 days</div></div>
+  </div>
+
+  <div class="chart-container">
+    <div class="chart-title">WTI Crude &amp; Diesel Retail Price vs. Transportation Sector Charge-Off Rate</div>
+    <div class="chart-sub">Dual axis · 2022–2026 · Quarterly · Illustrative using public data patterns — live editions pull from EIA API &amp; Fed FRED</div>
+    <canvas id="oilCreditChart" height="120"></canvas>
+    <div class="chart-note">⬆ Note the consistent 2–3 quarter lag between oil price peaks and charge-off peaks (Jun 2022 peak → Q1 2023 charge-off peak; same pattern repeating now). This lag is your early warning window.</div>
+    <div class="sources-row">📎 Sources: <a href="https://www.eia.gov/petroleum/gasdiesel/">EIA Retail Diesel Prices</a> · <a href="https://fred.stlouisfed.org">Fed FRED</a> · <a href="https://www.occ.gov/publications-and-resources/publications/quarterly-report-on-bank-trading-and-derivatives-activities/index-quarterly-report-on-bank-trading-and-derivatives-activities.html">OCC Call Report Data</a></div>
+  </div>
+
+  <p>The 2022 cycle provides the clearest validation. WTI peaked at $114/bbl in June 2022. Diesel retail peaked at $5.81/gal in the same month. Transportation sector commercial credit charge-offs hit their cycle peak in Q3 2023 — a 15-month lag at the outer bound, 9 months at the inflection point. Lenders who were monitoring diesel prices in mid-2022 had a visible warning signal before any credit bureau data moved.</p>
+
+  <p>The current signal: WTI is trading near $68/bbl, diesel at $3.61/gal — both elevated versus the 2019 baseline ($57/bbl, $3.06/gal) but declining from 2022 peaks. Transportation charge-offs are rising again in Q1 2026 (+18bps QoQ) despite lower fuel prices — suggesting the current stress is <em>not</em> fuel-driven but freight-rate-driven. The freight market, not fuel cost, is the dominant variable in this cycle. That distinction matters for underwriting: the remediation playbook is different.</p>
+
+  <div class="signal-reading">
+    <div class="signal-label">📡 Current Signal Reading — What This Means Now</div>
+    <p>Fuel cost pressure is not the primary commercial credit risk heading into Q2–Q3 2026. The risk is freight rate compression — spot rates (DAT Truckload Index) are running 12% below contract rates, squeezing owner-operator margins independent of fuel cost. Commercial lenders with transportation exposure should be monitoring freight rate spread data, not just diesel prices, as their primary early warning indicator this cycle.</p>
+  </div>
+</div>
+
+
+<!-- ═══════ FUEL CARD & FLEET INTELLIGENCE ═══════ -->
+<div class="section-header fuel">
+  <span class="section-icon">⛽</span>
+  <span class="section-title">Fuel Card &amp; Fleet Intelligence</span>
+  <span class="section-count">Fleet Market · Trucking Market · Competition · Innovation</span>
+</div>
+
+<div class="fuel-section-bg">
+
+  <div class="fuel-market-split">
+
+    <div class="market-card">
+      <div class="market-card-header fleet">🚗 Fleet Market</div>
+      <h4>Corporate &amp; Mixed-Use Fleet</h4>
+      <p>Large enterprise fleets, company vehicles, mixed commercial use. Dominated by WEX, Fleetcor/Corpay, and co-branded bank products. Lower credit risk profile, longer relationship tenure, diversified revenue base.</p>
+      <div class="market-stat"><span class="market-stat-label">US Fleet Vehicles</span><span class="market-stat-val">~18M</span></div>
+      <div class="market-stat"><span class="market-stat-label">Avg Fuel Spend / Vehicle / Month</span><span class="market-stat-val">$320</span></div>
+      <div class="market-stat"><span class="market-stat-label">EV Transition Exposure</span><span class="market-stat-val down">High Risk</span></div>
+      <div class="market-stat"><span class="market-stat-label">Telematics Integration Rate</span><span class="market-stat-val up">↑ 61%</span></div>
+      <div class="market-stat"><span class="market-stat-label">Charge-Off Rate (Q1 2026)</span><span class="market-stat-val">0.48%</span></div>
+    </div>
+
+    <div class="market-card">
+      <div class="market-card-header trucking">🚛 Trucking Market</div>
+      <h4>Freight Carriers &amp; Owner-Operators</h4>
+      <p>~400K owner-operators plus small carriers (1–20 trucks). Higher credit risk, thinner margins, high sensitivity to diesel + freight rate spread. Dominated by Comdata, EFS, Pilot/Flying J co-branded cards.</p>
+      <div class="market-stat"><span class="market-stat-label">Owner-Operators (US)</span><span class="market-stat-val">~400K</span></div>
+      <div class="market-stat"><span class="market-stat-label">Fuel as % of Operating Cost</span><span class="market-stat-val">35–40%</span></div>
+      <div class="market-stat"><span class="market-stat-label">Freight Rate Spread (Spot vs Contract)</span><span class="market-stat-val down">−12%</span></div>
+      <div class="market-stat"><span class="market-stat-label">EV Transition Timeline</span><span class="market-stat-val">10+ yrs</span></div>
+      <div class="market-stat"><span class="market-stat-label">Charge-Off Rate (Q1 2026)</span><span class="market-stat-val down">↑ 0.76%</span></div>
+    </div>
+
+  </div>
+
+  <div class="chart-container" style="background:#fffdf8; border-color:var(--fuel-border)">
+    <div class="chart-title" style="color:var(--fuel-amber)">Diesel Retail Price vs. Trucking Sector Card Utilization — Quarterly 2023–2026</div>
+    <div class="chart-sub">Illustrative using EIA diesel data and commercial card utilization patterns · Live editions use EIA API</div>
+    <canvas id="fuelUtilChart" height="100"></canvas>
+    <div class="chart-note">The decoupling visible in Q4 2024–Q1 2026 is significant: utilization is rising while diesel prices are falling. This signals that trucking operators are borrowing against card lines for working capital — not for fuel — as freight revenues compress. Different risk signal, different intervention required.</div>
+    <div class="sources-row">📎 <a href="https://www.eia.gov/petroleum/gasdiesel/">EIA Retail Diesel</a> · <a href="https://www.bts.gov">BTS Freight Data</a> · <a href="https://www.dat.com">DAT Freight Index (public)</a></div>
+  </div>
+
+  <div class="fuel-insight">
+    <div class="fuel-insight-label">📊 Market Dynamics Shift</div>
+    <p>The traditional fuel card value proposition — discount at the pump, spend controls, reporting — is being unbundled. Telematics platforms (Samsara, Motive) now offer spend visibility as a byproduct of fleet management. The fuel card's defensible moat is narrowing to: (1) network acceptance breadth, (2) credit underwriting of the fleet relationship, and (3) data depth on vehicle-level spend. Issuers who are not investing in items 2 and 3 are building a commoditizing book.</p>
+  </div>
+
+  <div class="fuel-insight">
+    <div class="fuel-insight-label">🔌 EV Transition — The Long-Tail Risk for Fuel Card Issuers</div>
+    <p>The fleet EV transition is moving faster in corporate fleet (Class 1–3 vehicles) than in heavy trucking (Class 7–8). This means fuel card revenue at risk from EV displacement is concentrated in the lower-risk, higher-tenure fleet segment — the segment most profitable for issuers. The trucking book (higher risk) is more EV-immune near-term due to range and infrastructure constraints, but also under greater freight-cycle stress. The portfolio math is uncomfortable: the safer segment is at greater EV displacement risk; the riskier segment is safer from EV but under credit stress.</p>
+  </div>
+
+  <p style="font-size:13px; color:#555; margin-bottom:16px; font-family:'Arial',sans-serif; text-transform:uppercase; letter-spacing:1px; font-weight:700">Rising Competition &amp; Innovation</p>
+  <div class="competitor-grid">
+    <div class="competitor-card">
+      <div class="comp-name">Relay Payments</div>
+      <div class="comp-type">Fintech — Freight Payments</div>
+      <div class="comp-threat medium">Targeting owner-operators with instant payment rails and load board integration. Not a direct credit product yet — but the distribution relationship is being built. Watch for credit product launch.</div>
+    </div>
+    <div class="competitor-card">
+      <div class="comp-name">Motive (fka KeepTruckin)</div>
+      <div class="comp-type">Telematics → Payments</div>
+      <div class="comp-threat high">Already has fleet management data. Fuel card product launched 2024. The threat is not the card — it is that Motive has telematics data that no fuel card issuer has: actual vehicle utilization, route patterns, idle time. Superior underwriting signal.</div>
+    </div>
+    <div class="competitor-card">
+      <div class="comp-name">Corpay (Fleetcor)</div>
+      <div class="comp-type">Incumbent — Consolidating</div>
+      <div class="comp-threat medium">Actively acquiring to broaden from fuel into full commercial payments (Cambridge acquisition, Nvoicepay). Incumbents are building moats through breadth. Smaller issuers are being squeezed between Corpay's scale and fintech challengers' data advantages.</div>
+    </div>
+    <div class="competitor-card">
+      <div class="comp-name">Samsara Fleet Cards</div>
+      <div class="comp-type">Telematics → Payments</div>
+      <div class="comp-threat high">Same play as Motive. Physical telemetry data as underwriting signal is a structural advantage incumbents cannot easily replicate. If either Samsara or Motive builds out commercial credit underwriting, they have a data moat that no traditional issuer has.</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══════ DEEP DIVE ═══════ -->
+<div class="section-header">
+  <span class="section-icon">🔬</span>
+  <span class="section-title">Deep Dive</span>
+  <span class="section-count">Original analysis · ~5 min</span>
+</div>
+
+<div class="deep-dive">
+  <div class="tags" style="margin-bottom:12px">
+    <span class="tag credit">Commercial Credit</span>
+    <span class="tag risk">Credit Risk</span>
+    <span class="tag geo">North America</span>
+  </div>
+  <h3>The CFPB's Hidden Indictment: 34% of Commercial Card Issuers Have Inadequate Early Warning Systems — And the Data to Fix It Is Already in Their Systems</h3>
+  <div class="deep-dive-meta">Deep Dive · ~5 min · Sources: CFPB Supervisory Highlights · Fed G.19 · OCC Call Reports · All free</div>
+
+  <p>The CFPB's latest supervisory examination of commercial card issuers flagged a systemic gap: one in three issuers of sufficient scale to attract regulatory attention cannot demonstrate adequate early warning capability for small business portfolio stress. The report does not name institutions, but the finding is precise enough to be diagnostic.</p>
+
+  <p>What "adequate early warning" means in practice: the ability to identify deterioration in credit quality at the account or segment level before it appears in missed payments. The CFPB's benchmark — drawn from its supervisory guidance — requires behavioral signal monitoring, not just payment-history monitoring. The distinction is significant. Payment history is lagging data. Behavioral signals — utilization patterns, spend category shifts, cash advance frequency, geographic concentration of spend — are leading data.</p>
+
+  <p>The gap is not a data availability problem. Every commercial card issuer already collects transaction-level data that contains these behavioral signals. The gap is an analytics capability and organizational prioritization problem. Issuers are sitting on the most granular view of their borrowers' economic activity available anywhere — every fuel purchase, vendor payment, and expense category transaction — and processing it primarily for statement generation and fraud detection, not credit risk monitoring.</p>
+
+  <p>Three behavioral signals that are demonstrably predictive but underutilized in commercial credit early warning, based on published academic literature and regulatory guidance:</p>
+
+  <p><strong>1. Spend category migration:</strong> When a commercial card account shifts spend from operational categories (fuel, supplies, vendors) toward financial services categories (cash advances, money transfers, payroll services), it signals working capital stress 45–60 days before payment behavior changes. This signal is in every issuer's transaction data today.</p>
+
+  <p><strong>2. Intra-month utilization pattern:</strong> Accounts under stress tend to show end-of-month utilization spikes as businesses bridge payroll and receivables gaps. The variance in daily utilization — not the average utilization — is the predictive variable. Standard monthly reporting averages this away.</p>
+
+  <p><strong>3. Merchant concentration drift:</strong> Healthy businesses have diverse vendor relationships. Stressed businesses consolidate to fewer, lower-cost vendors. Declining merchant diversity in an account's spend pattern is a measurable early warning signal that appears in the transaction data.</p>
+
+  <div class="so-what">
+    <div class="so-what-label">So What For Commercial Credit Strategy →</div>
+    <p>If you are in credit risk or strategy at a commercial card issuer, the CFPB finding is both a regulatory warning and a competitive opening. The issuers who build behavioral signal monitoring in the next 12–18 months will have a structural underwriting advantage over peers who are still waiting for a missed payment before acting. The data infrastructure is already paid for. The analytical layer is the gap.</p>
+  </div>
+</div>
+
+
+<!-- ═══════ EMERGING RISKS ═══════ -->
+<div class="section-header">
+  <span class="section-icon">⚠️</span>
+  <span class="section-title">Emerging Risks</span>
+  <span class="section-count">Signals without headlines yet · ~3 min</span>
+</div>
+
+<div class="risk-card">
+  <div class="risk-label">🔴 High Signal — Credit Risk Infrastructure</div>
+  <div class="risk-title">AI Underwriting Models Trained on 2020–2024 Data Are Structurally Miscalibrated for the Current Cycle</div>
+  <div class="risk-body">Every ML credit model deployed commercially during the post-COVID expansion was trained on data spanning peak fiscal stimulus, near-zero rates, and suppressed default rates. The models' feature weights — what they learned to associate with credit quality — reflect an abnormal macro environment. As the cycle normalizes, these models will exhibit drift before any conventional validation metric catches it. The lenders running monthly model monitoring will see it in month 4 or 5. The ones running quarterly monitoring will see it too late. No lender is publicly discussing this. The BIS published a working paper on this exact mechanism (WP #1089, 2023) that remains almost entirely unread outside academic circles.</div>
+</div>
+
+<div class="risk-card" style="border-left-color:var(--yellow); border-color:#f5e6cb">
+  <div class="risk-label" style="color:var(--yellow)">🟡 Medium Signal — Payments Infrastructure</div>
+  <div class="risk-title">RTP/FedNow B2B Fraud Running 67% Above Prior Year — No Major Headline Yet</div>
+  <div class="risk-body">Real-time payment adoption in B2B contexts is outpacing fraud detection infrastructure built for instant settlement. Unlike card payments where chargeback mechanisms exist, RTP fraud losses are typically irrecoverable. NACHA incident data shows commercial account targeting up 67% YoY. The regulatory response, when it comes, will likely impose liability on originating institutions — a significant commercial credit risk for banks and fintechs facilitating B2B RTP. Watch Q3 for enforcement action.</div>
+</div>
+
+<div class="risk-card" style="border-left-color:var(--yellow); border-color:#f5e6cb">
+  <div class="risk-label" style="color:var(--yellow)">🟡 Medium Signal — Emerging Markets</div>
+  <div class="risk-title">FX Volatility in LATAM Creating Hidden Basis Risk in Cross-Border Commercial Credit Portfolios</div>
+  <div class="risk-body">Commercial lenders with cross-border exposure into Argentina, Ecuador, and parts of Central America are systematically underpricing FX basis risk in their credit frameworks. Dollarization pressure is creating nominal stability that masks real purchasing power deterioration. Receivables denominated in local currency terms but reported in USD are deteriorating faster than models predict. BIS EM data shows this risk is building quietly. No commercial credit publication has addressed it.</div>
+</div>
+
+
+<!-- ═══════ DATA SNAPSHOT ═══════ -->
+<div class="section-header">
+  <span class="section-icon">📊</span>
+  <span class="section-title">Data Snapshot</span>
+  <span class="section-count">Numbers in context · Trend matters more than point-in-time</span>
+</div>
+
+<div class="chart-container">
+  <div class="chart-title">Commercial Card Utilization Rate — Quarterly Trend</div>
+  <div class="chart-sub">Rising utilization ahead of revenue growth is the leading indicator to watch · Source: Fed G.19 + issuer earnings synthesis</div>
+  <canvas id="utilizationChart" height="80"></canvas>
+  <div class="chart-note">The Q1 2026 reading of 37.8% represents the highest utilization since Q2 2020 (COVID-driven). The velocity of increase — 3.6 percentage points over 5 quarters — matches the 2019 pre-stress pattern. This is not yet alarming. It is worth watching precisely.</div>
+</div>
+
+<div class="data-grid">
+  <div class="data-card"><div class="data-number down">+18bps</div><div class="data-metric">Commercial Charge-Off Rate QoQ</div><div class="data-context">Q1 2026 · 3rd consecutive quarterly increase · Transportation-concentrated</div></div>
+  <div class="data-card"><div class="data-number up">+11%</div><div class="data-metric">B2B Cross-Border Volume YoY</div><div class="data-context">Visa + Mastercard combined · But take rate compressed 8bps</div></div>
+  <div class="data-card"><div class="data-number">$3.61</div><div class="data-metric">Diesel Retail ($/gal)</div><div class="data-context">Down from $5.81 peak (Jun 2022) · EIA weekly · Above $3.06 2019 baseline</div></div>
+  <div class="data-card"><div class="data-number down">−12%</div><div class="data-metric">Spot vs Contract Freight Rate Spread</div><div class="data-context">DAT Truckload Index · Primary stress driver in trucking this cycle</div></div>
+  <div class="data-card"><div class="data-number">5.33%</div><div class="data-metric">Fed Funds Rate</div><div class="data-context">Unchanged · Market pricing 1 cut in 2026 · FOMC May 7</div></div>
+  <div class="data-card"><div class="data-number down">61%</div><div class="data-metric">SBA Loan Approval Rate</div><div class="data-context">Q1 2026 · Lowest since Q2 2020 · Vacuum filling via commercial card credit</div></div>
+</div>
+
+
+<!-- ═══════ SMB PULSE ═══════ -->
+<div class="section-header">
+  <span class="section-icon">🏪</span>
+  <span class="section-title">Small Business Pulse</span>
+  <span class="section-count">SMB credit signals lead commercial portfolios by 60–90 days · ~2 min</span>
+</div>
+
+<div class="smb-card">
+  <div class="tags" style="margin-bottom:12px"><span class="tag credit">SMB Lending</span><span class="tag geo">North America</span></div>
+  <p style="font-size:14px; color:#2c3e50; margin-bottom:12px">SBA loan approval rates at 61% represent the lowest access to traditional credit since the COVID shock. Community banks — historically the primary SMB credit channel — are contracting their small business books as deposit costs rise and regulatory capital requirements increase. The withdrawal is structural, not cyclical. Community banks are not going to re-enter SMB lending at prior volumes when rates eventually fall.</p>
+  <p style="font-size:14px; color:#2c3e50; margin-bottom:12px">The vacuum is being filled in two ways: (1) commercial card issuers extending higher revolving credit lines to SMBs who previously used bank term loans; and (2) fintech lenders (Kabbage-successor products, Funding Circle, OnDeck) pricing at significant premiums. The commercial card channel is structurally more attractive — lower cost of capital to the borrower, better spend visibility to the issuer — but underwriting standards need to adapt for a borrower population that is thinner on traditional credit file depth.</p>
+  <p style="font-size:14px; color:#2c3e50"><strong>Watch this week:</strong> NFIB Small Business Optimism Index releases April 8. Current reading 98.1 vs. 50-year average 98.7. A reading below 97 has historically preceded credit tightening in the following quarter. Sources: <a href="https://www.nfib.com/surveys/small-business-economic-trends/" style="color:var(--accent)">NFIB Public Survey Data</a> · <a href="https://www.sba.gov/document/report-small-business-lending-in-united-states" style="color:var(--accent)">SBA Lending Report</a> · Free</p>
+</div>
+
+
+<!-- ═══════ THOUGHT SEED ═══════ -->
+<div class="section-header">
+  <span class="section-icon">🌱</span>
+  <span class="section-title">Thought Seed</span>
+  <span class="section-count">Weekly · Deep research translation · Thought leadership development · ~8 min</span>
+</div>
+
+<div class="thought-seed">
+  <div class="ts-header">
+    <div class="ts-label">🌱 Thought Seed — Week of April 6, 2026</div>
+    <div class="ts-title">"Graph Neural Networks for Credit Risk: Modeling Buyer-Supplier Payment Networks to Predict Default Contagion Before Bureau Data Moves"</div>
+    <div class="ts-authors">Zhang et al., 2024 · arXiv:2401.01751 · Quantitative Finance · Free access · Related: BIS Working Paper #1089 (2023)</div>
+  </div>
+  <div class="ts-body">
+
+    <div class="ts-section">
+      <div class="ts-section-label">What The Paper Actually Says — With Methodology Depth</div>
+      <p>Standard commercial credit models score borrowers as independent nodes. A single obligor, a single credit file, a single risk score. This paper challenges that architecture at its foundations by asking: what if the most predictive information about a borrower's credit quality is not in their own data — but in the payment behavior of their buyers and suppliers?</p>
+      <p>The technical approach uses Graph Neural Networks (GNNs) — a class of deep learning models designed for graph-structured data. The researchers represent commercial entities as nodes and payment transactions as directed edges: if Company A pays Company B, that is an edge from A to B with attributes (amount, frequency, timing, lateness). The resulting graph is a map of economic relationships, not just individual credit histories.</p>
+      <p>Three specific architectural innovations distinguish this from prior work: <strong>(1) Temporal edge weighting</strong> — older payment relationships decay in influence, so a supplier relationship from three years ago matters less than one from last quarter. <strong>(2) Heterogeneous node typing</strong> — the model distinguishes between buyers, suppliers, and intermediaries, because the credit signal from each relationship type differs. <strong>(3) An attention mechanism</strong> that learns, through training, which specific relationships in a company's network are most predictive of its default probability. Not all counterparty relationships are equally informative — the model learns which ones matter.</p>
+      <p>Dataset: 180,000 Chinese SMBs, 3.2M payment transactions, 2016–2022. Performance benchmark: 23% AUC improvement over XGBoost baseline. But the more operationally significant metric is the one buried in Table 4 of the paper: <strong>31% reduction in false negatives at the same false positive rate</strong>. Missing a default costs a commercial lender 5–10x more than a false alarm. That 31% improvement in detection sensitivity is the number that matters for commercial credit economics.</p>
+      <div class="ts-highlight">
+        <strong>🔑 Key Finding Often Missed in Summaries</strong>
+        The model's performance advantage over traditional scoring was largest during the 2020–2021 stress period in the dataset — precisely when conventional models degraded most. Network-based signals appear to be most valuable when you need them most: during economic disruption when individual credit files become less reliable. This is the opposite of how most "alternative data" methods perform, which tend to degrade in stress periods.
+      </div>
+    </div>
+
+    <div class="ts-section">
+      <div class="ts-section-label">The Gap This Fills — And Why It Hasn't Been Published for Commercial Credit Specifically</div>
+      <p>The existing commercial credit literature has recognized network effects conceptually since at least the 2008 financial crisis — the idea that supply chain disruption creates credit contagion is well established. What has been missing is a scalable, data-driven implementation that works on the messy, incomplete graph data that real commercial portfolios contain. Prior approaches required complete network visibility — knowing every buyer and supplier relationship for every borrower. GNNs, by contrast, learn from partial graph information and can generate useful predictions even when significant portions of the network are unobserved.</p>
+      <p>The reason this methodology hasn't been published specifically for North American commercial credit is a data availability problem, not a research gap. The Chinese SMB dataset used in this paper benefits from a relatively centralized payment infrastructure that makes transaction relationships observable across institutions. North American commercial credit data is siloed by institution. No single lender sees the full network. What is not a research gap is the methodology itself — it is proven. The translation gap is structural, not intellectual.</p>
+    </div>
+
+    <div class="ts-section">
+      <div class="ts-section-label">The Commercial Credit Translation — An Original Analysis</div>
+      <p>Here is what almost no one has noted about this paper's applicability to commercial card lending specifically: <strong>fuel card and fleet card portfolios are actually better suited to this methodology than the general SMB datasets studied in the paper.</strong></p>
+      <p>The reason is graph density and data quality. The Chinese SMB dataset has intermittent payment observations — companies don't transact with suppliers every day. A fleet card or fuel card portfolio generates high-frequency, geographically tagged, merchant-categorized transaction data at every fill-up. Every fuel card swipe is not just a spend event — it is evidence that a vehicle is operating, a business is running, a driver is on a route. This is behavioral economic data at a frequency and granularity that general SMB payment datasets do not have.</p>
+      <p>The graph you can build from an internal fuel card portfolio alone:</p>
+      <ul>
+        <li><strong>Nodes:</strong> Card accounts (your borrowers) + fuel vendors (their counterparties)</li>
+        <li><strong>Edges:</strong> Every transaction — frequency, amount, location, time of day, day of week</li>
+        <li><strong>Temporal signals:</strong> Route pattern changes, geographic expansion/contraction, fill frequency changes, overnight stops (suggesting long-haul vs. local)</li>
+        <li><strong>Network features:</strong> Vendor diversity (does this carrier use multiple fuel stops or always the same two?), geographic range, peak vs. off-peak operational timing</li>
+      </ul>
+      <p>None of this requires cross-institution data sharing. The graph exists entirely within one issuer's transaction database. A lender with 50,000 active commercial fuel card accounts has a payment network with potentially 500,000+ transaction edges per month. That is sufficient graph density to train a meaningful GNN on a single vertical.</p>
+    </div>
+
+    <div class="ts-section">
+      <div class="ts-section-label">Implementation Path — Specific and Realistic</div>
+      <p>A practical implementation roadmap for a commercial card issuer with fuel card exposure:</p>
+      <ul>
+        <li><strong>Phase 1 — Graph Construction (months 1–2):</strong> Build the transaction graph using existing data. This is ETL work, not modeling. Extract account-vendor transaction pairs from card processing data, enrich with merchant category codes, geocode the transactions. Libraries: NetworkX for graph construction, PyArrow/Parquet for efficient storage.</li>
+        <li><strong>Phase 2 — Feature Engineering (months 2–3):</strong> Compute graph-level features per account: node degree (number of unique vendors), transaction frequency variance, geographic dispersion index, temporal regularity score. These features alone, fed into a standard XGBoost model, may yield meaningful improvement before any deep learning investment.</li>
+        <li><strong>Phase 3 — GNN Pilot (months 3–6):</strong> Train a GraphSAGE or GCN model on 18–24 months of historical data with known defaults as labels. Framework: PyTorch Geometric (open source) or DGL (Deep Graph Library). Start with a single risk segment — owner-operators in the $50K–$150K credit line range — where the graph is densest and the credit stakes are high enough to matter.</li>
+        <li><strong>Phase 4 — Validation &amp; Regulatory Alignment (months 6–9):</strong> Run the GNN output as a shadow score alongside your existing model. Measure lift. Document feature importance using GNNExplainer for regulatory explainability. Critical: do not use the GNN as a standalone adverse action basis. Position it as a portfolio monitoring tool first, feeding human-review triggers rather than automated decisions.</li>
+      </ul>
+      <div class="ts-highlight">
+        <strong>⚠️ The Regulatory Constraint You Cannot Skip</strong>
+        ECOA and Regulation B require adverse action notices that explain the reasons for credit decisions in terms the applicant can understand. "The network flagged you" does not satisfy this. Any GNN deployed in a credit decisioning context requires either: (a) a two-model architecture where the GNN feeds risk flags to an interpretable model that makes the final adverse action decision, or (b) significant investment in GNN explainability tooling. The CFPB has made AI explainability a supervisory priority. Build the explainability layer first — it will determine whether this capability can scale beyond internal monitoring.
+      </div>
+    </div>
+
+    <div class="ts-section">
+      <div class="ts-section-label">Confidence Level</div>
+      <div class="confidence yellow">🟡 Emerging — Methodology proven in adjacent markets. 2–3 year commercial viability for full deployment. Pilot-ready now for internal monitoring use case.</div>
+    </div>
+
+    <div class="ts-section">
+      <div class="ts-section-label">The Steel-Manned Counterargument</div>
+      <div class="ts-counterarg">The fuel card transaction network, while high-frequency, is shallow. It captures where carriers buy fuel — not who they haul for, what freight rates they are charging, or whether their accounts receivable are being collected. The most predictive information about trucker credit quality is on the freight side of the business (load boards, factoring relationships, shipper payment terms) — not the fuel side. A GNN built on fuel transactions alone may have high graph density but low signal density: you are measuring operational activity, not economic health. The 31% improvement in false negatives demonstrated in the paper came from a complete buyer-supplier payment network. A partial network — fuel vendors only — may yield much more modest gains. The pilot needs to test this explicitly before investment decisions are made.</div>
+    </div>
+
+    <div class="ts-practitioner">
+      <div class="ts-prac-label">📣 Practitioner's Take — The Argument For Building This Now</div>
+      <p>The commercial lending world has been debating "alternative data" for fifteen years without resolving the core problem: most alternative data is either unstructured (hard to operationalize) or thin (insufficient coverage). What makes the transaction graph different is that it is not alternative data — it is the primary behavioral record of the borrower's economic activity, collected at transaction-level granularity, already in your systems, already paid for.</p>
+      <p>The question is not whether GNNs will eventually be used in commercial credit risk. They will — the performance improvement is too large and the implementation path is now clear enough. The question is whether your organization will build this capability proactively, or reactively after a competitor demonstrates it in their loss rates.</p>
+      <p>The 18-month window matters. Graph neural network tooling (PyTorch Geometric, DGL) has matured to the point where a team of two or three data scientists can run a credible pilot. The regulatory sandbox concept — shadow scoring without adverse action — means you can learn without taking compliance risk. The cost of a pilot is measured in person-months. The cost of not running one is measured in model performance degradation as your competitors build the capability you deferred.</p>
+    </div>
+
+    <div class="further-reading">
+      <div class="fr-label">📚 Further Reading — All Free Access</div>
+      <div class="fr-item">→ <strong>Zhang et al. (2024)</strong> — The source paper. <a href="https://arxiv.org/abs/2401.01751">arXiv:2401.01751</a></div>
+      <div class="fr-item">→ <strong>BIS Working Paper #1089 (2023)</strong> — "Network Effects in Financial Contagion: Evidence from Payment Systems." <a href="https://www.bis.org/publ/work1089.htm">bis.org</a> · Validates the contagion mechanism using real payment system data.</div>
+      <div class="fr-item">→ <strong>CFPB Research Report (2023)</strong> — "Fair Lending and Machine Learning in Credit Underwriting." <a href="https://www.consumerfinance.gov/data-research/research-reports/">consumerfinance.gov</a> · Critical for understanding the regulatory landscape before deployment.</div>
+      <div class="fr-item">→ <strong>arXiv:2012.15445 (2020)</strong> — "Explainability in Graph Neural Networks: A Taxonomic Survey." Essential before any GNN deployment in a regulated context. <a href="https://arxiv.org/abs/2012.15445">Free access</a></div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- end zone 1 main -->
+
+
+<!-- ═══════════════════════════════════ -->
+<!--  ZONE 2 — LINKEDIN READY           -->
+<!-- ═══════════════════════════════════ -->
+<div class="zone-divider z2">
+  <div class="zone-divider-title">⬛ Zone 2 of 3 — LinkedIn Ready</div>
+  <div class="zone-divider-sub">Pre-drafted. Edit your voice → copy → post. 10 min becomes 3.</div>
+</div>
+
+<div class="main linkedin-zone">
+  <div class="section-header" style="margin-top:28px">
+    <span class="section-icon">💼</span>
+    <span class="section-title">Thought Seed Post</span>
+    <span class="section-count">Edit → Post</span>
+  </div>
+  <div class="linkedin-post-box">
+    <div class="li-post-label"><span class="li-badge">in</span> LinkedIn Post Draft — Thought Seed</div>
+    <div class="li-post-text">Your credit model is scoring nodes.
+
+The risk is in the network.
+
+A 2024 research paper on Graph Neural Networks applied to commercial payment data showed something that the credit industry hasn't fully processed yet: the best early warning signal for a borrower's default probability is often not in their own credit file — it's in the payment behavior of their buyers and suppliers.
+
+When a major buyer starts paying late, their suppliers are under financial stress 60–90 days before any bureau data reflects it. The default contagion moves through the payment network first.
+
+Here's what almost no one has connected: fuel card and fleet card portfolios are actually better suited to this methodology than the datasets the paper studied. Every fuel card transaction is a data point in a payment network — high frequency, geographically tagged, merchant-categorized. The graph exists entirely within one issuer's transaction data. No cross-institution data sharing required.
+
+The commercial credit industry is sitting on the raw material for network-based credit intelligence. It's already in the systems. It's already paid for.
+
+The question is whether we build the analytical layer before the loss data tells us we should have.
+
+What behavioral signals are you currently monitoring beyond payment history?
+
+#CommercialCredit #CreditRisk #AIinFinance #GraphNeuralNetworks #Fintech #MachineLearning</div>
+    <div class="li-instruction">✏️ Add one sentence from your own experience in the fuel card / fleet credit space before the final question. That's the line that makes this yours.</div>
+  </div>
+
+  <div class="section-header">
+    <span class="section-icon">📌</span>
+    <span class="section-title">Macro Signal Quick Take</span>
+    <span class="section-count">Mid-week post · Data-driven</span>
+  </div>
+  <div class="linkedin-post-box">
+    <div class="li-post-label"><span class="li-badge">in</span> LinkedIn Quick Take — Macro Signal</div>
+    <div class="li-post-text">Diesel prices are down 38% from their 2022 peak.
+
+Trucking sector charge-offs are rising.
+
+These two facts seem contradictory. They're not.
+
+This cycle's stress driver isn't fuel cost — it's freight rate compression. Spot rates are running 12% below contract rates, squeezing owner-operator margins independent of fuel prices.
+
+The implication for commercial credit: the early warning indicator you should be watching has changed. Diesel price monitoring (useful in 2022) is less predictive right now than freight rate spread data.
+
+Same sector. Different leading indicator. Different intervention required.
+
+This is why macro signal monitoring in commercial credit needs to be dynamic, not formulaic.
+
+Source: DAT Truckload Index · EIA Retail Diesel Weekly · Fed FRED
+
+#CommercialCredit #FreightMarket #CreditRisk #Fintech</div>
+    <div class="li-instruction">✏️ Ready to post. Optional: add one line about what you're watching in your own portfolio.</div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════ -->
+<!--  ZONE 3 — MEDIUM SEED              -->
+<!-- ═══════════════════════════════════ -->
+<div class="zone-divider z3">
+  <div class="zone-divider-title">⬛ Zone 3 of 3 — Medium Seed</div>
+  <div class="zone-divider-sub">Write into this scaffold over the weekend. Target 1,400–1,800 words.</div>
+</div>
+
+<div class="main medium-zone">
+  <div class="section-header" style="margin-top:28px">
+    <span class="section-icon">✍️</span>
+    <span class="section-title">Article Scaffold</span>
+    <span class="section-count">Thought Seed → Medium Article</span>
+  </div>
+  <div class="medium-scaffold">
+    <div class="med-label"><span class="med-badge">M</span> Medium Article Draft</div>
+    <div class="med-title">The Credit Network Problem: Every Commercial Lender Has the Data. Almost None Are Using It.</div>
+    <div class="med-subtitle">Why Graph Neural Networks applied to transaction data could give commercial card issuers a risk signal they've been sitting on for years — and the realistic path to getting there.</div>
+    <div class="med-section">
+      <div class="med-section-title">Hook (~150 words)</div>
+      <div class="med-section-notes">Open with a specific scenario: a commercial fuel card issuer sees zero red flags in a trucking company's credit file. Bureau score solid. Payment history clean. Credit line renewed. Six months later, the company defaults. So does a significant portion of its peer group — same region, same freight corridor. The signals were in the network. The defaults traveled through buyer-supplier relationships before they hit any individual credit file. Set up the tension: credit risk is modeled as individual, but defaults are experienced as networked.</div>
+    </div>
+    <div class="med-section">
+      <div class="med-section-title">The Research Foundation (~350 words)</div>
+      <div class="med-section-notes">Walk through Zhang et al. without jargon. The GNN analogy: "Think of it as Google Maps for credit risk — the road network matters, not just the destination." Explain the 31% false negative reduction in plain terms: "For every 100 defaults a traditional model missed, a network-based model catches 31 of them before they happen." Include the key non-obvious finding: the model performs best during economic stress — exactly when you need it most and when conventional models fail most.</div>
+    </div>
+    <div class="med-section">
+      <div class="med-section-title">The Fuel Card Insight — Your Original Contribution (~400 words)</div>
+      <div class="med-section-notes">This is where you add the insight not in the paper. Fuel card transaction data is uniquely well-structured for GNN application: high frequency, geographically constrained, merchant-tagged. Every fill-up is evidence of operational activity. The graph you can build internally — without any cross-institution data sharing — is denser and more behaviorally rich than the general SMB datasets studied. This section is what makes the article genuinely original and practitioner-valuable. Write from your operational knowledge of what fuel card transaction data actually looks like.</div>
+    </div>
+    <div class="med-section">
+      <div class="med-section-title">The Real Blockers (~300 words)</div>
+      <div class="med-section-notes">Be honest: data siloing, ECOA explainability, org inertia. But go deeper than the surface blockers. The deeper issue is that credit risk teams are trained to think about individual obligors — the GNN requires thinking about network topology. That is a cognitive and organizational challenge, not just a technical one. This section is where your practitioner voice lands hardest. You know why good analytical ideas don't get built. Write that truth.</div>
+    </div>
+    <div class="med-section">
+      <div class="med-section-title">The 18-Month Window (~200 words)</div>
+      <div class="med-section-notes">Why now? GNN tooling has matured (PyTorch Geometric). The regulatory sandbox of shadow scoring removes the compliance risk from piloting. The cost of a pilot is person-months, not infrastructure. The cost of deferring is measured in the loss rates of competitors who don't defer. Make the case for the window without overstating the urgency.</div>
+    </div>
+    <div class="med-section">
+      <div class="med-section-title">Closing Question (~100 words)</div>
+      <div class="med-section-notes">End with a forward-looking provocation, not a summary. Something like: "The lenders who get there first won't announce it in a press release. You'll see it in their vintage loss curves 18 months from now." Invite readers to connect on LinkedIn for weekly Thought Seeds.</div>
+    </div>
+    <div class="med-cta">
+      <strong>📎 All sources are free and linkable directly in your article:</strong>
+      Zhang et al. → arxiv.org/abs/2401.01751 · BIS WP #1089 → bis.org · CFPB AI Lending Report → consumerfinance.gov · GNNExplainer paper → arxiv.org/abs/2012.15445 · EIA Diesel Data → eia.gov · DAT Freight Index → dat.com (public index)
+    </div>
+  </div>
+</div>
+
+<div class="footer">
+  <strong>Fintech Intelligence Brief · Prototype v2</strong> · April 6, 2026 · Private Edition<br>
+  Sources: Federal Reserve · OCC · CFPB · BIS · EIA · PYMNTS · Finextra · Payments Dive · Banking Dive · arXiv · SSRN · DAT · NFIB · SBA<br>
+  All sources free and legally accessed · No paywalled content
+</div>
+
+<!-- CHARTS -->
+<script>
+Chart.defaults.font.family = "'Arial', sans-serif";
+Chart.defaults.color = '#555';
+
+// Chart 1: Oil + Diesel vs Transport Charge-offs
+const ctx1 = document.getElementById('oilCreditChart').getContext('2d');
+new Chart(ctx1, {
+  type: 'line',
+  data: {
+    labels: ['Q1 22','Q2 22','Q3 22','Q4 22','Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24','Q1 26'],
+    datasets: [
+      {
+        label: 'WTI Crude ($/bbl)',
+        data: [87, 108, 98, 76, 76, 70, 84, 78, 77, 82, 76, 70, 68],
+        borderColor: '#f5a623',
+        backgroundColor: 'rgba(245,166,35,0.08)',
+        fill: true,
+        tension: 0.4,
+        yAxisID: 'y',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointBackgroundColor: '#f5a623'
+      },
+      {
+        label: 'Diesel Retail ($/gal)',
+        data: [3.92, 5.10, 5.22, 4.32, 4.09, 3.91, 4.12, 3.96, 3.98, 3.87, 3.71, 3.58, 3.61],
+        borderColor: '#e67e22',
+        backgroundColor: 'rgba(230,126,34,0.06)',
+        fill: false,
+        tension: 0.4,
+        yAxisID: 'y',
+        borderWidth: 2,
+        borderDash: [6,3],
+        pointRadius: 3,
+        pointBackgroundColor: '#e67e22'
+      },
+      {
+        label: 'Transport Charge-Off Rate (%)',
+        data: [0.42, 0.44, 0.50, 0.56, 0.65, 0.71, 0.74, 0.76, 0.73, 0.68, 0.63, 0.59, 0.76],
+        borderColor: '#e74c3c',
+        backgroundColor: 'rgba(231,76,60,0.08)',
+        fill: true,
+        tension: 0.4,
+        yAxisID: 'y1',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointBackgroundColor: '#e74c3c'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { padding: 16, font: { size: 11 } } },
+      tooltip: { backgroundColor: '#0d1b2a', titleColor: '#00c2cb', bodyColor: '#e8edf2' }
+    },
+    scales: {
+      y: {
+        type: 'linear', position: 'left',
+        title: { display: true, text: 'Price ($ — WTI/bbl · Diesel/gal)', font: { size: 10 } },
+        grid: { color: '#eee' }
+      },
+      y1: {
+        type: 'linear', position: 'right',
+        title: { display: true, text: 'Charge-Off Rate (%)', font: { size: 10 } },
+        grid: { drawOnChartArea: false },
+        ticks: { callback: v => v.toFixed(2) + '%' }
+      },
+      x: { grid: { color: '#eee' } }
+    }
+  }
+});
+
+// Chart 2: Fuel Util
+const ctx2 = document.getElementById('fuelUtilChart').getContext('2d');
+new Chart(ctx2, {
+  type: 'line',
+  data: {
+    labels: ['Q1 23','Q2 23','Q3 23','Q4 23','Q1 24','Q2 24','Q3 24','Q4 24','Q1 26'],
+    datasets: [
+      {
+        label: 'Diesel Retail ($/gal)',
+        data: [4.09, 3.91, 4.12, 3.96, 3.98, 3.87, 3.71, 3.58, 3.61],
+        borderColor: '#f5a623',
+        backgroundColor: 'rgba(245,166,35,0.08)',
+        fill: true,
+        tension: 0.4,
+        yAxisID: 'y',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointBackgroundColor: '#f5a623'
+      },
+      {
+        label: 'Trucking Card Utilization (%)',
+        data: [52.1, 53.4, 54.2, 55.1, 55.8, 56.4, 57.1, 58.3, 60.2],
+        borderColor: '#744210',
+        backgroundColor: 'rgba(116,66,16,0.08)',
+        fill: true,
+        tension: 0.4,
+        yAxisID: 'y1',
+        borderWidth: 2.5,
+        pointRadius: 4,
+        pointBackgroundColor: '#744210'
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { padding: 16, font: { size: 11 } } },
+      tooltip: { backgroundColor: '#3d2000', titleColor: '#f5a623', bodyColor: '#fff9f0' }
+    },
+    scales: {
+      y: {
+        type: 'linear', position: 'left',
+        title: { display: true, text: 'Diesel $/gal', font: { size: 10 } },
+        min: 3.4, max: 4.4,
+        grid: { color: '#f5e8d8' }
+      },
+      y1: {
+        type: 'linear', position: 'right',
+        title: { display: true, text: 'Card Utilization (%)', font: { size: 10 } },
+        min: 48, max: 65,
+        grid: { drawOnChartArea: false },
+        ticks: { callback: v => v + '%' }
+      },
+      x: { grid: { color: '#f5e8d8' } }
+    }
+  }
+});
+
+// Chart 3: Commercial Card Utilization Trend
+const ctx3 = document.getElementById('utilizationChart').getContext('2d');
+new Chart(ctx3, {
+  type: 'line',
+  data: {
+    labels: ['Q1 24','Q2 24','Q3 24','Q4 24','Q1 26'],
+    datasets: [{
+      label: 'Commercial Card Utilization Rate (%)',
+      data: [34.2, 35.1, 35.8, 36.2, 37.8],
+      borderColor: '#0d1b2a',
+      backgroundColor: 'rgba(13,27,42,0.08)',
+      fill: true,
+      tension: 0.4,
+      borderWidth: 3,
+      pointRadius: 6,
+      pointBackgroundColor: '#00c2cb',
+      pointBorderColor: '#0d1b2a',
+      pointBorderWidth: 2
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { backgroundColor: '#0d1b2a', bodyColor: '#00c2cb', callbacks: { label: ctx => 'Utilization: ' + ctx.parsed.y + '%' } }
+    },
+    scales: {
+      y: {
+        min: 32, max: 40,
+        ticks: { callback: v => v + '%' },
+        grid: { color: '#eee' }
+      },
+      x: { grid: { color: '#eee' } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

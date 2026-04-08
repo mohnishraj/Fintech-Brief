@@ -1,0 +1,1421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fintech Intelligence Brief — Format Prototype</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+<style>
+/* ── DESIGN TOKENS ─────────────────────────────── */
+:root {
+  --navy:    #0d1b2a;
+  --ink:     #1a2535;
+  --accent:  #00c2cb;
+  --amber:   #e8900a;
+  --red:     #c0392b;
+  --green:   #1e8449;
+  --muted:   #6b7c93;
+  --rule:    #dde3ea;
+  --bg:      #f7f8fa;
+  --paper:   #ffffff;
+  --fuel:    #b35c00;
+  --serif:   'Georgia', serif;
+  --sans:    'Arial', sans-serif;
+}
+
+/* ── RESET & BASE ──────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: var(--bg); color: var(--ink); font-family: var(--serif); font-size: 16px; line-height: 1.7; }
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; }
+strong { font-weight: 700; }
+p { margin-bottom: 1em; }
+
+/* ── MASTHEAD ──────────────────────────────────── */
+.masthead {
+  background: var(--navy);
+  padding: 28px 40px 22px;
+  border-bottom: 3px solid var(--accent);
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.masthead-left {}
+.pub-name {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.masthead-headline {
+  font-size: 22px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.3;
+  max-width: 620px;
+}
+.masthead-right {
+  text-align: right;
+}
+.edition-pill {
+  display: inline-block;
+  background: var(--accent);
+  color: var(--navy);
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 3px;
+  margin-bottom: 8px;
+}
+.masthead-meta {
+  font-family: var(--sans);
+  font-size: 11px;
+  color: #6b8aaa;
+  line-height: 1.8;
+}
+
+/* ── ACTION BAR ────────────────────────────────── */
+.action-bar {
+  background: #0a1520;
+  padding: 8px 40px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  border-bottom: 1px solid #1e3a52;
+}
+.action-bar-label { font-family: var(--sans); font-size: 10px; color: #4a7a9b; letter-spacing: 1px; text-transform: uppercase; margin-right: auto; }
+.action-btn { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 4px; font-family: var(--sans); font-size: 11px; font-weight: 700; cursor: pointer; border: none; transition: all 0.15s; text-decoration: none; }
+.action-btn.pdf { background: var(--accent); color: var(--navy); }
+.action-btn.pdf:hover { background: #00aab3; }
+.action-btn.share { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+.action-btn.share:hover { background: #0d2538; }
+.share-wrapper { position: relative; display: inline-block; }
+.share-dropdown { display: none; position: absolute; right: 0; top: calc(100% + 6px); background: #132232; border: 1px solid #1e3a52; border-radius: 6px; min-width: 200px; z-index: 100; box-shadow: 0 6px 24px rgba(0,0,0,0.4); overflow: hidden; }
+.share-dropdown.open { display: block; }
+.share-option { display: flex; align-items: center; gap: 10px; padding: 11px 16px; font-family: var(--sans); font-size: 11px; color: #b0c4d8; cursor: pointer; transition: background 0.12s; border-bottom: 1px solid #1e3a52; }
+.share-option:last-child { border-bottom: none; }
+.share-option:hover { background: #1a2e42; color: #fff; }
+.share-option strong { display: block; font-size: 11px; color: #fff; }
+.share-option span { font-size: 9px; color: #7fb3c8; }
+.copy-confirm { display: none; font-size: 9px; color: var(--green); margin-left: 4px; }
+
+/* ── TODAY'S BRIEF (lede strip) ────────────────── */
+.lede-strip {
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule);
+  padding: 20px 40px;
+  max-width: 860px;
+  margin: 0 auto;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  align-items: flex-start;
+}
+.lede-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.lede-items { flex: 1; min-width: 200px; }
+.lede-item {
+  display: flex;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--rule);
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.lede-item:last-child { border-bottom: none; }
+.lede-num {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 900;
+  color: var(--accent);
+  min-width: 18px;
+  margin-top: 2px;
+}
+.lede-divider { width: 1px; background: var(--rule); flex-shrink: 0; }
+.lede-macro {
+  flex: 0 0 220px;
+  background: #f0f7ff;
+  border-radius: 6px;
+  padding: 14px 16px;
+  font-size: 12px;
+  color: #1a5276;
+}
+.lede-macro-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.lede-macro p { margin-bottom: 0; }
+
+/* ── MAIN LAYOUT ───────────────────────────────── */
+.page {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 40px 80px;
+}
+
+/* ── SECTION LABELS ────────────────────────────── */
+.section-rule {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 40px 0 24px;
+}
+.section-rule-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 900;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  white-space: nowrap;
+}
+.section-rule-line {
+  flex: 1;
+  height: 1px;
+  background: var(--rule);
+}
+.section-rule-line.accent { background: var(--accent); height: 2px; }
+
+/* ── STORY ─────────────────────────────────────── */
+.story {
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.story:last-child { border-bottom: none; }
+.story-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.tag {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 3px;
+  color: #fff;
+}
+.tag.payments { background: #1a6eb5; }
+.tag.credit   { background: #7b2d8b; }
+.tag.risk     { background: var(--red); }
+.tag.macro    { background: #16a085; }
+.tag.fuel     { background: var(--fuel); }
+.tag.smb      { background: #2c3e50; }
+.tag.regulatory { background: #8e44ad; }
+.tag.em       { background: #d35400; }
+.bias-pill {
+  margin-left: auto;
+  font-family: var(--sans);
+  font-size: 9px;
+  color: var(--muted);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.bias-mini-track {
+  width: 48px;
+  height: 4px;
+  background: linear-gradient(to right, #e74c3c, #ecf0f1, #2ecc71);
+  border-radius: 2px;
+  position: relative;
+}
+.bias-mini-dot {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: var(--navy);
+  border: 1.5px solid #fff;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+}
+.story-headline {
+  font-family: var(--serif);
+  font-size: 21px;
+  font-weight: bold;
+  line-height: 1.3;
+  color: var(--navy);
+  margin-bottom: 14px;
+}
+.story-body { color: #2c3e50; }
+.story-body p { font-size: 15px; }
+
+/* Pull quote / synthesis */
+.pull {
+  border-left: 3px solid var(--accent);
+  margin: 20px 0;
+  padding: 12px 18px;
+  background: #f5fbfc;
+  border-radius: 0 6px 6px 0;
+}
+.pull-label {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.pull p {
+  font-size: 14px;
+  color: #1a3a4a;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+/* Counterargument */
+.counter {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #fffbf5;
+  border-left: 3px solid var(--amber);
+  border-radius: 0 4px 4px 0;
+  font-size: 13px;
+  color: #5a4000;
+}
+.counter-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--amber);
+  white-space: nowrap;
+  margin-top: 1px;
+}
+
+/* Source line */
+.source-line {
+  margin-top: 14px;
+  padding-top: 10px;
+  border-top: 1px solid var(--rule);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  font-family: var(--sans);
+  font-size: 10px;
+  color: var(--muted);
+}
+.src { display: inline-flex; align-items: center; gap: 4px; }
+.src-dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.src-dot.gov   { background: var(--green); }
+.src-dot.trade { background: #1a6eb5; }
+.src-dot.synth { background: #8e44ad; }
+
+/* ── MACRO SIGNAL ──────────────────────────────── */
+.macro-block {
+  background: #f0f7ff;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 8px 0 0;
+}
+.macro-kicker {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #1a5276;
+  margin-bottom: 8px;
+}
+.macro-headline {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0d2b3e;
+  margin-bottom: 14px;
+  line-height: 1.35;
+}
+.chain {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 0 0 20px;
+}
+.chain-node {
+  background: #1a5276;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 6px 12px;
+  border-radius: 5px;
+}
+.chain-arrow { color: #1a5276; font-size: 16px; padding: 0 4px; }
+.macro-charts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+.chart-panel {
+  background: #fff;
+  border-radius: 6px;
+  padding: 14px;
+  border: 1px solid #c5ddf5;
+}
+.chart-panel h4 {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #1a5276;
+  margin-bottom: 8px;
+}
+.chart-panel canvas { max-height: 170px; }
+.signal-box {
+  background: #1a5276;
+  color: #fff;
+  border-radius: 6px;
+  padding: 14px 18px;
+  font-size: 13px;
+  line-height: 1.6;
+}
+.signal-box-label {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 6px;
+}
+.signal-box p { margin-bottom: 0; color: #d0e8f5; }
+
+/* ── FUEL & FLEET ──────────────────────────────── */
+.fuel-block {
+  background: #fffaf4;
+  border-radius: 8px;
+  padding: 24px;
+  margin: 8px 0 0;
+}
+.fuel-kicker {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--fuel);
+  margin-bottom: 8px;
+}
+.fuel-headline {
+  font-size: 17px;
+  font-weight: bold;
+  color: var(--navy);
+  margin-bottom: 16px;
+}
+.fuel-stats-row {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border: 1px solid #f0d9b5;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+.fuel-stat-cell {
+  flex: 1;
+  padding: 14px 16px;
+  border-right: 1px solid #f0d9b5;
+}
+.fuel-stat-cell:last-child { border-right: none; }
+.fuel-stat-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--fuel);
+  margin-bottom: 4px;
+}
+.fuel-stat-value {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.fuel-stat-sub { font-size: 11px; color: var(--muted); }
+.fuel-text { font-size: 14px; color: #5a3e00; line-height: 1.65; margin-bottom: 14px; }
+.players-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 16px 0;
+}
+.player-card {
+  background: #fff;
+  border: 1px solid #f0d9b5;
+  border-radius: 6px;
+  padding: 12px;
+}
+.player-name {
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 2px;
+}
+.player-role {
+  font-family: var(--sans);
+  font-size: 9px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+.player-note { font-size: 11px; color: #555; line-height: 1.45; }
+
+/* ── DEEP DIVE ─────────────────────────────────── */
+.deep-block {
+  background: var(--paper);
+  border-top: 3px solid var(--amber);
+  padding: 28px 0;
+}
+.deep-kicker {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 10px;
+}
+.deep-headline {
+  font-size: 22px;
+  font-weight: bold;
+  color: var(--navy);
+  line-height: 1.3;
+  margin-bottom: 18px;
+}
+.deep-body p { font-size: 15px; color: #2c3e50; }
+.so-what {
+  background: #fffbf0;
+  border: 1px solid #f0c040;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-top: 20px;
+}
+.so-what-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+}
+.so-what p { font-size: 14px; color: #4a3000; margin-bottom: 0; }
+
+/* ── EMERGING RISKS ────────────────────────────── */
+.risks-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  margin-top: 8px;
+}
+.risk-item {
+  padding: 16px;
+  border-radius: 6px;
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-top: 3px solid;
+}
+.risk-item.high  { border-top-color: var(--red); }
+.risk-item.med   { border-top-color: var(--amber); }
+.risk-item.low   { border-top-color: var(--green); }
+.risk-sev {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+.risk-item.high .risk-sev { color: var(--red); }
+.risk-item.med  .risk-sev { color: var(--amber); }
+.risk-item.low  .risk-sev { color: var(--green); }
+.risk-item h4 { font-size: 13px; font-weight: bold; color: var(--navy); margin-bottom: 7px; line-height: 1.35; }
+.risk-item p  { font-size: 12px; color: #555; line-height: 1.55; margin-bottom: 0; }
+
+/* ── DATA STRIP ────────────────────────────────── */
+.data-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--paper);
+  margin-top: 8px;
+}
+.data-cell {
+  padding: 16px 18px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.data-cell:nth-child(3n) { border-right: none; }
+.data-cell:nth-last-child(-n+3) { border-bottom: none; }
+.data-cell-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.data-cell-value {
+  font-size: 26px;
+  font-weight: bold;
+  color: var(--navy);
+  line-height: 1;
+  margin-bottom: 3px;
+}
+.delta-up   { font-size: 12px; font-weight: 700; color: var(--green); margin-left: 5px; }
+.delta-down { font-size: 12px; font-weight: 700; color: var(--red); margin-left: 5px; }
+.data-cell-ctx  { font-size: 11px; color: #555; line-height: 1.45; margin-bottom: 4px; }
+.data-cell-src  { font-family: var(--sans); font-size: 9px; color: var(--muted); }
+
+/* ── SMB PULSE ─────────────────────────────────── */
+.smb-block {
+  background: #f4fdf7;
+  border-radius: 8px;
+  padding: 24px;
+  margin-top: 8px;
+}
+.smb-kicker {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 12px;
+}
+.smb-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid #b7e0c9;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 18px;
+}
+.smb-stat-cell {
+  padding: 14px 16px;
+  border-right: 1px solid #b7e0c9;
+}
+.smb-stat-cell:last-child { border-right: none; }
+.smb-stat-label {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--green);
+  margin-bottom: 4px;
+}
+.smb-stat-value { font-size: 22px; font-weight: bold; color: var(--navy); }
+.smb-stat-sub   { font-size: 11px; color: #555; margin-top: 2px; }
+.watch-list { list-style: none; }
+.watch-list li {
+  display: flex;
+  gap: 10px;
+  padding: 9px 0;
+  border-bottom: 1px solid #b7e0c9;
+  font-size: 13px;
+  color: #2c3e50;
+}
+.watch-list li:last-child { border-bottom: none; }
+.watch-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+/* ── THOUGHT SEED ──────────────────────────────── */
+.ts-block {
+  background: var(--navy);
+  border-radius: 8px;
+  padding: 32px;
+  margin-top: 8px;
+  color: #c8d8e8;
+}
+.ts-kicker {
+  font-family: var(--sans);
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.ts-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+.ts-authors { font-family: var(--sans); font-size: 11px; color: #6b8aaa; margin-bottom: 24px; }
+.ts-section { margin-bottom: 20px; }
+.ts-section-label {
+  font-family: var(--sans);
+  font-size: 8px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 7px;
+}
+.ts-section p { font-size: 13px; line-height: 1.7; margin-bottom: 0; }
+.ts-steps { list-style: none; padding: 0; }
+.ts-steps li {
+  padding: 8px 0;
+  border-bottom: 1px solid #1e3a52;
+  font-size: 12px;
+  color: #c8d8e8;
+  display: flex;
+  gap: 8px;
+  line-height: 1.5;
+}
+.ts-steps li:last-child { border-bottom: none; }
+.ts-steps li::before { content: "→"; color: var(--accent); flex-shrink: 0; }
+.ts-counter {
+  background: #1a2e42;
+  border-left: 3px solid var(--amber);
+  padding: 12px 16px;
+  border-radius: 0 5px 5px 0;
+  margin: 8px 0;
+}
+.ts-counter p { font-size: 12px; color: #b0c4d8; margin-bottom: 0; }
+.ts-prac {
+  background: #060e18;
+  border-radius: 6px;
+  padding: 18px 20px;
+  margin-top: 8px;
+  position: relative;
+}
+.ts-prac::before {
+  content: '\201C';
+  font-size: 48px;
+  color: var(--accent);
+  line-height: 0.5;
+  display: block;
+  margin-bottom: 12px;
+}
+.ts-prac p { font-style: italic; font-size: 13px; color: #94b0c8; margin-bottom: 0; line-height: 1.7; }
+.ts-links { margin-top: 16px; display: flex; flex-direction: column; gap: 5px; }
+.ts-links a { font-family: var(--sans); font-size: 11px; color: var(--accent); }
+.ts-confidence { font-family: var(--sans); font-size: 12px; color: #c8d8e8; margin: 8px 0; }
+
+/* ── VALIDATION ROW ────────────────────────────── */
+.val-row {
+  background: #1a2e42;
+  padding: 9px 40px;
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  font-family: var(--sans);
+  font-size: 10px;
+  color: #7fb3c8;
+}
+.val-check { color: var(--green); }
+
+/* ── BIAS LEGEND ───────────────────────────────── */
+.bias-legend {
+  background: linear-gradient(135deg, #1a2a3a 0%, #0d1b2a 100%);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 18px 24px;
+  margin: 16px 0 0;
+  color: #b0c4d8;
+}
+.bias-legend-title {
+  font-family: var(--sans);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.bias-legend-intro { font-family: var(--sans); font-size: 11px; color: #8fa3b8; margin-bottom: 14px; line-height: 1.55; }
+.bias-legend-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 10px; }
+.bl-axis-name { font-family: var(--sans); font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 6px; }
+.bl-track { height: 5px; background: linear-gradient(to right, #e74c3c, #ecf0f1, #2ecc71); border-radius: 3px; margin-bottom: 5px; }
+.bl-ends { display: flex; justify-content: space-between; font-family: var(--sans); font-size: 9px; color: #aaa; margin-bottom: 4px; }
+.bl-def { font-family: var(--sans); font-size: 10px; line-height: 1.45; }
+.bl-def span.hawk { color: #e74c3c; }
+.bl-def span.dove { color: #2ecc71; }
+.bias-legend-note { font-family: var(--sans); font-size: 10px; color: #6b8aaa; border-top: 1px solid #1e3a52; padding-top: 10px; margin-top: 4px; }
+
+/* ── FOOTER ────────────────────────────────────── */
+.brief-footer {
+  background: var(--navy);
+  padding: 24px 40px;
+  font-family: var(--sans);
+  font-size: 10px;
+  color: #6b8aaa;
+}
+.footer-title {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.footer-sources {
+  columns: 2;
+  column-gap: 24px;
+  margin-bottom: 14px;
+  line-height: 1.8;
+}
+.src-badge { display: inline-block; font-size: 8px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 1px 6px; border-radius: 2px; color: #fff; margin-right: 4px; }
+.src-badge.gov   { background: var(--green); }
+.src-badge.trade { background: #1a6eb5; }
+.src-badge.synth { background: #8e44ad; }
+.footer-val { border-top: 1px solid #1e3a52; padding-top: 10px; color: #4a7a9b; }
+
+/* ── RESPONSIVE ────────────────────────────────── */
+@media(max-width:660px){
+  .masthead,.page,.val-row,.brief-footer,.action-bar { padding-left: 18px; padding-right: 18px; }
+  .lede-strip { padding: 16px 18px; flex-direction: column; }
+  .lede-divider { display: none; }
+  .lede-macro { flex: none; width: 100%; }
+  .macro-charts,.players-row,.smb-stats { grid-template-columns: 1fr; }
+  .data-strip { grid-template-columns: 1fr 1fr; }
+  .data-cell:nth-child(2n) { border-right: none; }
+  .risks-row { grid-template-columns: 1fr; }
+  .fuel-stats-row { flex-direction: column; }
+  .bias-legend-grid { grid-template-columns: 1fr; }
+  .masthead-right { text-align: left; }
+}
+
+/* ── PRINT ─────────────────────────────────────── */
+@media print {
+  .action-bar { display: none !important; }
+  .masthead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ts-block,.macro-block,.smb-block,.fuel-block { break-inside: avoid; }
+  body { font-size: 13px; }
+}
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<div class="masthead">
+  <div class="masthead-left">
+    <div class="pub-name">Fintech Intelligence Brief</div>
+    <div class="masthead-headline">Liberation Day, One Year On: What Tariff Chaos Did to Commercial Credit — And What's Still Coming</div>
+  </div>
+  <div class="masthead-right">
+    <div class="edition-pill">Edition #002</div>
+    <div class="masthead-meta">
+      Monday, April 6, 2026<br>
+      5 stories · ~20 min read<br>
+      Commercial Credit · Fuel &amp; Fleet · SMB
+    </div>
+  </div>
+</div>
+
+<!-- ACTION BAR -->
+<div class="action-bar">
+  <span class="action-bar-label">Edition #002 · April 6, 2026</span>
+  <button class="action-btn pdf" onclick="window.print()">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Download PDF
+  </button>
+  <div class="share-wrapper">
+    <button class="action-btn share" onclick="toggleShare(event)">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+      Share ▾
+    </button>
+    <div class="share-dropdown" id="shareDropdown">
+      <div class="share-option" onclick="shareEmail()">
+        <span style="font-size:15px">✉️</span>
+        <div><strong>Share via Email</strong><span>Pre-filled subject &amp; summary</span></div>
+      </div>
+      <div class="share-option" onclick="copyLink()">
+        <span style="font-size:15px">🔗</span>
+        <div><strong>Copy Link <span class="copy-confirm" id="copyConfirm">✓</span></strong><span>Copy file path</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALIDATION -->
+<div class="val-row">
+  <span><span class="val-check">✓</span> Truth Layer — 18 claims verified | 11 sources cross-checked | 3 excluded</span>
+  <span><span class="val-check">✓</span> Format Layer — Charts sourced | All sections cited</span>
+  <span><span class="val-check">✓</span> No paywalled content</span>
+</div>
+
+<!-- LEDE STRIP -->
+<div class="lede-strip">
+  <div class="lede-items">
+    <div class="lede-label">Today's Brief</div>
+    <div class="lede-item"><span class="lede-num">01</span><span>Liberation Day, one year on — tariff shock rewired C&amp;I credit underwriting. The silent risk: $10K collateral gap in Class 8 equipment portfolios.</span></div>
+    <div class="lede-item"><span class="lede-num">02</span><span>Trump backs the Credit Card Competition Act. The underreported story: fuel card interchange economics are in the crosshairs.</span></div>
+    <div class="lede-item"><span class="lede-num">03</span><span>Private credit default risk could hit 8% — Morgan Stanley. Banks' $1.14T exposure to non-deposit financial institutions creates a contagion path.</span></div>
+    <div class="lede-item"><span class="lede-num">04</span><span>CFPB examinations cut 88% — from ~600 to ~70 annually. Compliance arbitrage environment is back in SMB lending.</span></div>
+    <div class="lede-item"><span class="lede-num">05</span><span>Bank M&amp;A at 181 deals in 2025 (+45% YoY). Commercial credit niches being vacated — exactly as CFPB shrinks.</span></div>
+  </div>
+  <div class="lede-divider"></div>
+  <div class="lede-macro">
+    <div class="lede-macro-label">📡 Today's Macro Signal</div>
+    <p>DAT spot-contract gap narrows to $0.11/mile — a 90-day leading indicator for carrier margin compression and fuel card payment stress.</p>
+  </div>
+</div>
+
+<!-- PAGE CONTENT -->
+<div class="page">
+
+<!-- BIAS LEGEND -->
+<div class="bias-legend">
+  <div class="bias-legend-title">⚖ How to Read the Bias Meter</div>
+  <div class="bias-legend-intro">Every story is tagged on three axes. The dot shows where the source's framing leans — not where the truth sits. Red = one pole, green = the other, center = neutral.</div>
+  <div class="bias-legend-grid">
+    <div>
+      <div class="bl-axis-name">① Monetary</div>
+      <div class="bl-track"></div>
+      <div class="bl-ends"><span>🦅 Hawk</span><span>🕊 Dove</span></div>
+      <div class="bl-def"><span class="hawk"><strong>Hawk:</strong></span> Tight policy, higher rates, inflation over growth. <span class="dove"><strong>Dove:</strong></span> Easy policy, lower rates, growth over inflation.</div>
+    </div>
+    <div>
+      <div class="bl-axis-name">② Regulatory</div>
+      <div class="bl-track"></div>
+      <div class="bl-ends"><span>🏛 Interventionist</span><span>🏪 Free Market</span></div>
+      <div class="bl-def"><span class="hawk"><strong>Interventionist:</strong></span> Government oversight, consumer mandates. <span class="dove"><strong>Free Market:</strong></span> Minimal regulation, industry self-governance.</div>
+    </div>
+    <div>
+      <div class="bl-axis-name">③ Business</div>
+      <div class="bl-track"></div>
+      <div class="bl-ends"><span>🏦 Incumbent</span><span>🚀 Disruptor</span></div>
+      <div class="bl-def"><span class="hawk"><strong>Incumbent:</strong></span> Favors established banks, legacy networks. <span class="dove"><strong>Disruptor:</strong></span> Favors fintech challengers, new entrants.</div>
+    </div>
+  </div>
+  <div class="bias-legend-note">📌 The "Bear Case" beneath each story presents the strongest counterargument. Your job is to decide which version of reality is closer to the truth.</div>
+</div>
+
+<!-- ── EXECUTIVE BRIEF ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Executive Brief</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<!-- STORY 1 -->
+<div class="story">
+  <div class="story-meta">
+    <span class="tag macro">macro</span>
+    <span class="tag credit">credit</span>
+    <span class="tag risk">risk</span>
+    <div class="bias-pill">
+      Monetary <div class="bias-mini-track"><div class="bias-mini-dot" style="left:40%"></div></div>
+      Regulatory <div class="bias-mini-track"><div class="bias-mini-dot" style="left:30%"></div></div>
+      Business <div class="bias-mini-track"><div class="bias-mini-dot" style="left:35%"></div></div>
+    </div>
+  </div>
+  <div class="story-headline">Liberation Day, One Year Later: The Tariff Shock Rewired How Commercial Banks Think About C&amp;I Risk</div>
+  <div class="story-body">
+    <p>April 2, 2025's "Liberation Day" tariff announcement triggered an immediate −5.7% single-day sell-off in the S&amp;P 500 — the worst since 2022. One year on, markets recovered strongly (+16% from the nadir), but the commercial credit infrastructure tells a more complicated story. A Federal Reserve FEDS Note published January 2026 found that C&amp;I loan utilization <em>and</em> spreads rose more significantly at banks with elevated exposure to tariff-sensitive supply chain borrowers. Crucially, this was demand-pull borrowing — companies drawing revolvers to pre-fund inventory and imported equipment ahead of tariff implementation — not distress-driven.</p>
+    <p>The slow-burn risk sits in equipment finance. ACT Research projects Class 8 truck prices rising approximately $10,000 per unit in 2026 from tariff pass-through alone. Fleet lenders who underwrote those loans at pre-tariff appraisal values are now sitting on a collateral gap that won't surface in charge-off data until Q3–Q4 2026. Meanwhile the Supreme Court struck down the broadest tariff provisions, but sector-level uncertainty persists — and the freight market's spot-contract convergence (see Macro Signal) is telling a story about carrier margin compression that the credit models aren't yet pricing.</p>
+    <div class="pull">
+      <div class="pull-label">Synthesis — Cross-Source Insight</div>
+      <p>The intersection of the Fed FEDS Note (demand-driven utilization spike) and ACT Research fleet price projections creates a specific, dateable risk: lenders holding transportation equipment as collateral are exposed to a classic appraisal-gap problem with a 12–18 month lag before it shows in charge-off data. Flag this in Q2 2026 portfolio reviews.</p>
+    </div>
+    <div class="counter">
+      <span class="counter-label">Bear Case →</span>
+      <span>Most tariff-exposed borrowers drew revolvers as a precaution, not from distress — and many have since repaid. Tariff-driven reshoring is generating new domestic lending demand that partially offsets freight sector headwinds. The Supreme Court ruling reduces tail risk materially.</span>
+    </div>
+  </div>
+  <div class="source-line">
+    <span class="src"><span class="src-dot gov"></span>Fed FEDS Note: Supply Chain Risk &amp; Bank Lending (Jan 30, 2026)</span>
+    <span class="src"><span class="src-dot trade"></span>TruckingInfo / ACT Research: Class 8 tariff pricing</span>
+    <span class="src"><span class="src-dot trade"></span>CNBC / USTR: Liberation Day anniversary (April 2026)</span>
+  </div>
+</div>
+
+<!-- STORY 2 -->
+<div class="story">
+  <div class="story-meta">
+    <span class="tag payments">payments</span>
+    <span class="tag regulatory">regulatory</span>
+    <span class="tag fuel">fuel</span>
+    <div class="bias-pill">
+      Regulatory <div class="bias-mini-track"><div class="bias-mini-dot" style="left:20%"></div></div>
+      Business <div class="bias-mini-track"><div class="bias-mini-dot" style="left:75%"></div></div>
+    </div>
+  </div>
+  <div class="story-headline">Trump Backs the Credit Card Competition Act — And Fuel Card Economics Are the Underreported Casualty</div>
+  <div class="story-body">
+    <p>The Credit Card Competition Act of 2026 (S.3623), reintroduced by Senators Durbin and Marshall with bipartisan House support, cleared a major momentum threshold when President Trump endorsed it on social media, calling swipe fees an "out of control ripoff." The legislation would require large issuers — those with over $100 billion in assets — to enable routing competition, allowing merchants to choose from at least two unaffiliated payment networks per transaction. Current coverage focuses almost entirely on consumer credit cards and airline miles. The commercial card angle is being missed.</p>
+    <p>The $100B asset threshold captures many of the largest commercial card issuers in the U.S. The closed-loop properties that make fuel cards particularly valuable — real-time purchase controls, odometer verification, driver ID, site restriction — become technically complicated if mandatory open-loop routing applies. More concretely: fuel card rebates to fleets are partially funded by interchange revenue. If CCCA routing competition drives commercial card interchange toward the lower end of the spread (as the Durbin Amendment did for debit), the rebate pool that funds fleet fuel discounts shrinks. The challenger networks like Relay Payments — already priced below incumbent interchange economics — gain relative attractiveness.</p>
+    <div class="pull">
+      <div class="pull-label">Synthesis — Cross-Source Insight</div>
+      <p>This story isn't in the fleet card trade press yet. Model a 15–20% reduction in commercial card interchange under routing competition and quantify the pass-through effect on rebate-funded acquisition economics. The window to do this proactively is approximately 12 months.</p>
+    </div>
+    <div class="counter">
+      <span class="counter-label">Bear Case →</span>
+      <span>CCCA implementation requires a multi-year rulemaking process. The banking lobby has blocked this bill in every prior session. Trump's endorsement may reflect political signaling rather than legislative priority. The bill has never passed a committee markup.</span>
+    </div>
+  </div>
+  <div class="source-line">
+    <span class="src"><span class="src-dot gov"></span>Congress.gov: S.3623 — Credit Card Competition Act of 2026</span>
+    <span class="src"><span class="src-dot trade"></span>Payments Dive: CCCA Trump support (Jan 2026)</span>
+    <span class="src"><span class="src-dot trade"></span>KTS Law / Lexology: CCCA commercial card implications</span>
+  </div>
+</div>
+
+<!-- STORY 3 -->
+<div class="story">
+  <div class="story-meta">
+    <span class="tag risk">risk</span>
+    <span class="tag credit">credit</span>
+    <div class="bias-pill">
+      Monetary <div class="bias-mini-track"><div class="bias-mini-dot" style="left:30%"></div></div>
+      Regulatory <div class="bias-mini-track"><div class="bias-mini-dot" style="left:25%"></div></div>
+      Business <div class="bias-mini-track"><div class="bias-mini-dot" style="left:35%"></div></div>
+    </div>
+  </div>
+  <div class="story-headline">Private Credit's "Zero-Loss Fantasy" Is Cracking — And Banks Hold $1.14T in Exposure</div>
+  <div class="story-body">
+    <p>Morgan Stanley warned in late March 2026 that default rates in private credit direct lending could surge to 8%, compared to the 2–2.5% historical average, with concentration risk in AI-disrupted sectors like SaaS middle-market. The $1.14 trillion that banks have extended to non-deposit financial institutions — private credit funds and BDCs — creates a direct transmission mechanism from private credit stress to regulated bank balance sheets. Banks' share of buyout financing above $1B collapsed from 61% in 2021 to 39% in 2023 as private credit flooded in; it has partially recovered to ~50% in 2025 as portfolio cracks appear.</p>
+    <div class="pull">
+      <div class="pull-label">Synthesis — Cross-Source Insight</div>
+      <p>Bank stress tests model direct C&amp;I loss rates — not the indirect path through fund NAV deterioration and forced secondary market selling. The $1.14T bank-to-fund exposure is a non-linear risk that current stress scenarios likely underweight. Flag in Pillar 2 scenario analysis.</p>
+    </div>
+    <div class="counter">
+      <span class="counter-label">Bear Case →</span>
+      <span>Morgan Stanley's 8% scenario is a tail risk, not a base case. Private credit BDCs have covenant packages that trigger renegotiation before technical default. Morgan Stanley itself said the scenario would be "significant but not systemic."</span>
+    </div>
+  </div>
+  <div class="source-line">
+    <span class="src"><span class="src-dot trade"></span>CNBC: Private Credit defaults / bank market share (March 25–27, 2026)</span>
+    <span class="src"><span class="src-dot trade"></span>Boston Fed: Private Credit Systemic Risk paper (2025)</span>
+  </div>
+</div>
+
+<!-- STORY 4 — compact -->
+<div class="story">
+  <div class="story-meta">
+    <span class="tag regulatory">regulatory</span>
+    <span class="tag risk">risk</span>
+    <div class="bias-pill">
+      Regulatory <div class="bias-mini-track"><div class="bias-mini-dot" style="left:75%"></div></div>
+      Business <div class="bias-mini-track"><div class="bias-mini-dot" style="left:70%"></div></div>
+    </div>
+  </div>
+  <div class="story-headline">CFPB Cut from 1,700 to 550 Staff — Exams Down 88%: Compliance Arbitrage Is Back</div>
+  <div class="story-body">
+    <p>The Trump administration's CFPB restructuring is materializing: headcount dropping from ~1,700 to ~550, supervisory exams from ~600 annually to approximately 70, all conducted virtually with narrowed scope. A court blocked full defunding — the agency is operational but dramatically reduced. The bureau received 6.6 million consumer complaints in 2025 per its April 2026 annual report, the highest on record, even as its capacity to act on them shrinks.</p>
+    <div class="pull">
+      <div class="pull-label">Synthesis — Cross-Source Insight</div>
+      <p>Non-bank SMB lenders face an 8–10 year supervisory holiday. History shows supervision vacuums in SMB credit fill with aggressively-priced products — MCA rate creep, revenue-based financing with undisclosed APRs. For bank commercial credit teams: adverse selection pressure from non-bank competitors operating without examination risk is the real story here.</p>
+    </div>
+    <div class="counter">
+      <span class="counter-label">Bear Case →</span>
+      <span>A more focused CFPB may actually improve clarity for well-run programs. State AGs and the OCC are actively filling the gap. Reduced compliance uncertainty may expand credit availability for thin-file SMB borrowers.</span>
+    </div>
+  </div>
+  <div class="source-line">
+    <span class="src"><span class="src-dot trade"></span>Washington Times / America's Credit Unions: CFPB restructuring (April 2, 2026)</span>
+    <span class="src"><span class="src-dot gov"></span>CFPB: 6.6M complaints annual report (April 2026)</span>
+  </div>
+</div>
+
+<!-- STORY 5 — compact -->
+<div class="story">
+  <div class="story-meta">
+    <span class="tag credit">credit</span>
+    <span class="tag payments">payments</span>
+    <div class="bias-pill">
+      Regulatory <div class="bias-mini-track"><div class="bias-mini-dot" style="left:65%"></div></div>
+      Business <div class="bias-mini-track"><div class="bias-mini-dot" style="left:35%"></div></div>
+    </div>
+  </div>
+  <div class="story-headline">181 Bank Deals in 2025 (+45%) — Commercial Credit Niches Are Being Vacated</div>
+  <div class="story-body">
+    <p>U.S. bank M&amp;A hit 181 deals in 2025, and Klaros Group predicts 2026 could double that. The industry is forming a barbell: midtier banks growing via acquisition, sub-$1B institutions clustering at the other end. Klaros also expects 25+ de novo charter applications in 2026 — the most in decades. For commercial credit practitioners, acquired portfolios bring integration complexity: different underwriting standards, covenant structures, and risk appetite collide in a tariff-uncertain environment with potential private credit stress.</p>
+    <div class="pull">
+      <div class="pull-label">Synthesis — Cross-Source Insight</div>
+      <p>Consolidation vacates niches — historically small-fleet commercial card and SMB commercial credit lines are de-prioritized post-merger. This happens exactly as CFPB supervision diminishes. Fintech and non-bank competitors now face the most favorable entry conditions in a decade for these segments.</p>
+    </div>
+  </div>
+  <div class="source-line">
+    <span class="src"><span class="src-dot trade"></span>Banking Dive: Bank M&amp;A 2026 trends / Klaros Group</span>
+  </div>
+</div>
+
+<!-- ── MACRO SIGNAL ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Macro Signal</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div class="macro-block">
+  <div class="macro-kicker">📡 Today's Signal — Freight Rate Convergence</div>
+  <div class="macro-headline">DAT Spot-Contract Convergence: The 90-Day Leading Indicator for Trucking Portfolio Stress</div>
+  <div class="chain">
+    <div class="chain-node">Tariff Uncertainty</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Spot Rate Volatility</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Carrier Margin Compression</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Fuel Card Stress (60–90 days)</div><span class="chain-arrow">→</span>
+    <div class="chain-node">Charge-Off (90–120 days)</div>
+  </div>
+  <div class="macro-charts">
+    <div class="chart-panel">
+      <h4>Spot vs. Contract Rates ($/mile)</h4>
+      <canvas id="freightChart"></canvas>
+      <div style="font-size:9px;color:#888;margin-top:5px;">Source: US Bank + DAT Freight Payment Index, April 1, 2026</div>
+    </div>
+    <div class="chart-panel">
+      <h4>Net % Banks Tightening C&amp;I Standards</h4>
+      <canvas id="ciChart"></canvas>
+      <div style="font-size:9px;color:#888;margin-top:5px;">Source: Fed SLOOS data via FEDS Note, Jan 2026</div>
+    </div>
+  </div>
+  <div class="signal-box">
+    <div class="signal-box-label">Signal Reading</div>
+    <p>The spot-contract gap narrowed from $0.37/mile (Nov 2025) to $0.11/mile (Feb 2026) — one of the fastest convergences in recent history. For fuel card portfolios, this is a 60–90 day leading indicator: when the spot premium disappears, small carriers on spot loads face cash flow compression that surfaces in payment behavior before it shows in formal delinquency data. The C&amp;I tightening easing (net +4% in Q1 2026, from +18% in Q2 2025) suggests broad credit improvement — but freight-specific stress is more granular than aggregate C&amp;I standards capture.</p>
+  </div>
+</div>
+
+<!-- ── FUEL & FLEET ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Fuel Card &amp; Fleet Intelligence</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div class="fuel-block">
+  <div class="fuel-kicker">⛽ Market Update</div>
+  <div class="fuel-headline">WEX Launches First Unified Fuel + EV Charging Card — Incumbents Race to Redefine the Category</div>
+  <div class="fuel-stats-row">
+    <div class="fuel-stat-cell">
+      <div class="fuel-stat-label">Spot Rate (Feb 2026)</div>
+      <div class="fuel-stat-value">$2.01<span style="font-size:14px;font-weight:400;color:var(--muted)">/mi</span></div>
+      <div class="fuel-stat-sub">↑ from $1.65 in Nov 2025</div>
+    </div>
+    <div class="fuel-stat-cell">
+      <div class="fuel-stat-label">Contract Rate (Feb 2026)</div>
+      <div class="fuel-stat-value">$2.12<span style="font-size:14px;font-weight:400;color:var(--muted)">/mi</span></div>
+      <div class="fuel-stat-sub">Gap narrowed to $0.11</div>
+    </div>
+    <div class="fuel-stat-cell">
+      <div class="fuel-stat-label">Tariff Price Premium</div>
+      <div class="fuel-stat-value">~$10K</div>
+      <div class="fuel-stat-sub">Per Class 8 unit, 2026 (ACT Research)</div>
+    </div>
+    <div class="fuel-stat-cell">
+      <div class="fuel-stat-label">Truck Postings (Wk 13)</div>
+      <div class="fuel-stat-value">10-yr Low</div>
+      <div class="fuel-stat-sub">Dry van, reefer, flatbed all at lows</div>
+    </div>
+  </div>
+  <p class="fuel-text">WEX's January 2026 launch of a unified fuel + EV charging card — covering 175,000+ public charging ports and 90%+ of U.S. gas stations on one account, one invoice — is the first concrete signal that the fuel card industry is beginning to price in fleet electrification as a near-term commercial reality. For credit underwriters assessing fuel card company quality: this transition creates higher-margin EV charging revenue opportunity alongside risk from existing diesel-heavy closed-loop networks losing relevance. Corpay responded with its December 2025 "Select Fleet Cards" — deep fuel rebates, integrated spend controls, maintenance management.</p>
+  <div class="players-row">
+    <div class="player-card">
+      <div class="player-name">WEX Inc.</div>
+      <div class="player-role">Incumbent / Diversifying</div>
+      <div class="player-note">Launched first unified fuel + EV charging card (Jan 2026). 175K+ charging ports. Redefining TAM ahead of fleet electrification.</div>
+    </div>
+    <div class="player-card">
+      <div class="player-name">Corpay</div>
+      <div class="player-role">Incumbent / Competing</div>
+      <div class="player-note">Select Fleet Cards (Dec 2025) — deep rebates, spend controls, maintenance management. Direct competitive response to challenger pressure.</div>
+    </div>
+    <div class="player-card">
+      <div class="player-name">Relay Payments</div>
+      <div class="player-role">Challenger / Driver-First</div>
+      <div class="player-note">Real-time driver visibility on route choice, stop selection, price swings. Fleets reporting thousands/month saved. Incumbents struggle to replicate.</div>
+    </div>
+    <div class="player-card">
+      <div class="player-name">Motive / Samsara</div>
+      <div class="player-role">Telematics + Payments</div>
+      <div class="player-note">Telematics-payments convergence. GPS-to-card-swipe verification (SecureFuel model) becoming industry standard fraud defense.</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── DEEP DIVE ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Deep Dive</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div class="deep-block">
+  <div class="deep-kicker">Deep Dive · ~5 min</div>
+  <div class="deep-headline">The CCCA Is Not Just a Consumer Problem: Why Fuel Card Economics Are in the Crosshairs</div>
+  <div class="deep-body">
+    <p>The Credit Card Competition Act debate plays out almost entirely in consumer finance circles — airline miles, hotel points, Visa vs. Mastercard. What the coverage misses entirely is the commercial card stack, and specifically how the fuel/fleet card segment would be restructured if routing competition were mandated for commercial card rails.</p>
+    <p>The largest fuel card programs in the U.S. are issued by banks captured by the CCCA's $100B asset threshold: WEX's banking partnerships, Corpay's affiliated issuing relationships, and many white-label commercial card programs run through major bank networks. If these programs must route through an unaffiliated network, the closed-loop properties that make fuel cards valuable — real-time purchase controls, odometer verification, driver ID, site restriction — become technically complicated. Closed-loop networks derive value precisely from operating outside open-loop routing constraints.</p>
+    <p>The economics: fuel card rebates to fleets are partially funded by interchange revenue from the open-loop portion of transactions. Commercial card interchange rates average meaningfully higher than consumer rates for large-ticket categories — which includes diesel. If CCCA routing competition drives those rates toward the lower end (as Durbin did for debit interchange), the subsidy pool funding fleet rebates shrinks. Fleet operators face a choice between lower rebate rates or switching to non-regulated programs. Challenger networks like Relay Payments — already priced on lower interchange economics — gain relative attractiveness.</p>
+    <p>The timeline gives some runway. CCCA implementation requires a multi-year rulemaking process if passed. But the structural changes required — building or licensing competitive routing, renegotiating rebate economics with fleet operators, repricing merchant acceptance agreements — are not trivial. The window to do this analysis proactively is approximately 12 months before passage becomes a plausible planning scenario.</p>
+    <div class="so-what">
+      <div class="so-what-label">So What for Commercial Credit</div>
+      <p>If you underwrite fuel card programs or hold fuel card receivables: (1) model a 15–20% interchange reduction and quantify the effect on rebate-funded acquisition economics; (2) assess whether your program's closed-loop properties survive mandatory open-loop routing; (3) evaluate whether credit analyses of fuel card company borrowers have adequately priced interchange-dependency in their revenue models. Do this now, not after a markup is scheduled.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ── EMERGING RISKS ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Emerging Risks — Signals Without Headlines Yet</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div class="risks-row">
+  <div class="risk-item high">
+    <div class="risk-sev">🔴 High</div>
+    <h4>Class 8 Collateral Gap — Equipment Finance Silent Risk</h4>
+    <p>Class 8 prices rising ~$10K from tariffs. Lenders who originated at pre-tariff appraisal values hold collateral positions that may be underwater. Unlikely to surface in charge-off data until Q3–Q4 2026.</p>
+  </div>
+  <div class="risk-item high">
+    <div class="risk-sev">🔴 High</div>
+    <h4>Private Credit → Bank Contagion via $1.14T Exposure</h4>
+    <p>Bank loans to non-deposit financial institutions at $1.14T. If Morgan Stanley's 8% default scenario materializes, NAV compression flows upstream. Risk is non-linear: redemption gates → forced selling → collateral impairment.</p>
+  </div>
+  <div class="risk-item med">
+    <div class="risk-sev">🟡 Medium</div>
+    <h4>CFPB Vacuum → Non-Bank SMB Predatory Surge</h4>
+    <p>With exams cut 88%, non-bank SMB lenders face a supervisory holiday. Watch for MCA rate creep, revenue-based financing with undisclosed APRs, and aggressive commercial card deferred interest terms.</p>
+  </div>
+</div>
+
+<!-- ── DATA SNAPSHOT ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Data Snapshot</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div style="background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:16px;margin-bottom:16px;">
+  <div style="font-family:var(--sans);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;">Freight Rate Trend — Spot vs. Contract ($/mile, Nov 2025–Feb 2026)</div>
+  <canvas id="snapshotChart" style="max-height:160px;"></canvas>
+  <div style="font-family:var(--sans);font-size:9px;color:var(--muted);margin-top:6px;">Source: US Bank + DAT Freight Payment Index, April 1, 2026</div>
+</div>
+
+<div class="data-strip">
+  <div class="data-cell">
+    <div class="data-cell-label">NFIB Optimism (Feb 2026)</div>
+    <div class="data-cell-value">98.8<span class="delta-down">▼0.5</span></div>
+    <div class="data-cell-ctx">Below Jan's 99.3. 4 of 10 sub-components declined. Compensation plans at net 34% raising — highest since March 2025.</div>
+    <div class="data-cell-src">NFIB / ABA Banking Journal, Mar 2026</div>
+  </div>
+  <div class="data-cell">
+    <div class="data-cell-label">DAT Spot Rate (Feb 2026)</div>
+    <div class="data-cell-value">$2.01<span class="delta-up">▲22%</span></div>
+    <div class="data-cell-ctx">Per mile. Up from $1.65 in Nov. Contract at $2.12 — gap of only $0.11, narrowest since early 2024. Winter storms primary driver.</div>
+    <div class="data-cell-src">US Bank + DAT, April 1, 2026</div>
+  </div>
+  <div class="data-cell">
+    <div class="data-cell-label">Large Bank SMB Approval Rate</div>
+    <div class="data-cell-value">21.3%</div>
+    <div class="data-cell-ctx">Q1 2026. 45% of unfunded SMB applicants cited credit score issues. Rural: 48% full approval vs. urban 61%.</div>
+    <div class="data-cell-src">Kansas City Fed / SMB lending survey</div>
+  </div>
+  <div class="data-cell">
+    <div class="data-cell-label">Net Banks Tightening C&amp;I</div>
+    <div class="data-cell-value">+4%<span class="delta-up">↓ from +18%</span></div>
+    <div class="data-cell-ctx">Q1 2026 vs. Q2 2025. Significant easing — near-neutral stance for small firm C&amp;I. Tariff uncertainty still holding back full easing.</div>
+    <div class="data-cell-src">Fed SLOOS via FEDS Note, Jan 2026</div>
+  </div>
+  <div class="data-cell">
+    <div class="data-cell-label">U.S. Bank M&amp;A — 2025</div>
+    <div class="data-cell-value">181<span class="delta-up">▲45%</span></div>
+    <div class="data-cell-ctx">Highest since 2019. Klaros predicts potential doubling in 2026. Texas, Illinois, Ohio top states for deal activity.</div>
+    <div class="data-cell-src">Banking Dive / Klaros Group, 2026</div>
+  </div>
+  <div class="data-cell">
+    <div class="data-cell-label">CFPB Exams — Projected 2026</div>
+    <div class="data-cell-value">~70<span class="delta-down">▼88%</span></div>
+    <div class="data-cell-ctx">Down from ~600. All virtual, narrowed scope. Headcount: 1,700 → ~550. Court blocked full defunding — agency operational.</div>
+    <div class="data-cell-src">Washington Times / Credit Unions, April 2026</div>
+  </div>
+</div>
+
+<!-- ── SMB PULSE ── -->
+<div class="section-rule">
+  <span class="section-rule-label">SMB Pulse</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div class="smb-block">
+  <div class="smb-kicker">📊 SMB Credit Access — Current Signals</div>
+  <div class="smb-stats">
+    <div class="smb-stat-cell">
+      <div class="smb-stat-label">Borrowing Intent Q1 2026</div>
+      <div class="smb-stat-value">22%</div>
+      <div class="smb-stat-sub">Plan to borrow in next 3 mo. Up from 17% Q1 2025. Large banks approve &lt;22% — unmet demand persists.</div>
+    </div>
+    <div class="smb-stat-cell">
+      <div class="smb-stat-label">Standards Easing</div>
+      <div class="smb-stat-value">+4%</div>
+      <div class="smb-stat-sub">Net tightening (down from +18%). First meaningful easing since pre-tariff environment.</div>
+    </div>
+    <div class="smb-stat-cell">
+      <div class="smb-stat-label">Rural vs. Urban Gap</div>
+      <div class="smb-stat-value">48 / 61%</div>
+      <div class="smb-stat-sub">Full approval rates. 13-pt gap persists despite digital credit programs. Relevant for rural fleet operator exposure.</div>
+    </div>
+    <div class="smb-stat-cell">
+      <div class="smb-stat-label">Credit Score Barrier</div>
+      <div class="smb-stat-value">45%</div>
+      <div class="smb-stat-sub">Of unfunded applicants cite credit score as primary barrier. TAM for alternative-data underwriting.</div>
+    </div>
+  </div>
+  <ul class="watch-list">
+    <li><span class="watch-icon">👀</span><span><strong>March NFIB release (mid-April)</strong> — Watch if optimism holds above 52-yr average (98). Compensation plans at 34% net raising is a wage pressure signal for SMB credit.</span></li>
+    <li><span class="watch-icon">👀</span><span><strong>April 7 EIA Diesel Price Update</strong> — Weekly EIA data releases Mondays. Every $0.10/gallon move changes cash flow dynamics for thin-margin carriers.</span></li>
+    <li><span class="watch-icon">👀</span><span><strong>CCCA Senate Judiciary Markup</strong> — Any committee scheduling would be a major catalyst for commercial card program scenario planning.</span></li>
+    <li><span class="watch-icon">👀</span><span><strong>Q1 Bank Earnings (April 11–15)</strong> — JPMorgan, Citi, BofA, Wells Fargo. Watch: commercial card volumes, C&amp;I growth commentary, tariff credit quality language, private credit exposure disclosures.</span></li>
+  </ul>
+</div>
+
+<!-- ── THOUGHT SEED ── -->
+<div class="section-rule">
+  <span class="section-rule-label">Thought Seed</span>
+  <div class="section-rule-line accent"></div>
+</div>
+
+<div class="ts-block">
+  <div class="ts-kicker">🌱 Research Translation</div>
+  <div class="ts-title">An AI-Driven Credit Risk Assessment Framework for Strengthening SME Lending and Financial Stability</div>
+  <div class="ts-authors">Syed Adil Abbas Rizvi · SSRN #5932478 · January 15, 2026 · <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5932478" target="_blank">ssrn.com/abstract=5932478</a></div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">What It Says</div>
+    <p>A practical AI framework integrating ML models, alternative data, and explainable AI (XAI) for SME credit evaluation. The core argument: SMEs lack the financial reporting depth conventional underwriting requires, making credit invisibility a structural problem rather than a risk signal. XAI + behavioral data can reduce both false approvals and false rejections.</p>
+  </div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">Why Not Yet in Commercial Credit</div>
+    <p>Most commercial credit teams use ML as a scoring overlay on traditional applications — not as a workflow replacement. The explainability requirement is hard. SR 11-7 model validation imposes material burdens on any ML model used in underwriting decisions. The paper largely ignores this, writing for an academic audience.</p>
+  </div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">Original Commercial Credit Translation</div>
+    <p>The insight the paper doesn't make: the most commercially valuable application isn't SME loan origination — it's <strong>fuel card behavioral underwriting</strong>. Fuel and fleet card programs already generate continuous transactional data (spend frequency, category mix, geographic patterns, seasonal variation) that is richer than any application-stage alternative data. An XAI framework applied to this data enables dynamic credit limit management and early warning signals for carrier distress — without triggering SR 11-7 concerns, because the model outputs are monitoring signals, not origination credit decisions. That's a regulatory arbitrage that makes this paper commercially actionable right now.</p>
+  </div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">Implementation Path</div>
+    <ul class="ts-steps">
+      <li>Map fuel card transaction data to the alternative data categories the framework identifies: spend frequency, category concentration, temporal patterns, network diversity</li>
+      <li>Build a behavioral distress score on historical accounts that subsequently defaulted — your portfolio already has the labels. XGBoost or LightGBM are strong starting points.</li>
+      <li>Design the output as a monitoring signal (not a credit decision) to stay outside SR 11-7 scope — the model recommends review, a human approves any limit change</li>
+      <li>Pilot on small-carrier accounts first (highest risk, richest data), then scale to mid-market fleet programs</li>
+      <li>Document explainability from day one: which behavioral features drive the score and why — essential for when a carrier disputes a limit reduction</li>
+    </ul>
+  </div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">Confidence Level</div>
+    <div class="ts-confidence">🟡 Medium — Technical approach is sound. The regulatory arbitrage framing is practitioner inference not in the paper. Pilot results in a specific portfolio could shift confidence significantly.</div>
+  </div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">Steel-Manned Counterargument</div>
+    <div class="ts-counter">
+      <p>The "monitoring tool, not credit decision" framing is fragile. Regulators increasingly view behavioral monitoring models that consistently drive automated limit reductions as functionally equivalent to credit models. The "human in the loop" requirement is only as strong as actual process discipline. Additionally, small carriers often operate with multiple fuel programs simultaneously, diluting the behavioral signal in exactly the highest-risk segment.</p>
+    </div>
+  </div>
+
+  <div class="ts-section">
+    <div class="ts-section-label">Practitioner's Take</div>
+    <div class="ts-prac">
+      <p>Every bank has been doing this informally for years — your credit ops team notices when a good fleet account suddenly starts swiping at three different truck stops a week instead of their usual two. What this paper gives you is a reason to systematize and document that judgment. The XAI requirement is actually useful here — not because regulators demand it for monitoring tools, but because when a carrier calls in to dispute a limit reduction, you want to show them specific behaviors that triggered the review. The carrier who understands why their limit tightened is the carrier who gives you the context you need to make the right call. That's relationship banking with a ML assist.</p>
+    </div>
+  </div>
+
+  <div class="ts-links">
+    <div class="ts-section-label">Further Reading</div>
+    <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=5414214" target="_blank">SSRN: "A Comprehensive Review of AI-Driven Credit Risk Modeling" — Gates &amp; Flynn (Sept 2025)</a>
+    <a href="https://finreglab.org/research/ai-faqs-explainability-in-credit-underwriting/" target="_blank">FinRegLab: AI FAQs — Explainability in Credit Underwriting</a>
+    <a href="https://www.federalreserve.gov/supervisionreg/srletters/sr1107.htm" target="_blank">Federal Reserve SR 11-7: Model Risk Management Guidance</a>
+  </div>
+</div>
+
+</div><!-- end .page -->
+
+<!-- FOOTER -->
+<div class="brief-footer">
+  <div class="footer-title">All Sources — Edition #002 · April 6, 2026</div>
+  <div class="footer-sources">
+    <div><span class="src-badge gov">Gov</span> Fed FEDS Note: Supply Chain Risk &amp; Bank Lending (Jan 30, 2026)</div>
+    <div><span class="src-badge gov">Gov</span> Congress.gov: S.3623 Credit Card Competition Act of 2026</div>
+    <div><span class="src-badge gov">Gov</span> CFPB: Annual Consumer Complaints Report (April 2026)</div>
+    <div><span class="src-badge gov">Gov</span> USTR: Liberation Day One Year Later (April 2026)</div>
+    <div><span class="src-badge trade">Trade</span> US Bank + DAT Freight Payment Index (April 1, 2026)</div>
+    <div><span class="src-badge trade">Trade</span> CNBC: Private Credit defaults / bank market share (March 25–27, 2026)</div>
+    <div><span class="src-badge trade">Trade</span> Banking Dive: Bank M&amp;A trends 2026 / Klaros Group</div>
+    <div><span class="src-badge trade">Trade</span> Payments Dive: CCCA Trump support (Jan 2026)</div>
+    <div><span class="src-badge trade">Trade</span> WEX IR / Automotive Fleet: WEX EV fleet card (Jan 2026)</div>
+    <div><span class="src-badge trade">Trade</span> Corpay newsroom: Select Fleet Cards (Dec 2025)</div>
+    <div><span class="src-badge trade">Trade</span> Washington Times / America's Credit Unions: CFPB (April 2026)</div>
+    <div><span class="src-badge trade">Trade</span> TruckingInfo / ACT Research: Class 8 tariff pricing</div>
+    <div><span class="src-badge trade">Trade</span> NFIB / ABA Banking Journal: SMB optimism data</div>
+    <div><span class="src-badge trade">Trade</span> Boston Fed: Private Credit Systemic Risk paper (2025)</div>
+    <div><span class="src-badge synth">Synth</span> SSRN: Rizvi — AI Credit Risk Framework for SME Lending (Jan 2026)</div>
+  </div>
+  <div class="footer-val">✓ 18 claims verified · 11+ sources cross-checked · 3 excluded (unverifiable) · No paywalled content · Thought Seed from free SSRN abstract<br>Fintech Intelligence Brief · Edition #002 · April 6, 2026 · Private distribution</div>
+</div>
+
+<!-- SCRIPTS -->
+<script>
+function toggleShare(e){e.stopPropagation();document.getElementById('shareDropdown').classList.toggle('open');}
+document.addEventListener('click',function(){document.getElementById('shareDropdown').classList.remove('open');});
+function shareEmail(){
+  const s=encodeURIComponent('Fintech Intelligence Brief — Edition #002 — April 6, 2026');
+  const b=encodeURIComponent('Hi,\n\nSharing today\'s Fintech Intelligence Brief (Edition #002 — April 6, 2026).\n\nTop stories:\n• Liberation Day One Year On: Tariff Shock + C&I Credit Risk\n• Credit Card Competition Act: Trump endorses — fuel card interchange at risk\n• Private Credit Defaults Could Hit 8% (Morgan Stanley)\n• CFPB Examinations Cut 88%\n• Bank M&A Wave: 181 Deals in 2025\n\nMacro Signal: DAT Spot-Contract Convergence — 90-day leading indicator for trucking portfolio stress.\n\n— Fintech Intelligence Brief');
+  window.location.href='mailto:?subject='+s+'&body='+b;
+  document.getElementById('shareDropdown').classList.remove('open');
+}
+function copyLink(){
+  const p=window.location.href||window.location.pathname;
+  navigator.clipboard.writeText(p).then(function(){
+    const c=document.getElementById('copyConfirm');c.style.display='inline';setTimeout(function(){c.style.display='none';},2000);
+  }).catch(function(){
+    const el=document.createElement('textarea');el.value=p;document.body.appendChild(el);el.select();document.execCommand('copy');document.body.removeChild(el);
+    const c=document.getElementById('copyConfirm');c.style.display='inline';setTimeout(function(){c.style.display='none';},2000);
+  });
+}
+</script>
+<script>
+const fCtx=document.getElementById('freightChart').getContext('2d');
+new Chart(fCtx,{type:'line',data:{labels:['Nov 2025','Dec 2025','Jan 2026','Feb 2026'],datasets:[{label:'Spot ($/mi)',data:[1.65,1.75,1.90,2.01],borderColor:'#e74c3c',backgroundColor:'rgba(231,76,60,0.08)',borderWidth:2,pointRadius:4,tension:0.3},{label:'Contract ($/mi)',data:[2.02,2.05,2.09,2.12],borderColor:'#1a6eb5',backgroundColor:'rgba(26,110,181,0.08)',borderWidth:2,pointRadius:4,tension:0.3}]},options:{responsive:true,plugins:{legend:{position:'top',labels:{font:{size:10}}}},scales:{y:{min:1.40,max:2.30,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+const cCtx=document.getElementById('ciChart').getContext('2d');
+new Chart(cCtx,{type:'bar',data:{labels:['Q2 2025','Q3 2025','Q4 2025','Q1 2026'],datasets:[{label:'Net % Tightening',data:[18,12,8,4],backgroundColor:['#e74c3c','#e67e22','#f39c12','#27ae60'],borderWidth:0}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{y:{min:0,max:25,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+const sCtx=document.getElementById('snapshotChart').getContext('2d');
+new Chart(sCtx,{type:'line',data:{labels:['Nov 2025','Dec 2025','Jan 2026','Feb 2026'],datasets:[{label:'Spot',data:[1.65,1.75,1.90,2.01],borderColor:'#00c2cb',borderWidth:2,pointRadius:4,fill:false,tension:0.3},{label:'Contract',data:[2.02,2.05,2.09,2.12],borderColor:'#f5a623',borderWidth:2,borderDash:[5,3],pointRadius:4,fill:false,tension:0.3}]},options:{responsive:true,plugins:{legend:{position:'right',labels:{font:{size:10}}}},scales:{y:{min:1.40,max:2.30,ticks:{font:{size:10}}},x:{ticks:{font:{size:10}}}}}});
+</script>
+</body>
+</html>

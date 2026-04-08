@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly Content Report — Week of April 6, 2026</title>
+<style>
+:root {
+  --navy:#0d1b2a; --accent:#00c2cb; --accent2:#f5a623;
+  --green:#27ae60; --red:#e74c3c;
+  --text:#e8edf2; --text-muted:#8fa3b8; --text-dark:#1a2535;
+  --bg:#f5f0e8; --white:#fff; --border:#e8d5b0;
+  --li-blue:#0077b5; --med-black:#000;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Georgia',serif;background:var(--bg);color:var(--text-dark);line-height:1.75;}
+
+.week-label{background:#7b4f00;color:#ffe5a0;text-align:center;padding:9px;font-family:'Arial',sans-serif;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;}
+.header{background:linear-gradient(135deg,#3d2a00,#7b4f00);color:var(--text);padding:28px 48px 20px;border-bottom:3px solid var(--accent2);}
+.header-meta{font-family:'Arial',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent2);margin-bottom:8px;}
+.header h1{font-size:24px;font-weight:normal;color:#fff;margin-bottom:5px;}
+.header-sub{font-family:'Arial',sans-serif;font-size:12px;color:#d4b896;}
+.header-stats{display:flex;gap:28px;margin-top:16px;padding-top:16px;border-top:1px solid rgba(255,255,255,0.15);flex-wrap:wrap;}
+.stat-val{font-family:'Arial',sans-serif;font-size:18px;font-weight:700;color:var(--accent2);}
+.stat-label{font-family:'Arial',sans-serif;font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#d4b896;}
+
+.main{max-width:900px;margin:0 auto;padding:0 24px 60px;}
+
+.section-header{display:flex;align-items:center;gap:10px;margin:32px 0 16px;padding-bottom:8px;border-bottom:2px solid #7b4f00;}
+.section-icon{font-size:17px;}
+.section-title{font-family:'Arial',sans-serif;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#7b4f00;}
+.section-count{margin-left:auto;font-family:'Arial',sans-serif;font-size:11px;color:#888;}
+
+/* WEEK IN REVIEW */
+.week-review-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;}
+.day-card{background:white;border:1px solid var(--border);border-radius:6px;padding:14px;border-top:3px solid #7b4f00;cursor:pointer;transition:all 0.15s;}
+.day-card:hover{box-shadow:0 3px 12px rgba(0,0,0,0.1);transform:translateY(-1px);}
+.day-card a{text-decoration:none;color:inherit;}
+.day-name{font-family:'Arial',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--accent2);margin-bottom:6px;}
+.day-date{font-family:'Arial',sans-serif;font-size:10px;color:#888;margin-bottom:8px;}
+.day-headline{font-size:12px;color:var(--navy);line-height:1.4;margin-bottom:8px;}
+.day-tags{display:flex;flex-wrap:wrap;gap:3px;}
+.day-tag{font-family:'Arial',sans-serif;font-size:9px;padding:2px 5px;border-radius:2px;color:white;font-weight:700;text-transform:uppercase;}
+.day-tag.payments{background:#1a6eb5;}.day-tag.credit{background:#7b2d8b;}
+.day-tag.risk{background:#c0392b;}.day-tag.macro{background:#16a085;}
+.day-tag.fuel{background:#b35c00;}.day-tag.em{background:#d35400;}
+
+/* MACRO THREAD */
+.macro-thread{background:white;border:1px solid var(--border);border-radius:8px;padding:22px 26px;margin-bottom:16px;}
+.macro-thread h3{font-size:17px;color:var(--navy);margin-bottom:5px;line-height:1.3;}
+.thread-meta{font-family:'Arial',sans-serif;font-size:11px;color:#888;margin-bottom:14px;}
+.macro-thread p{font-size:14px;color:#2c3e50;margin-bottom:10px;}
+.thread-evolution{display:flex;flex-direction:column;gap:8px;margin:14px 0;}
+.thread-day{display:flex;gap:12px;align-items:flex-start;}
+.thread-day-label{font-family:'Arial',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;color:var(--accent2);width:40px;flex-shrink:0;padding-top:2px;}
+.thread-day-content{font-size:13px;color:#3a4a5c;flex:1;}
+
+/* LINKEDIN CALENDAR */
+.li-calendar{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+.li-slot{background:white;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.li-slot-header{background:var(--li-blue);color:white;padding:10px 14px;font-family:'Arial',sans-serif;font-size:11px;font-weight:700;display:flex;justify-content:space-between;align-items:center;}
+.li-slot-day{font-size:13px;}
+.li-slot-type{font-size:9px;text-transform:uppercase;letter-spacing:1px;opacity:0.8;}
+.li-slot-body{padding:14px;}
+.li-post-text{font-family:'Arial',sans-serif;font-size:13px;color:#1a1a1a;line-height:1.6;white-space:pre-wrap;background:#f8fbff;border:1px dashed #c5ddf4;padding:12px;border-radius:4px;margin-bottom:8px;}
+.li-post-note{font-family:'Arial',sans-serif;font-size:10px;color:#888;font-style:italic;}
+.li-hashtags{font-family:'Arial',sans-serif;font-size:10px;color:var(--li-blue);margin-top:6px;line-height:1.6;}
+.li-engagement{background:#f0f7ff;border-radius:4px;padding:8px 12px;margin-top:8px;font-family:'Arial',sans-serif;font-size:11px;color:#1a4a8a;}
+.li-engagement strong{display:block;font-size:10px;text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+
+/* MEDIUM */
+.medium-scaffold{background:white;border:1px solid var(--border);border-radius:8px;padding:22px 26px;margin-bottom:16px;}
+.med-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.med-badge{background:#000;color:white;font-size:11px;font-weight:900;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Arial',sans-serif;flex-shrink:0;}
+.med-label{font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#333;}
+.med-title{font-size:22px;font-weight:bold;color:var(--navy);margin-bottom:5px;line-height:1.3;}
+.med-subtitle{font-size:15px;color:#555;margin-bottom:18px;font-style:italic;}
+.med-meta{font-family:'Arial',sans-serif;font-size:11px;color:#888;margin-bottom:18px;}
+.med-section{margin-bottom:14px;padding-left:14px;border-left:3px solid #e8d5b0;}
+.med-section-title{font-family:'Arial',sans-serif;font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:1px;margin-bottom:3px;}
+.med-section-notes{font-size:13px;color:#555;font-style:italic;}
+.med-section-wordcount{font-family:'Arial',sans-serif;font-size:10px;color:#aaa;margin-top:2px;}
+.med-cta{background:#f5f0e8;border-radius:6px;padding:12px 16px;margin-top:14px;font-family:'Arial',sans-serif;font-size:12px;color:#7b4f00;}
+.med-cta strong{display:block;margin-bottom:3px;}
+.med-submit{background:#e8d5b0;border-radius:6px;padding:12px 16px;margin-top:10px;font-family:'Arial',sans-serif;font-size:12px;color:#3d2a00;}
+.med-submit strong{display:block;margin-bottom:3px;}
+
+/* BRAND NOTES */
+.brand-card{background:white;border:1px solid var(--border);border-radius:6px;padding:18px 22px;margin-bottom:10px;}
+.brand-label{font-family:'Arial',sans-serif;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:var(--accent2);margin-bottom:8px;}
+.brand-card p{font-size:14px;color:#2c3e50;margin-bottom:8px;}
+.brand-action{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px solid #f5eede;}
+.brand-action:last-child{border-bottom:none;}
+.action-icon{font-size:16px;flex-shrink:0;margin-top:1px;}
+.action-text{font-size:13px;color:#3a4a5c;}
+.action-text strong{display:block;font-size:12px;color:var(--navy);margin-bottom:2px;}
+
+/* THOUGHT SEED BANK */
+.ts-bank{background:white;border:1px solid var(--border);border-radius:6px;overflow:hidden;margin-bottom:10px;}
+.ts-bank-header{background:var(--navy);color:var(--text);padding:12px 18px;display:flex;justify-content:space-between;align-items:center;}
+.ts-bank-title{font-size:14px;}
+.ts-bank-badge{font-family:'Arial',sans-serif;font-size:10px;font-weight:700;padding:3px 8px;border-radius:3px;background:rgba(0,194,203,0.2);color:var(--accent);text-transform:uppercase;letter-spacing:1px;}
+.ts-bank-body{padding:14px 18px;font-size:13px;color:#3a4a5c;}
+.ts-bank-used{font-family:'Arial',sans-serif;font-size:10px;color:var(--accent2);margin-top:6px;}
+
+.footer{background:#3d2a00;color:#d4b896;padding:16px 48px;font-family:'Arial',sans-serif;font-size:11px;text-align:center;}
+.footer strong{color:var(--accent2);}
+
+@media(max-width:700px){
+  .week-review-grid{grid-template-columns:1fr;}.li-calendar{grid-template-columns:1fr;}
+  .header,.main{padding-left:16px;padding-right:16px;}
+}
+</style>
+</head>
+<body>
+
+<div class="week-label">Weekly Content Report &nbsp;·&nbsp; Brand &amp; Publishing Layer &nbsp;·&nbsp; Week of April 6, 2026</div>
+
+<div class="header">
+  <div class="header-meta">Weekly Content Report &nbsp;·&nbsp; Generated Friday, April 10, 2026 &nbsp;·&nbsp; Week #01</div>
+  <h1>LinkedIn + Medium Publishing Brief</h1>
+  <div class="header-sub">Compiled from 5 daily editions · Optimized for thought leadership publishing · Not for daily reading</div>
+  <div class="header-stats">
+    <div><div class="stat-val">5</div><div class="stat-label">Briefs Compiled</div></div>
+    <div><div class="stat-val">3</div><div class="stat-label">LinkedIn Posts</div></div>
+    <div><div class="stat-val">1</div><div class="stat-label">Medium Article</div></div>
+    <div><div class="stat-val">1</div><div class="stat-label">Thought Seed</div></div>
+    <div><div class="stat-val">Next Week</div><div class="stat-label">Calendar Ready</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ═══ WEEK IN REVIEW ═══ -->
+<div class="section-header">
+  <span class="section-icon">📅</span>
+  <span class="section-title">Week in Review</span>
+  <span class="section-count">5 editions · Click to open any brief</span>
+</div>
+
+<div class="week-review-grid">
+  <div class="day-card">
+    <a href="fintech-daily-brief.html">
+      <div class="day-name">Monday</div>
+      <div class="day-date">April 6</div>
+      <div class="day-headline">Fed tightening + trucking stress + Nubank AI underwriting</div>
+      <div class="day-tags">
+        <span class="day-tag credit">Credit</span><span class="day-tag fuel">Fleet</span><span class="day-tag macro">Macro</span>
+      </div>
+    </a>
+  </div>
+  <div class="day-card" style="opacity:0.45;border-top-color:#ccc">
+    <div class="day-name">Tuesday</div>
+    <div class="day-date">April 7</div>
+    <div class="day-headline" style="color:#aaa;font-style:italic">Brief not yet generated</div>
+  </div>
+  <div class="day-card" style="opacity:0.45;border-top-color:#ccc">
+    <div class="day-name">Wednesday</div>
+    <div class="day-date">April 8</div>
+    <div class="day-headline" style="color:#aaa;font-style:italic">Brief not yet generated</div>
+  </div>
+  <div class="day-card" style="opacity:0.45;border-top-color:#ccc">
+    <div class="day-name">Thursday</div>
+    <div class="day-date">April 9</div>
+    <div class="day-headline" style="color:#aaa;font-style:italic">Brief not yet generated</div>
+  </div>
+  <div class="day-card" style="opacity:0.45;border-top-color:#ccc">
+    <div class="day-name">Friday</div>
+    <div class="day-date">April 10</div>
+    <div class="day-headline" style="color:#aaa;font-style:italic">Brief not yet generated</div>
+  </div>
+</div>
+
+<!-- MACRO THREAD -->
+<div class="section-header">
+  <span class="section-icon">🔭</span>
+  <span class="section-title">Macro Thread of the Week</span>
+  <span class="section-count">How the signal evolved across Monday–Friday</span>
+</div>
+<div class="macro-thread">
+  <h3>The Freight Rate Signal: How the Week's Data Changed the Credit Risk Picture</h3>
+  <div class="thread-meta">Compiled from week's Macro Signal sections · Prototype shows Monday's signal only</div>
+  <p>The week opened with a key diagnostic: transportation charge-off stress in Q1 2026 is decoupled from diesel prices — the primary variable this cycle is the spot-to-contract freight rate spread. This reframing has significant implications for how commercial lenders with trucking exposure should calibrate their early warning systems.</p>
+  <div class="thread-evolution">
+    <div class="thread-day">
+      <div class="thread-day-label">Mon</div>
+      <div class="thread-day-content">Established the oil-credit transmission mechanism and identified the cycle shift: fuel cost → freight rate spread as the dominant stress variable. DAT spot rates −12% vs. contract.</div>
+    </div>
+    <div class="thread-day">
+      <div class="thread-day-label" style="color:#aaa">Tue</div>
+      <div class="thread-day-content" style="color:#aaa;font-style:italic">Tuesday signal pending — will update when brief is generated.</div>
+    </div>
+    <div class="thread-day">
+      <div class="thread-day-label" style="color:#aaa">Wed</div>
+      <div class="thread-day-content" style="color:#aaa;font-style:italic">Wednesday signal pending.</div>
+    </div>
+    <div class="thread-day">
+      <div class="thread-day-label" style="color:#aaa">Thu</div>
+      <div class="thread-day-content" style="color:#aaa;font-style:italic">Thursday signal pending.</div>
+    </div>
+    <div class="thread-day">
+      <div class="thread-day-label" style="color:#aaa">Fri</div>
+      <div class="thread-day-content" style="color:#aaa;font-style:italic">Friday signal pending. Weekly synthesis will be added here.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══ LINKEDIN CALENDAR ═══ -->
+<div class="section-header">
+  <span class="section-icon">💼</span>
+  <span class="section-title">LinkedIn Publishing Calendar</span>
+  <span class="section-count">3 posts · Next week · Tuesday · Thursday · Saturday</span>
+</div>
+
+<div class="li-calendar">
+
+  <div class="li-slot">
+    <div class="li-slot-header">
+      <div>
+        <div class="li-slot-day">Tuesday, April 14</div>
+        <div class="li-slot-type">Thought Seed Post</div>
+      </div>
+      <span style="font-size:18px">🌱</span>
+    </div>
+    <div class="li-slot-body">
+      <div class="li-post-text">Your credit model is scoring nodes.
+
+The risk is in the network.
+
+A 2024 paper on Graph Neural Networks applied to commercial payment data showed that the best early warning signal for a borrower's default probability is often not in their own credit file — it's in the payment behavior of their buyers and suppliers.
+
+When a buyer starts paying late, their suppliers are under stress 60–90 days before any bureau data reflects it. Default contagion moves through the payment network first.
+
+Here's what hasn't been connected: fuel card portfolios are actually better suited to this methodology than the datasets studied. Every transaction is a data point in a payment network — high frequency, geographically tagged, merchant-categorized. The graph exists entirely within one issuer's data.
+
+The commercial credit industry is sitting on the raw material for network-based credit intelligence. Already in the systems. Already paid for.
+
+The question is whether we build the analytical layer before the loss data tells us we should have.
+
+What behavioral signals are you monitoring beyond payment history?</div>
+      <div class="li-hashtags">#CommercialCredit #CreditRisk #AIinFinance #GraphNeuralNetworks #Fintech #MachineLearning</div>
+      <div class="li-engagement">
+        <strong>Engagement Strategy</strong>
+        Post at 8:30am ET. Reply to every comment within 2 hours. Tag the arXiv paper in first comment. Ask one specific follow-up question to commenters who engage substantively.
+      </div>
+      <div class="li-post-note">✏️ Add one line from your own operational experience before the final question. That's what makes it yours.</div>
+    </div>
+  </div>
+
+  <div class="li-slot">
+    <div class="li-slot-header" style="background:#1a4a8a">
+      <div>
+        <div class="li-slot-day">Thursday, April 16</div>
+        <div class="li-slot-type">Data Point Take</div>
+      </div>
+      <span style="font-size:18px">📊</span>
+    </div>
+    <div class="li-slot-body">
+      <div class="li-post-text">Diesel prices are down 38% from their 2022 peak.
+
+Trucking sector charge-offs are rising.
+
+These two facts seem contradictory. They're not.
+
+This cycle's stress driver isn't fuel cost — it's freight rate compression. Spot rates are running 12% below contract rates, squeezing owner-operator margins independent of fuel prices.
+
+The implication for commercial credit: the early warning indicator that mattered in 2022 is less predictive in 2026. Same sector. Different leading indicator. Different intervention required.
+
+This is why macro signal monitoring in commercial credit needs to be dynamic, not formulaic. The variable that leads defaults changes with the cycle.
+
+Source: DAT Truckload Index · EIA Retail Diesel Weekly · Fed FRED</div>
+      <div class="li-hashtags">#CommercialCredit #FreightMarket #CreditRisk #MacroSignals #Fintech</div>
+      <div class="li-engagement">
+        <strong>Engagement Strategy</strong>
+        Post midday Thursday. Lead with the counterintuitive framing — diesel down, charge-offs up. This invites challenge from people who haven't made the distinction. Engage those challenges specifically.
+      </div>
+      <div class="li-post-note">✏️ Ready to post as-is. Consider adding a chart screenshot from the daily brief.</div>
+    </div>
+  </div>
+
+  <div class="li-slot">
+    <div class="li-slot-header" style="background:#2d5016">
+      <div>
+        <div class="li-slot-day">Saturday, April 18</div>
+        <div class="li-slot-type">Industry Observation</div>
+      </div>
+      <span style="font-size:18px">🔬</span>
+    </div>
+    <div class="li-slot-body">
+      <div class="li-post-text">34% of commercial card issuers reviewed by the CFPB had inadequate early warning systems for small business portfolio stress.
+
+Not 34% of small community lenders.
+
+34% of issuers large enough to attract regulatory supervisory attention.
+
+Most are still relying on static FICO pulls and monthly statement analysis.
+
+Meanwhile, every fuel swipe, every vendor payment, every category shift is a real-time behavioral signal sitting unused in transaction databases.
+
+The gap between the data lenders have and the intelligence they're extracting from it is the most underutilized opportunity in commercial credit risk right now.
+
+And it's also a growing regulatory exposure.
+
+Source: CFPB Supervisory Highlights (free, public)</div>
+      <div class="li-hashtags">#CommercialCredit #CreditRisk #CFPB #Fintech #RegulatoryRisk #DataScience</div>
+      <div class="li-engagement">
+        <strong>Engagement Strategy</strong>
+        Saturday posts reach a different audience — weekend readers who are more thoughtful. This one invites compliance and risk professionals. Repost with a comment on Sunday morning to catch Monday morning readers.
+      </div>
+      <div class="li-post-note">✏️ Add one sentence from your own perspective on what "adequate early warning" looks like operationally.</div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- ═══ MEDIUM ARTICLE ═══ -->
+<div class="section-header">
+  <span class="section-icon">✍️</span>
+  <span class="section-title">Medium Article Scaffold</span>
+  <span class="section-count">From this week's Thought Seed · Write into this · Target 1,400–1,800 words · Publish following Tuesday</span>
+</div>
+
+<div class="medium-scaffold">
+  <div class="med-header">
+    <div class="med-badge">M</div>
+    <div class="med-label">Medium Article — Week 01</div>
+  </div>
+  <div class="med-title">The Credit Network Problem: Every Commercial Lender Has the Data. Almost None Are Using It.</div>
+  <div class="med-subtitle">How Graph Neural Networks applied to transaction data could give commercial card issuers a risk signal they've been sitting on for years — and the realistic path to getting there.</div>
+  <div class="med-meta">Target: 1,400–1,800 words · Tags: Credit Risk, AI, Machine Learning, Fintech, Commercial Lending · Publish: Tuesday April 21, 8am ET</div>
+
+  <div class="med-section">
+    <div class="med-section-title">Hook — The Counterintuitive Opening</div>
+    <div class="med-section-notes">Open with a specific scenario: a commercial fuel card issuer sees zero red flags in a trucking company's credit file. Bureau score solid, payment history clean, line renewed. Six months later: default. Then three more from the same freight corridor. The signals were in the network — not the individual file. Set up the central tension: credit risk is modeled as individual, but experienced as networked. End the hook with a precise claim — the data to see this was already in the issuer's systems. Just not assembled correctly.</div>
+    <div class="med-section-wordcount">Target: ~150 words</div>
+  </div>
+
+  <div class="med-section">
+    <div class="med-section-title">The Research Foundation</div>
+    <div class="med-section-notes">Walk through Zhang et al. accessibly. The GNN analogy: "think of Google Maps for credit risk — the road network matters, not just the destination." Explain the 31% false negative reduction in plain terms: for every 100 defaults a traditional model missed, a network-based model catches 31 before they happen. Cover the non-obvious finding: the model performs best during economic stress — exactly when conventional models degrade. Cite the paper directly with the arXiv link.</div>
+    <div class="med-section-wordcount">Target: ~300 words</div>
+  </div>
+
+  <div class="med-section">
+    <div class="med-section-title">The Fuel Card Insight — Your Original Contribution</div>
+    <div class="med-section-notes">This is where you add what's not in the paper. Fuel card transaction data is structurally better suited to GNN application than general SMB datasets: high frequency, geographically constrained, merchant-tagged. Every fill-up is evidence of operational activity. The graph that can be built internally — without any cross-institution data — is denser and more behaviorally rich. This section is your intellectual property. Write from operational knowledge. This is what makes the article worth reading for practitioners who already know GNNs exist.</div>
+    <div class="med-section-wordcount">Target: ~350 words</div>
+  </div>
+
+  <div class="med-section">
+    <div class="med-section-title">The Real Blockers — Practitioner Honesty</div>
+    <div class="med-section-notes">Be specific about why good ideas don't get built: data siloing, ECOA explainability requirements, org inertia. Go deeper than the surface: the real issue is that credit risk teams are trained to think about individual obligors, not network topology. That's a cognitive and organizational challenge, not just technical. This is where your practitioner voice distinguishes you from academics. Write what you know from inside the industry.</div>
+    <div class="med-section-wordcount">Target: ~300 words</div>
+  </div>
+
+  <div class="med-section">
+    <div class="med-section-title">The 18-Month Window</div>
+    <div class="med-section-notes">Why now? GNN tooling matured. Shadow scoring removes compliance risk from piloting. Pilot cost is person-months. Deferral cost is competitors' loss rates 24 months from now. Make the case without overstating urgency — credibility matters more than alarm.</div>
+    <div class="med-section-wordcount">Target: ~200 words</div>
+  </div>
+
+  <div class="med-section">
+    <div class="med-section-title">Closing — Provocation Not Summary</div>
+    <div class="med-section-notes">"The lenders who develop this capability won't announce it in a press release. You'll see it in their vintage loss curves 24 months from now." Invite readers to follow for weekly Thought Seeds. Link to your LinkedIn.</div>
+    <div class="med-section-wordcount">Target: ~100 words</div>
+  </div>
+
+  <div class="med-cta">
+    <strong>📎 All sources — free and linkable directly in your article:</strong>
+    Zhang et al. → arxiv.org/abs/2401.01751 · BIS WP #1089 → bis.org · CFPB AI Report → consumerfinance.gov · GNNExplainer → arxiv.org/abs/2012.15445 · EIA Diesel → eia.gov · DAT Freight Index → dat.com
+  </div>
+  <div class="med-submit">
+    <strong>📤 Submission Checklist Before Publishing:</strong>
+    ☐ Read aloud once — cut anything that sounds like a press release · ☐ Every claim has a source link · ☐ The "fuel card insight" section is in your voice, not summarizing · ☐ Add a cover image (Unsplash: search "network graph" or "freight truck") · ☐ Cross-post link on LinkedIn the same morning
+  </div>
+</div>
+
+
+<!-- ═══ BRAND NOTES ═══ -->
+<div class="section-header">
+  <span class="section-icon">📣</span>
+  <span class="section-title">Brand Building Notes</span>
+  <span class="section-count">This week's actions · 30 min total</span>
+</div>
+
+<div class="brand-card">
+  <div class="brand-label">This Week's Priority Actions</div>
+  <div class="brand-action">
+    <div class="action-icon">🤝</div>
+    <div class="action-text"><strong>Engage on 3 posts from established credit risk voices</strong>Substantive comment — not "great post." Add a data point, a counterargument, or a specific question. This is how you enter the conversation without a platform yet.</div>
+  </div>
+  <div class="brand-action">
+    <div class="action-icon">🔗</div>
+    <div class="action-text"><strong>Link Tuesday's LinkedIn post to the arXiv paper in the first comment</strong>Signals credibility. The people who click the link are your target audience. Engage them specifically.</div>
+  </div>
+  <div class="brand-action">
+    <div class="action-icon">✍️</div>
+    <div class="action-text"><strong>Write the Medium article this weekend</strong>Use the scaffold above. Aim for 1,500 words. The first draft does not need to be good — it needs to exist. Edit on Monday, publish Tuesday.</div>
+  </div>
+  <div class="brand-action">
+    <div class="action-icon">📊</div>
+    <div class="action-text"><strong>Screenshot the charge-off vs. diesel chart from Monday's brief</strong>Use it as a visual in Thursday's LinkedIn post. Charts from your own analysis get more engagement than stock images. Caption it clearly: "Source: EIA · OCC Call Reports · My analysis."</div>
+  </div>
+</div>
+
+<div class="brand-card">
+  <div class="brand-label">Thought Seed Bank — This Week's Candidates for Future Articles</div>
+  <div class="ts-bank">
+    <div class="ts-bank-header">
+      <div class="ts-bank-title">Graph Neural Networks for Credit Risk (Zhang et al., 2024)</div>
+      <span class="ts-bank-badge">This Week ✓</span>
+    </div>
+    <div class="ts-bank-body">Used as this week's Thought Seed. LinkedIn post + Medium article scaffold generated. Publish Medium article April 21.
+      <div class="ts-bank-used">→ arXiv:2401.01751 · Confidence: 🟡 Emerging</div>
+    </div>
+  </div>
+  <div class="ts-bank" style="opacity:0.6">
+    <div class="ts-bank-header" style="background:#243b55">
+      <div class="ts-bank-title">BIS WP #1089: Network Effects in Financial Contagion — Payment Systems</div>
+      <span class="ts-bank-badge" style="background:rgba(255,255,255,0.1)">Queued — Week 2</span>
+    </div>
+    <div class="ts-bank-body">Validates the credit contagion mechanism using real payment system data. Complements this week's GNN paper and extends the network argument to systemic risk. Strong follow-up article candidate.
+      <div class="ts-bank-used">→ BIS Working Paper #1089 · bis.org · Free</div>
+    </div>
+  </div>
+  <div class="ts-bank" style="opacity:0.6">
+    <div class="ts-bank-header" style="background:#243b55">
+      <div class="ts-bank-title">Causal Inference in Credit Risk: Moving From "Who Defaults" to "What Intervention Prevents It"</div>
+      <span class="ts-bank-badge" style="background:rgba(255,255,255,0.1)">Queued — Week 3</span>
+    </div>
+    <div class="ts-bank-body">Uplift modeling applied to commercial credit line management and collections. Hugely underexplored in commercial credit. High practitioner value, strong original contribution potential.
+      <div class="ts-bank-used">→ Multiple SSRN / arXiv sources · Research curation needed</div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  <strong>Weekly Content Report — Week of April 6, 2026</strong> · Generated Friday April 10 · Private<br>
+  Compiled from 5 daily intelligence briefs · LinkedIn + Medium publishing layer · Separate from daily read
+</div>
+
+</body>
+</html>

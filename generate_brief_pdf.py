@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Fintech Intelligence Brief — Static PDF Generator
+Credit Intelligence Brief — Static PDF Generator
 Converts a brief HTML file into a clean, print-ready PDF:
   1. Parses Chart.js data from embedded JS
   2. Renders each chart as a static matplotlib image (base64-encoded PNG)
@@ -199,7 +199,7 @@ PRINT_CSS = """
   size: A4;
   margin: 18mm 16mm 18mm 16mm;
   @bottom-center {
-    content: "Fintech Intelligence Brief · Private · Page " counter(page) " of " counter(pages);
+    content: "Credit Intelligence Brief · Private · Page " counter(page) " of " counter(pages);
     font-family: Arial, sans-serif; font-size: 8pt; color: #8fa3b8;
   }
 }
@@ -287,7 +287,7 @@ def html_to_pdf(html_path: Path, pdf_path: Path):
 
 
 # ── CLI ───────────────────────────────────────────────────────────────────────
-BRIEFS_DIR = Path("/sessions/determined-kind-noether/mnt/Documents/Claude/Projects/Fintech Daily Report")
+BRIEFS_DIR = Path("/sessions/determined-kind-noether/mnt/Documents/Claude/Projects/Credit Intelligence Report")
 OUT_DIR    = Path("/sessions/determined-kind-noether/mnt/Downloads")
 
 ALL_BRIEFS = [

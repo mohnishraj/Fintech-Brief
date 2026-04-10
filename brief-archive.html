@@ -59,9 +59,9 @@ body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--nav
 </div>
 
 <div class="stats-bar">
-  <div class="stat"><div class="stat-val" id="totalCount">2</div><div class="stat-label">Editions</div></div>
-  <div class="stat"><div class="stat-val" id="weekCount">2</div><div class="stat-label">This Week</div></div>
-  <div class="stat"><div class="stat-val" id="tsCount">2</div><div class="stat-label">Thought Seeds</div></div>
+  <div class="stat"><div class="stat-val" id="totalCount">3</div><div class="stat-label">Editions</div></div>
+  <div class="stat"><div class="stat-val" id="weekCount">3</div><div class="stat-label">This Week</div></div>
+  <div class="stat"><div class="stat-val" id="tsCount">3</div><div class="stat-label">Thought Seeds</div></div>
 </div>
 
 <div class="controls">
@@ -86,6 +86,17 @@ body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--nav
 // Each new edition is added here automatically by the scheduled task.
 // Format: { date, edition, file, headline, thoughtSeed, tags, readTime }
 const briefs = [
+  {
+    date: "April 10, 2026",
+    dateSort: "2026-04-10",
+    edition: "005",
+    file: "briefs/brief-2026-04-10.html",
+    headline: "Tariff Whipsaw: 90-Day Pause Sparks Historic Rally While China at 145% Rewrites Supply Chain Credit",
+    thoughtSeed: "Geopolitical Risk and Bank Lending — Paltalidis & Zhang (SSRN 5284582, May 2025): How banks implicitly price geopolitical risk into spreads — and why that inconsistency is your hidden basis risk",
+    tags: ["macro", "credit", "risk", "fuel", "fleet", "smb", "payments"],
+    readTime: "~20 min",
+    macro: "Fed Holds 3.5–3.75% × Tariff-Inflation Wedge × Diesel at $5.64 — The Stagflation Scenario the Fed Most Fears"
+  },
   {
     date: "April 9, 2026",
     dateSort: "2026-04-09",

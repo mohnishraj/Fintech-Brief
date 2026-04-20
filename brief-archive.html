@@ -59,9 +59,9 @@ body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--nav
 </div>
 
 <div class="stats-bar">
-  <div class="stat"><div class="stat-val" id="totalCount">3</div><div class="stat-label">Editions</div></div>
+  <div class="stat"><div class="stat-val" id="totalCount">9</div><div class="stat-label">Editions</div></div>
   <div class="stat"><div class="stat-val" id="weekCount">3</div><div class="stat-label">This Week</div></div>
-  <div class="stat"><div class="stat-val" id="tsCount">3</div><div class="stat-label">Thought Seeds</div></div>
+  <div class="stat"><div class="stat-val" id="tsCount">9</div><div class="stat-label">Thought Seeds</div></div>
 </div>
 
 <div class="controls">
@@ -86,6 +86,50 @@ body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--nav
 // Each new edition is added here automatically by the scheduled task.
 // Format: { date, edition, file, headline, thoughtSeed, tags, readTime }
 const briefs = [
+  {
+    date: "April 19, 2026",
+    dateSort: "2026-04-19",
+    edition: "009",
+    file: "briefs/brief-2026-04-19.html",
+    headline: "The Pre-FOMC Trap: Fed Walks Into April 28–29 Frozen by Stagflation, China Tariff Escalation Threat Builds, and Private Credit Defaults Reach 5.8%",
+    thoughtSeed: "Fuster, Goldsmith-Pinkham, Ramadorai & Walther (JF 2022) — Predictably Unequal: ML Credit Models Miss Out-of-Distribution Risk — and Why nCino's 70% Time Cut Creates Adverse Selection in a Tariff Shock",
+    tags: ["credit", "risk", "macro", "fuel", "smb", "payments", "regulatory"],
+    readTime: "~20 min",
+    macro: "FOMC April 28–29 Rate Hold × Stagflation Lock × China 50% Tariff Escalation Risk × Iran Ceasefire Expires April 22 × Private Credit Default 5.8%"
+  },
+  {
+    date: "April 18, 2026",
+    dateSort: "2026-04-18",
+    edition: "008",
+    file: "briefs/brief-2026-04-18.html",
+    headline: "The Gate Crash: Apollo, Ares, BlackRock Cap Private Credit Redemptions as March CPI Rockets to 3.3% — And the Ceasefire That Expires Wednesday",
+    thoughtSeed: "Goldstein-Jiang-Ng (JFE 2017) — First-Mover Advantage in Illiquid Funds, applied to BDC/Interval Fund Run Dynamics",
+    tags: ["credit", "risk", "macro", "payments", "fuel", "smb", "regulatory"],
+    readTime: "~20 min",
+    macro: "CPI at 3.3% × Fed Frozen at 3.5–3.75% × Iran Ceasefire Expires April 22 × Private Credit Redemption Gates Active"
+  },
+  {
+    date: "April 14, 2026",
+    dateSort: "2026-04-14",
+    edition: "007",
+    file: "briefs/brief-2026-04-14.html",
+    headline: "The Hormuz Shock: Diesel at $5.80 Record High Meets Capital One's $5B Brex Play — While FICO Bets Its Monopoly on a $10 Score",
+    thoughtSeed: "Kilian (AER 2009) — Not All Oil Price Shocks Are Alike: Why the Hormuz Closure Is a Different Credit Risk Than a Demand Spike — and the fleet portfolio test that tells you which type you're in",
+    tags: ["macro", "fuel", "credit", "risk", "payments", "smb", "regulatory"],
+    readTime: "~20 min",
+    macro: "Iran War Oil Shock × Fed Frozen at 3.5–3.75% × Stagflation Feedback Loop Tightening"
+  },
+  {
+    date: "April 11, 2026",
+    dateSort: "2026-04-11",
+    edition: "006",
+    file: "briefs/brief-2026-04-11.html",
+    headline: "The Hawk Returns: FOMC Minutes Put Rate Hikes Back on the Table — While Private Credit's $2.8 Trillion Empire Faces Its First Real Test",
+    thoughtSeed: "Barbiero & Stein (Fed Boston, SSRN 5127709) — The Impact of Tariffs on Inflation: Using the 40% pass-through rate to reverse-engineer your borrower's real tariff exposure with the Tariff Absorption Ratio",
+    tags: ["macro", "credit", "risk", "fuel", "smb", "regulatory", "payments"],
+    readTime: "~20 min",
+    macro: "Fed at 3.5–3.75% × Rate Hike Optionality × Tariff-Inflation Transmission × Diesel at $5.64"
+  },
   {
     date: "April 10, 2026",
     dateSort: "2026-04-10",

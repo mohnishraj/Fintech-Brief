@@ -59,9 +59,9 @@ body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--nav
 </div>
 
 <div class="stats-bar">
-  <div class="stat"><div class="stat-val" id="totalCount">9</div><div class="stat-label">Editions</div></div>
-  <div class="stat"><div class="stat-val" id="weekCount">3</div><div class="stat-label">This Week</div></div>
-  <div class="stat"><div class="stat-val" id="tsCount">9</div><div class="stat-label">Thought Seeds</div></div>
+  <div class="stat"><div class="stat-val" id="totalCount">10</div><div class="stat-label">Editions</div></div>
+  <div class="stat"><div class="stat-val" id="weekCount">4</div><div class="stat-label">This Week</div></div>
+  <div class="stat"><div class="stat-val" id="tsCount">10</div><div class="stat-label">Thought Seeds</div></div>
 </div>
 
 <div class="controls">
@@ -86,6 +86,28 @@ body { font-family: 'Arial', sans-serif; background: var(--bg); color: var(--nav
 // Each new edition is added here automatically by the scheduled task.
 // Format: { date, edition, file, headline, thoughtSeed, tags, readTime }
 const briefs = [
+  {
+    date: "April 25, 2026",
+    dateSort: "2026-04-25",
+    edition: "011",
+    file: "briefs/brief-2026-04-25.html",
+    headline: "T-3 to the FOMC Trap: The Section 301 Hearing and Rate Hold Land on the Same Day — While Ares, Apollo, BlackRock, and Blue Owl Gate Simultaneously and Diesel Drops 20 Cents to $5.403",
+    thoughtSeed: "Brunnermeier & Pedersen (JF 2009) — 'Market Liquidity and Funding Liquidity' — The Spiral That Private Credit Was Built to Avoid Has Arrived: Why Gating Is Not the Resolution — It Is the First Symptom of the Next Redemption Wave",
+    tags: ["credit", "risk", "macro", "fuel", "smb", "regulatory"],
+    readTime: "~20 min",
+    macro: "FOMC April 28–29 Hold × Section 301 Hearing April 28 × JPMorgan No Cuts 2026 / Hike Q3 2027 × Ares/Apollo/BlackRock/Blue Owl Gate Wave × Diesel $5.403 ↓20¢ × Basel III Endgame SMB Capital Relief × Private Credit Default 5.8%"
+  },
+  {
+    date: "April 20, 2026",
+    dateSort: "2026-04-20",
+    edition: "010",
+    file: "briefs/brief-2026-04-20.html",
+    headline: "The Beijing Countdown: Trump-Xi Summit May 14–15 Opens a 24-Day Tariff Clarity Window — While Morgan Stanley Warns 8% Private Credit Defaults Are Coming and the FDIC Rewrites the Debanking Rules",
+    thoughtSeed: "Acharya, Eisert, Eufinger & Hirsch (JF 2019) — 'Whatever It Takes' — How Private Credit's Amend-and-Pretend Is Creating a $728B Zombie Borrower Problem in AI-Disrupted Software",
+    tags: ["credit", "risk", "macro", "fuel", "smb", "regulatory", "payments"],
+    readTime: "~20 min",
+    macro: "Trump-Xi Summit May 14–15 × FOMC April 28–29 Hold × Section 301 Hearing April 28 × FDIC/OCC Debanking Rule June 9 × Morgan Stanley 8% Private Credit Default Warning"
+  },
   {
     date: "April 19, 2026",
     dateSort: "2026-04-19",

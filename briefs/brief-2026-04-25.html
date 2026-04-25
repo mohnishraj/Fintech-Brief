@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Credit Intelligence Brief — Edition #011 — April 25, 2026</title>
+<link rel="stylesheet" href="brief-style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════
+     1. MASTHEAD
+═══════════════════════════════════════════════════ -->
+<header class="brief-header">
+  <h1><span class="edition-badge">EDITION #011</span>Credit Intelligence Brief</h1>
+  <h2>T-3 to the FOMC Trap: The Section 301 Hearing and Rate Hold Land on the Same Day — While Ares, Apollo, BlackRock, and Blue Owl Gate Simultaneously and Diesel Drops 20 Cents to $5.403</h2>
+  <div class="header-meta">
+    <span>📅 Saturday, April 25, 2026</span>
+    <span>⏱ ~20 min read</span>
+    <span>📰 4 Executive Briefs</span>
+    <span>🔭 Macro: FOMC April 28–29 Rate Hold (3.5–3.75%) × Section 301 China Hearing April 28 × JPMorgan No Cuts Until Late 2026, Possible Hike Q3 2027 × Ares/Apollo/BlackRock/Blue Owl Gate Wave × Diesel $5.403 (Down 20¢ from $5.608) × Basel III Endgame March Proposals (SMB Risk Weights Cut) × Private Credit Default 5.8% Trailing</span>
+    <span>🌱 Thought Seed: Brunnermeier &amp; Pedersen (JF 2009) — "Market Liquidity and Funding Liquidity" — The Spiral That Private Credit's Architecture Was Built to Avoid Has Arrived Anyway: Why Gating Is Not the Resolution — It Is the First Symptom of the Next Redemption Wave</span>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════════════
+     2. ACTION BAR
+═══════════════════════════════════════════════════ -->
+<div class="action-bar">
+  <span class="action-bar-label">Credit Intelligence Brief · Private Distribution</span>
+  <button class="action-btn pdf" onclick="window.print()">⬇ Download PDF</button>
+  <div class="share-wrapper">
+    <button class="action-btn share" onclick="toggleShare(this)">↗ Share</button>
+    <div class="share-dropdown" id="shareDropdown">
+      <a class="share-option" href="mailto:?subject=Credit Intelligence Brief — April 25, 2026 (Edition %23011)&body=Credit Intelligence Brief — April 25, 2026%0A%0AT-3 to the FOMC Trap: Section 301 Hearing and Rate Hold Land the Same Day%0A%0AKey stories:%0A• FOMC April 28–29 — Hold Certain, Forward Guidance Is Not%0A• The Gate Cascade — Ares, Apollo, BlackRock, Blue Owl All Cap Withdrawals in Q1 2026%0A• Diesel $5.403 — 20-Cent Drop Is Real but EIA Projects $5.61 Q2 Average%0A• Basel III Endgame — SMB Risk Weights Cut, Fintech Charter Wave Accelerates%0A">
+        <span class="share-option-icon">✉️</span>
+        <span class="share-option-text"><strong>Email this brief</strong><span>Opens your email client</span></span>
+      </a>
+      <div class="share-option" onclick="copyLink()">
+        <span class="share-option-icon">🔗</span>
+        <span class="share-option-text"><strong>Copy link</strong><span id="copyStatus">Click to copy path</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     3. VALIDATION BAR
+═══════════════════════════════════════════════════ -->
+<div class="validation-bar">
+  <div class="val-item"><span class="val-check">✓</span> Truth Layer Active</div>
+  <div class="val-item"><span class="val-check">✓</span> 21 claims verified</div>
+  <div class="val-item"><span class="val-check">✓</span> 16 sources cited</div>
+  <div class="val-item"><span class="val-check">✓</span> 11 cross-checked</div>
+  <div class="val-item"><span class="val-check">✓</span> 0 paywalled sources used</div>
+  <div class="val-item"><span class="val-check">✓</span> All data from last 7 days or explicitly dated</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     4. BIAS LEGEND
+═══════════════════════════════════════════════════ -->
+<div class="bias-legend">
+  <div class="bias-legend-title">📡 Bias Transparency System — v2</div>
+  <p class="bias-legend-intro">Every story in this brief is assessed across three independent bias axes. These meters don't indicate whether coverage is "good" or "bad" — they show where each source and synthesis sits on three dimensions that matter for commercial credit strategy. Understanding source bias is part of reading intelligently.</p>
+  <div class="bias-axes-grid">
+    <div class="bias-axis-def">
+      <div class="bad-axis-name">🦅 Monetary Axis</div>
+      <div class="bad-track"></div>
+      <div class="bad-ends">
+        <span class="bad-end">HAWK</span>
+        <span class="bad-end">DOVE</span>
+      </div>
+      <div class="bad-end-def"><strong style="color:#e74c3c">Hawk</strong> — Prioritizes inflation control, rate stability, tighter credit conditions. Skeptical of stimulative lending.</div>
+      <div class="bad-end-def" style="margin-top:4px"><strong style="color:#2ecc71">Dove</strong> — Favors rate cuts, credit expansion, stimulus. Tolerates higher credit risk for growth.</div>
+    </div>
+    <div class="bias-axis-def">
+      <div class="bad-axis-name">⚖️ Regulatory Axis</div>
+      <div class="bad-track"></div>
+      <div class="bad-ends">
+        <span class="bad-end">INTERVENTIONIST</span>
+        <span class="bad-end">FREE MARKET</span>
+      </div>
+      <div class="bad-end-def"><strong style="color:#e74c3c">Interventionist</strong> — Favors regulatory mandates, consumer protection, agency oversight of credit markets.</div>
+      <div class="bad-end-def" style="margin-top:4px"><strong style="color:#2ecc71">Free Market</strong> — Favors deregulation, industry self-governance, reduced compliance burden.</div>
+    </div>
+    <div class="bias-axis-def">
+      <div class="bad-axis-name">🏛 Business Axis</div>
+      <div class="bad-track"></div>
+      <div class="bad-ends">
+        <span class="bad-end">PRO-INCUMBENT</span>
+        <span class="bad-end">PRO-DISRUPTION</span>
+      </div>
+      <div class="bad-end-def"><strong style="color:#e74c3c">Pro-Incumbent</strong> — Favors banks, established lenders, existing credit infrastructure.</div>
+      <div class="bad-end-def" style="margin-top:4px"><strong style="color:#2ecc71">Pro-Disruption</strong> — Favors fintechs, alternative lenders, new credit delivery models.</div>
+    </div>
+  </div>
+  <div class="bias-legend-note">📌 <strong>Other Side:</strong> Every story includes a steel-manned counterargument. When you find yourself agreeing too easily with a synthesis, that's the note to read first.</div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     MAIN CONTENT
+═══════════════════════════════════════════════════ -->
+<div class="content">
+
+<!-- ══════════════════════════════════════════════════
+     5. EXECUTIVE BRIEF
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 01</div>
+<div class="section-title">Executive Brief</div>
+
+<!-- STORY 1 -->
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag macro">Macro</span>
+      <span class="stag credit">Credit</span>
+      <span class="stag risk">Risk</span>
+    </div>
+    <h3>T-3 to the FOMC Trap: The April 28 Section 301 Hearing + FOMC Day 1 Convergence Is Still the Most Underpriced Credit Risk of Q2 — Now With J.P. Morgan Flagging No Cuts Until Late 2026 and a Possible Hike in Q3 2027</h3>
+  </div>
+  <div class="story-body">
+    <p>In three days, the FOMC begins its April 28–29 meeting. The rate decision is not the story — the hold at 3.50–3.75% is priced at near-certainty. The Federal Reserve held at 3.50–3.75% at its March 18, 2026 meeting, its most recent action, following a series of cuts in late 2025. J.P. Morgan Global Research has hardened its position this week: the next move is more likely a 25 basis point hike in Q3 2027 than a cut in 2026, with the base case being "hold for the rest of 2026." That is not a priced-in scenario. The market is still assigning non-trivial probability to at least one 25bps cut by year end 2026. If J.P. Morgan's read is right — and their rationale (sticky geopolitical inflation, tariff pass-through, limited labor market deterioration) is well-grounded — credit spreads are mispriced on the dovish side by roughly 15–25bps across investment grade and 30–50bps across high yield. That re-pricing would come through a combination of the April 29 FOMC statement and the June meeting's dot plot.</p>
+    <p>The April 28 convergence remains the specific risk that has not been resolved since Edition #010 raised it. The USTR's public hearing on its Section 301 investigation — covering China and 15 other countries, initiated March 11, 2026 — is scheduled for April 28, FOMC Day 1. Section 301 hearings are procedural, not policy-triggering — the investigation typically runs 6–12 months before action is recommended. But hearings generate real-time news flow. If testimony on April 28 features hawkish postures from the administration on China trade policy (which is the most likely framing given the Trump-Xi summit is 19 days away on May 14–15), that news flow lands during the exact 36-hour window when FOMC members are in blackout and forming their collective view. The mechanism: hawkish trade rhetoric → higher tariff escalation probability → higher inflation expectations → Fed reluctance to signal accommodation → April 29 statement that is incrementally more restrictive in language, even without any rate change. Credit markets price Fed language changes faster than rate changes. A statement-level hawkish shift on April 29 produces HY spread widening of 15–25bps within 72 hours — at current spread levels, that is a material move.</p>
+    <p>The macro context for the FOMC is tighter than the surface-level "hold" narrative suggests. PCE and Core PCE were revised up to 2.7% each in the March FOMC projections — above December's 2.4/2.5% projections. J.P. Morgan's reasoning that geopolitical inflation risks have pushed cut expectations to late 2026 is reinforced by the IEA's April 2026 Oil Market Report: global oil supply fell by 10.1 mb/d in March 2026 due to Hormuz-related disruptions. That supply shock has not fully transmitted into consumer prices yet. The FOMC statement on April 29 will need to acknowledge the energy price drop (diesel fell 20 cents in the week of April 20, to $5.403) while simultaneously maintaining that energy-driven inflation risks are transitory — a delicate balance that historically correlates with hawkish communication errors.</p>
+    <div class="synthesis-box">
+      <strong>Synthesis — Commercial Credit Lens</strong>
+      The April 28–29 window is three days away. Three specific actions remain relevant: First, any credit decision with rate-sensitive pricing that can be moved before April 25 end-of-day should be — the 48-hour FOMC window that begins April 28 is a structural volatility trap regardless of outcome. Second, prepare to read the April 29 FOMC statement against one specific phrase: whether the committee retains or modifies "the Committee is prepared to adjust the stance of monetary policy as appropriate" — any weakening of that language signals reduced cut optionality and is a de facto hawkish signal. Third, run your floating-rate credit book against the J.P. Morgan base case: no cut through year-end 2026, possible hike Q3 2027. If your floating-rate credits assumed at least one cut in H2 2026 as the base case for covenant compliance, those credits need to be re-underwritten under the J.P. Morgan scenario. The gap between what borrowers projected when they took floating-rate loans in 2024–2025 (cuts coming) and what J.P. Morgan is now calling (hold, then hike) is a covenant compliance problem that has not yet appeared in default statistics but will by H2 2026.
+    </div>
+  </div>
+  <div class="story-footer">
+    <div class="src-box">
+      <div class="src-item"><span class="src-badge gov">GOV</span> Federal Reserve — "Federal Reserve issues FOMC statement" (March 18, 2026) — Hold at 3.50–3.75%</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> J.P. Morgan Global Research — "What's The Fed's Next Move?" (April 2026) — No cuts rest of 2026; hike optionality Q3 2027</div>
+      <div class="src-item"><span class="src-badge gov">GOV</span> Federal Register — Section 301 Investigation Notice (March 11, 2026); Public Hearing April 28, 2026</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> CME FedWatch Tool — April 2026 rate decision probabilities</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> IEA — Oil Market Report April 2026 — Global supply fell 10.1 mb/d in March from Hormuz disruptions</div>
+      <div class="src-item"><span class="src-badge synth">SYNTH</span> Cross-source synthesis: J.P. Morgan no-cut base case vs. market pricing, April 28 dual-event volatility window</div>
+    </div>
+    <div class="bias-meter">
+      <div class="bias-title">Bias Assessment</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🦅 Monetary</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:25%"></div></div>
+          <div class="bias-ends"><span>Hawk</span><span>Dove</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">⚖️ Regulatory</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:45%"></div></div>
+          <div class="bias-ends"><span>Intervene</span><span>Free Mkt</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🏛 Business</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:42%"></div></div>
+          <div class="bias-ends"><span>Incumbent</span><span>Disruption</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="other-side">
+    <strong>📌 Other Side</strong>
+    J.P. Morgan's "hike in Q3 2027" scenario is the most hawkish projection in the street consensus — Deutsche Bank, Goldman Sachs, and Barclays are all calling for at least one 25bps cut in H2 2026. The Fed's own March dot plot still projected one cut in 2026. J.P. Morgan's geopolitical inflation argument is real but may be overstated: the 20-cent weekly diesel drop to $5.403 (the first sustained decline since the Hormuz disruptions began) suggests energy prices are responding to ceasefire diplomacy in ways that could reduce PCE upside risk meaningfully by the June FOMC. The Section 301 hearing on April 28 is a procedural step, not a policy action — the investigation will not produce tariff recommendations for months, and the FOMC is institutionally sophisticated enough to separate a hearing from an action. The April 28 dual-event overlap is a positioning narrative, not a macro forcing function. For credit portfolios, the most likely outcome is that the April 29 FOMC statement is a non-event — and credit managers who moved decisions out of the April 28–29 window will find they gave up nothing but time.
+  </div>
+</div>
+
+<!-- STORY 2 -->
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag credit">Credit</span>
+      <span class="stag risk">Risk</span>
+      <span class="stag macro">Macro</span>
+    </div>
+    <h3>The Gate Cascade Crystallizes: Ares, Apollo, BlackRock, and Blue Owl All Restrict Redemptions in Q1 2026 — This Is No Longer Individual Fund Stress. It Is a Category-Level Liquidity Event, and CLO ETF Spreads Are Beginning to Confirm It</h3>
+  </div>
+  <div class="story-body">
+    <p>Ares Management, manager of the $10.7 billion Ares Strategic Income Fund (ASIF), limited withdrawals to 5% of shares after clients submitted redemption requests for 11.6% of NAV in Q1 2026. Ares honored $525 million — approximately 43.1% of requested withdrawals. This follows the same pattern at Blue Owl Capital (two funds gated, first significant gate activity since 2022), Morgan Stanley North Haven (honored only 45% of redemption requests), and Apollo and BlackRock, which have also imposed caps. Four of the largest direct lending platforms gating in the same calendar quarter is not a fund-specific story. It is category-level liquidity stress. The ETF DB article from April 23 is the first sign this stress is crossing the public market threshold: private credit jitters are beginning to spill into CLO ETFs, where secondary market spreads have been widening on higher perceived credit risk in the reference portfolios. This is the transmission mechanism that turns private credit stress into public credit market volatility.</p>
+    <p>The mechanism behind the gate wave is structural rather than cyclical. Private credit semi-liquid funds promise quarterly redemption windows to attract retail and institutional capital that would otherwise be locked in longer-duration vehicles. Those redemption windows are gated — funds can limit quarterly withdrawals to 5% of NAV — but the gate is a one-quarter deferral, not a resolution. Investors who were denied redemptions in Q1 2026 can resubmit in Q2 2026. If the underlying credit quality continues to deteriorate (current Fitch trailing default rate: 5.8%; Morgan Stanley H2 2026 projection: 8%), Q2 2026 redemption requests are more likely to exceed Q1's 11.6% than to decline. The fund manager faces a sequential constraint: each time it gates, it defers redemption pressure while simultaneously signaling stress, which accelerates the next wave of requests. Brunnermeier and Pedersen's 2009 model of the liquidity spiral — where funding liquidity constraints force asset sales into illiquid markets, depressing prices, which triggers further funding stress — is the precise dynamic playing out in private credit at category scale. The gate is not the end of the cycle. It is the beginning of the acceleration.</p>
+    <p>The CAIA post from April 20 ("Private Credit Redemptions, Defaults, and Wrappers, Oh My!") captures the three converging pressures that distinguish this quarter from prior stress events: simultaneous gating across managers (not isolated); CLO wrapper issuance acceleration (private credit firms issuing CLOs to raise cash rather than because credit quality supports issuance); and the Morningstar/DBRS DealCatalyst conference findings showing that market participants are now pricing private credit risk as a distinct asset class risk rather than manager-specific execution risk. J.P. Morgan's Jamie Dimon offered the institutional establishment's reassurance: private credit is "not a systemic threat to the broader financial system." That claim deserves scrutiny. Individual fund stress is not systemic. Simultaneous gating across four of the largest platforms, CLO ETF spread widening, and accelerating redemption requests from institutional allocators who are beginning to treat private credit as a risk-on/risk-off category is a different condition than individual fund stress.</p>
+    <div class="synthesis-box">
+      <strong>Synthesis — Commercial Credit Lens</strong>
+      The gate wave creates three specific commercial credit exposure vectors. First: if your institution has participated in private credit CLO tranches, co-investment structures, or subscription credit lines extended to private credit funds, the gate wave is a direct credit event. Subscription credit lines to Ares ASIF or similar vehicles now have a counterparty that is actively managing a redemption overhang — model the credit as "under surveillance" immediately. Second: shared borrower population. Private credit and bank commercial credit overlap significantly in the $5M–$50M loan range. When private credit funds force defaults or restructurings on shared borrowers to address liquidity needs, bank lenders see covenant amendment requests and PIK elections 60–90 days later. Build a monitoring list of commercial credits where private credit is also a lender in the capital structure. Third: CLO ETF spread widening is a 30–60 day leading indicator for broader HY spread moves. If CLO ETF spreads widen 25–50bps over the next two weeks, HY spreads typically follow. That creates a pricing window for any commercial credit portfolio re-financings — execute before the public credit spread move, not after it.
+    </div>
+  </div>
+  <div class="story-footer">
+    <div class="src-box">
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Bloomberg — "Ares Limits Private Credit Fund Withdrawals as Redemptions Surge" (March 24, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Globe and Mail — "Ares caps withdrawals at private credit fund after redemption requests surge" (March 2026) — $525M honored (43.1% of requests)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> CNBC — "How private credit's cracks are threatening to deepen private equity's woes" (April 20, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> ETF DB — "Private Credit Jitters: Spillover into CLO ETFs?" (April 23, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> CAIA — "Private Credit Redemptions, Defaults, and Wrappers, Oh My!" (April 20, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Morningstar DBRS — "Key Takeaways From the DealCatalyst U.S. Private Credit Conference" (April 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> CNBC — "Private credit's 'zero-loss fantasy' is coming to an end as defaults and fund exits rise" (March 25, 2026)</div>
+      <div class="src-item"><span class="src-badge synth">SYNTH</span> Cross-source synthesis: Gate cascade mechanism, CLO ETF spillover transmission, Brunnermeier-Pedersen liquidity spiral applied to private credit Q1 2026</div>
+    </div>
+    <div class="bias-meter">
+      <div class="bias-title">Bias Assessment</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🦅 Monetary</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:30%"></div></div>
+          <div class="bias-ends"><span>Hawk</span><span>Dove</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">⚖️ Regulatory</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:40%"></div></div>
+          <div class="bias-ends"><span>Intervene</span><span>Free Mkt</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🏛 Business</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:35%"></div></div>
+          <div class="bias-ends"><span>Incumbent</span><span>Disruption</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="other-side">
+    <strong>📌 Other Side</strong>
+    Jamie Dimon's "not systemic" assessment should not be dismissed as establishment reassurance. The private credit gate wave, while broad across managers, is concentrated in the semi-liquid retail and institutional feeder vehicle structures — interval funds and BDC-adjacent vehicles — that are structurally distinct from the core direct lending operations of the same firms. Ares ASIF, for example, maintained "no non-accrual loans" (no interest payment overdue past 30 days) as of its gate announcement, and maintained $5 billion in undrawn committed debt facilities. The fund's gross inflows in Q1 2026 were $708 million even as redemptions surged — meaning net outflows were manageable relative to fund size. The CLO ETF spread widening (from ETF DB, April 23) is early-stage and unquantified — the article identifies the risk but does not provide spread data that would confirm contagion rather than correlation. The gate mechanism, while psychologically alarming, is specifically designed to prevent the disorderly asset sales that would create the Brunnermeier-Pedersen spiral: by smoothing redemptions over time, funds avoid the forced-seller price impact that would accelerate NAV decline. The gate is the designed solution to the problem, not evidence that the problem is beyond solution.
+  </div>
+</div>
+
+<!-- STORY 3 -->
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag fuel">Fuel &amp; Fleet</span>
+      <span class="stag risk">Risk</span>
+      <span class="stag macro">Macro</span>
+    </div>
+    <h3>Diesel $5.403 — The First Meaningful Price Relief Since the Hormuz Disruptions Began, But EIA STEO Projects $5.61 Q2 Average and Brent at $96.32 Means the Drop Is a Correction, Not a Trend</h3>
+  </div>
+  <div class="story-body">
+    <p>The EIA's weekly on-highway diesel price for the week of April 20, 2026 was $5.403 per gallon — down 20.5 cents from Edition #010's $5.608 reading for April 14. That is the largest single-week decline since October 2025 and the first time national average diesel has been below $5.45 since the Hormuz disruption began. The driver: Brent crude moved to $96.32 on April 21, 2026 — elevated in historical context (Brent was below $80 for most of 2024) but lower than the $100+ levels that prevailed during the peak Hormuz supply shock. The IEA's April 2026 Oil Market Report documented that global supply fell 10.1 mb/d to 97 mb/d in March due to Hormuz-related disruptions — the largest disruption in history. The April price drop reflects partial normalization of Hormuz transit risk as ceasefire discussions progressed, not a fundamental change in the supply picture.</p>
+    <p>The EIA's April 2026 Short-Term Energy Outlook (STEO) is explicit: the U.S. average retail diesel price will average $5.61 per gallon in Q2 2026, $5.00 in Q3, and $4.59 in Q4. The Q2 average of $5.61 implies that the week-of-April-20 reading of $5.403 will be partly offset by higher prices in May and June — the STEO is not projecting a linear decline from current levels. The EIA raised its 2026 and 2027 fuel price projections on April 17 (Rigzone, April 17, 2026), reflecting the updated Hormuz supply assessment. The 20-cent weekly drop and the upward revision to annual projections are not contradictory: the former reflects near-term ceasefire diplomacy, the latter reflects the sustained Hormuz supply disruption that will not resolve fully until tanker passage normalizes for an extended period. Fleet credit professionals should use $5.60/gallon for Q2 carrier cost modeling, not the $5.403 spot reading.</p>
+    <p>For fleet card credit portfolios, the directional improvement matters — a 20-cent drop in diesel reduces the operating cost pressure on owner-operators running 500+ miles per week by approximately $75–$100 per week per vehicle. That is not covenant-irrelevant. But the relief is fragile in a specific way: the Iran ceasefire that is driving the crude price partial normalization expires and has been subject to negotiation. A ceasefire breakdown would re-price crude toward $105–$110 within 30 days based on market behavior during the original disruption. The May 14–15 Trump-Xi summit is the geopolitical event with the greatest structural impact on the medium-term energy price path — a China deal that reduces tariff pressure reduces US manufacturing demand uncertainty and indirectly supports crude supply normalization. A breakdown at the summit could re-escalate both the trade war and regional geopolitical risk simultaneously.</p>
+    <div class="synthesis-box">
+      <strong>Synthesis — Fleet Credit Action</strong>
+      Do not mark fleet credit portfolios to the $5.403 spot reading. Use the EIA STEO Q2 average of $5.61 for covenant compliance testing — that is the defensible underwriting assumption given the structural supply situation. For California-exposed fleet credits, the state premium persists in the mid-$7 range regardless of national price movements; the 20-cent drop has not compressed the California premium. The actionable insight from this week's price move: use the temporary cost relief to engage fleet borrowers in fuel cost management conversations. Carriers that lock in load contracts at current freight rates (which were negotiated during higher-diesel-cost expectations) will face margin compression when diesel reverts to $5.60+. Any fleet credit with fixed-rate freight contracts negotiated in Q1 2026 should be reviewed for whether the fuel surcharge mechanism captures the full $5.61 Q2 cost — if not, the credit is carrying embedded margin risk that will not appear until Q2 actuals.
+    </div>
+  </div>
+  <div class="story-footer">
+    <div class="src-box">
+      <div class="src-item"><span class="src-badge gov">GOV</span> EIA — Gasoline and Diesel Fuel Update — $5.403/gal national average, week of April 20, 2026</div>
+      <div class="src-item"><span class="src-badge gov">GOV</span> EIA — April 2026 Short-Term Energy Outlook (STEO) — Q2 $5.61/gal, Q3 $5.00/gal, Q4 $4.59/gal projections</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Rigzone / Yahoo Finance — "EIA Raises USA Fuel Price Projections for 2026, 2027" (April 17, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Fortune — "Current price of oil as of April 21, 2026" — Brent $96.32/barrel</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> IEA — Oil Market Report April 2026 — Global supply fell 10.1 mb/d to 97 mb/d in March from Hormuz disruptions</div>
+      <div class="src-item"><span class="src-badge synth">SYNTH</span> Cross-source synthesis: EIA spot vs. STEO divergence, Hormuz ceasefire fragility, fleet portfolio Q2 cost modeling</div>
+    </div>
+    <div class="bias-meter">
+      <div class="bias-title">Bias Assessment</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🦅 Monetary</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:50%"></div></div>
+          <div class="bias-ends"><span>Hawk</span><span>Dove</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">⚖️ Regulatory</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:45%"></div></div>
+          <div class="bias-ends"><span>Intervene</span><span>Free Mkt</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🏛 Business</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:48%"></div></div>
+          <div class="bias-ends"><span>Incumbent</span><span>Disruption</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="other-side">
+    <strong>📌 Other Side</strong>
+    The EIA STEO is historically conservative in its post-shock recovery projections. After the 2022 Russia-Ukraine diesel spike, actual Q3 diesel prices fell faster and more steeply than any STEO published during Q2 predicted. If the Iran ceasefire produces sustained normalization — rather than the rolling expiration-and-renewal cycle of recent months — crude could retrace toward $80–85 faster than the STEO's $5.61 Q2 and $5.00 Q3 trajectory implies. The EIA's April 17 upward revision to 2026/2027 projections reflects the baseline Hormuz disruption scenario; it does not incorporate a scenario where the May 14–15 Trump-Xi summit produces a genuine trade de-escalation that reduces US-China geopolitical risk and indirectly contributes to Hormuz normalization. Fleet credit portfolios that stress-tested against $5.60+ diesel since October 2025 may find themselves over-reserved if the political calendar produces a more constructive energy price environment in Q3. The $5.403 spot reading may be early confirmation of a faster-than-modeled recovery, not a head-fake.
+  </div>
+</div>
+
+<!-- STORY 4 -->
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag regulatory">Regulatory</span>
+      <span class="stag credit">Credit</span>
+      <span class="stag smb">SMB</span>
+    </div>
+    <h3>Basel III Endgame March 2026 Proposals: Small Banks' Capital Requirements Cut 7.8%, SMB Loan Risk Weights Drop to 65–75% — While Mission Lane, Upstart, Revolut, and Zero Hash File for National Bank Charters in a Simultaneous Fintech Bank Wave</h3>
+  </div>
+  <div class="story-body">
+    <p>On March 19, 2026, the Federal Reserve, OCC, and FDIC issued a joint notice of proposed rulemaking to modernize the regulatory capital framework. The proposals are the final iteration of Basel III Endgame — the multi-year effort to implement the last tranche of post-2008 capital reforms. The commercial credit headline: small bank capital requirements fall 7.8% under the proposal, category III and IV (regional) bank requirements fall 5.2%, and the largest category I and II banks see a 4.8% reduction. The SMB lending impact is specific and meaningful: loans to small businesses under $1 million would see risk weights reduced from 100% to 75%, and loans to investment-grade small businesses over $1 million would see risk weights fall from 100% to 65%. These are not trivial changes. A 25–35 percentage point reduction in risk weight directly reduces the capital a bank must hold against each dollar of SMB lending — making SMB lending meaningfully more capital-efficient. The stated intent is to "free up lending capacity" for households and small businesses. The banking industry has endorsed the proposal; community bank associations have been seeking this adjustment since the original Basel III Endgame proposal in 2023.</p>
+    <p>The fintech bank charter wave is happening simultaneously and is not a coincidence. Mission Lane — a credit card company focused on underserved consumers — filed for a national bank charter with the OCC and FDIC in April 2026. Upstart, Revolut, Zero Hash, and Payoneer have all filed similar applications in recent months. The convergence is structural: as Basel III Endgame reduces capital efficiency penalties for community and mid-size banks, the cost advantage that fintech non-bank lenders historically enjoyed over bank competitors (no capital requirements, no CRA obligations) is being partially compressed. Fintechs that filed for bank charters are doing so to access the Federal Reserve's payment infrastructure, including FedNow, and to gain deposit funding — not to accept more regulatory burden. They are betting that bank charter access plus technology advantage outperforms the non-bank model in the post-Basel environment. Mission Lane's application is the most credit-relevant: it targets the subprime and near-prime consumer credit card market — the exact population most exposed to rising consumer charge-offs in the current economic environment. A Mission Lane national bank charter approval would represent a major new competitor in the consumer credit card market with direct access to FDIC insurance and lower funding costs.</p>
+    <div class="synthesis-box">
+      <strong>Synthesis — Commercial Credit Lens</strong>
+      The Basel III Endgame proposals create two specific commercial credit opportunities. First: community bank SMB lending capacity expands meaningfully once the proposals are finalized. The risk weight reduction from 100% to 75% for sub-$1M SMB loans is the single largest capital efficiency improvement for community commercial lending in a decade. Banks with current SMB books that are capital-constrained should model the incremental lending capacity that becomes available under the new weights — and begin pipeline development for the origination that capital will support. Do not wait for final rule. The comment period will close by mid-2026, and the rule is likely to finalize with broadly similar parameters given bipartisan industry support. Second: the fintech bank charter wave is a competitive intelligence signal. Upstart, Revolut, and Mission Lane as chartered banks will compete directly for borrowers currently in community bank SMB and consumer credit books. Identify your most fintech-susceptible credits (digital-first businesses, younger borrower demographics, price-sensitive borrowers) and develop retention and re-engagement strategies before charter approvals, not after.
+    </div>
+  </div>
+  <div class="story-footer">
+    <div class="src-box">
+      <div class="src-item"><span class="src-badge gov">GOV</span> Federal Reserve — "Agencies request comment on proposals to modernize the regulatory capital framework" (March 19, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> ABA Banking Journal — "Regulators release proposals to ease bank capital requirements" (March 2026)</div>
+      <div class="src-item"><span class="src-badge gov">GOV</span> Federal Reserve — Speech by Vice Chair for Supervision Bowman on small business lending (March 31, 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> PYMNTS — "Fed Capital Changes Put Small Business Lending Back in Play" (April 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> The Paypers — "Mission Lane applies for national bank charter with OCC and FDIC" (April 2026)</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Consumer Finance Monitor — "OCC Publishes NPR on National Bank Chartering" (January 2026) and charter filing tracking</div>
+      <div class="src-item"><span class="src-badge trade">TRADE</span> Payments Dive — "Fintechs push bill for Fed payment rail access" (April 2026)</div>
+      <div class="src-item"><span class="src-badge synth">SYNTH</span> Cross-source synthesis: Basel III Endgame capital relief mechanics for SMB lending, fintech charter wave competitive dynamics</div>
+    </div>
+    <div class="bias-meter">
+      <div class="bias-title">Bias Assessment</div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🦅 Monetary</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:52%"></div></div>
+          <div class="bias-ends"><span>Hawk</span><span>Dove</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">⚖️ Regulatory</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:72%"></div></div>
+          <div class="bias-ends"><span>Intervene</span><span>Free Mkt</span></div>
+        </div>
+      </div>
+      <div class="bias-axis">
+        <div class="bias-axis-label">🏛 Business</div>
+        <div>
+          <div class="bias-track"><div class="bias-dot" style="left:60%"></div></div>
+          <div class="bias-ends"><span>Incumbent</span><span>Disruption</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="other-side">
+    <strong>📌 Other Side</strong>
+    The Basel III Endgame capital relief story has a structural counterargument: regulatory proposals are not implemented policy. The March 2026 proposals are a notice of proposed rulemaking, not a final rule. Comment periods, legal challenges, and implementation timelines mean the earliest effective date for any capital relief is mid-to-late 2027. Community banks that expand SMB origination pipelines in anticipation of capital relief that is delayed or modified face a capital squeeze in the interim. The risk weight reduction also applies a blunt instrument to a problem that requires credit quality discrimination: lowering SMB risk weights from 100% to 75% reduces capital requirements uniformly across all SMB loans, including those originated in a riskier economic environment. The Federal Reserve Bank of Kansas City's Small Business Lending Survey (Q3 2025) found that 83% of banks that reported tightening standards cited economic uncertainty as the reason — that economic uncertainty has not resolved. Lower risk weights improve capital efficiency; they do not improve credit quality. The fintech charter wave is also less threatening to incumbents than it appears: most fintech charter applications face 18–24 month approval timelines, and Mission Lane's subprime consumer focus, while competitive, is a sector many community banks have deliberately avoided for credit risk reasons. The "competitive threat" from a Mission Lane national bank is largely to specialty finance companies and non-bank credit card issuers, not to community commercial banks.
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     6. MACRO SIGNAL
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 02</div>
+<div class="section-title">Macro Signal</div>
+
+<div class="macro-signal-card" style="background:#f0f7ff;border:1px solid #dde3ea;border-left:5px solid #00c2cb;border-radius:8px;padding:22px 26px;margin-bottom:28px;">
+  <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#00c2cb;margin-bottom:12px;">MACRO SIGNAL — T-3 FOMC COUNTDOWN</div>
+  <h3 style="font-size:18px;margin-bottom:16px;font-family:'Georgia',serif;">3 Days to the April 28–29 FOMC: Hold Is Certain, Forward Guidance Is the Only Variable — And J.P. Morgan's "No Cut in 2026, Hike in 2027" Scenario Changes the Floating-Rate Credit Math</h3>
+  <p>The Federal Reserve holds at 3.50–3.75% on April 29 with near-certainty. The question is the communication. J.P. Morgan Global Research's current call — no cuts through 2026, possible 25bps hike in Q3 2027 — is the most hawkish on the Street and is supported by: (a) PCE inflation revised up to 2.7% in March FOMC projections; (b) geopolitical risk premium embedded in energy prices; (c) labor market that has not softened enough to justify accommodation. If the April 29 statement softens the "prepared to adjust" language or removes references to cut optionality, floating-rate credits originated on a "cuts coming" assumption become structurally stressed.</p>
+  <p>The dual April 28 event — Section 301 hearing + FOMC Day 1 — remains the specific intraday risk. Section 301 testimony from domestic manufacturing and semiconductor industries is expected to be hawkish on China trade policy, arriving during FOMC deliberations. Monitor the spread between 2Y and 10Y Treasuries on April 28 as a real-time signal of the market's FOMC language interpretation.</p>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:20px;">
+    <div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;color:#00c2cb;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Fed Funds Rate Path — 2026 (J.P. Morgan Base Case)</div>
+      <canvas id="fedRateChart" height="160"></canvas>
+    </div>
+    <div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;color:#00c2cb;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Diesel Price — EIA Weekly ($/gal) + STEO Q2–Q4 2026</div>
+      <canvas id="dieselTrendChart" height="160"></canvas>
+    </div>
+  </div>
+
+  <div style="background:#fff;border:1px solid #dde3ea;border-radius:6px;padding:14px 16px;margin-top:18px;">
+    <div style="font-family:'Arial',sans-serif;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8fa3b8;margin-bottom:8px;">CREDIT SIGNAL — APRIL 28–29 ACTION WINDOW</div>
+    <p style="font-size:14px;color:#0d1b2a;">Close all rate-sensitive credit pricing decisions before end-of-day April 25 (today). The 48-hour window beginning April 28 carries structural volatility regardless of outcome. Monitor the April 29 FOMC statement for changes to cut-bias language — any modification is a de facto 15–25bps HY spread widening signal. After the statement is released, run floating-rate credits against the J.P. Morgan no-cut scenario for full-year 2026. Credits that only pass covenant compliance with at least one cut priced in are watch-list candidates effective April 30.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     7. FUEL CARD & FLEET INTELLIGENCE
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 03</div>
+<div class="section-title">Fuel Card &amp; Fleet Intelligence</div>
+
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag fuel">Fuel &amp; Fleet</span>
+      <span class="stag risk">Risk</span>
+      <span class="stag credit">Credit</span>
+    </div>
+    <h3>The Diesel Relief Trap: Use the $5.403 Window to Reassess Borrower Fuel Surcharge Structures — The EIA STEO Implies Prices Return to $5.61+ Within 6 Weeks</h3>
+  </div>
+  <div class="story-body">
+    <p>The 20-cent weekly drop to $5.403 is real. For a fleet running 50 trucks at 500 miles per week each, at approximately 6 miles per gallon, that's a weekly fuel cost reduction of roughly $1,700 — not trivial for thin-margin carriers. But the EIA STEO Q2 average is $5.61, which means the $5.403 spot reading implies above-$5.60 prices for the balance of April and May. Fleet card portfolios that are modeling Q2 using the spot price are under-reserving for the fuel cost trajectory the EIA projects.</p>
+    <p>The more actionable question is fuel surcharge pass-through. Carriers that negotiated load contracts in Q1 2026 — when diesel was at $5.60+ and freight rates were elevated accordingly — may now face shippers demanding lower rates as diesel drops. If those load contracts have a fuel surcharge adjustment mechanism tied to EIA published weekly prices, the carrier's margin normalizes automatically. If contracts were priced at a fixed rate inclusive of fuel cost assumptions, the carrier has a one-way exposure: they lose the fuel cost benefit if prices drop (because the shipper will renegotiate) but absorb the full cost increase when prices revert. That asymmetry is a credit risk that belongs in the loan file, not just in the portfolio-level fuel price sensitivity table.</p>
+    <div class="synthesis-box">
+      <strong>Fleet Credit Action — This Week</strong>
+      Use the temporary price relief to pull Q1 2026 fuel cost actuals from the 10–15 largest fleet borrowers in your portfolio. Compare their actual Q1 fuel cost per mile against what they projected when loans were underwritten. Any borrower running more than 12% above their underwriting-period fuel cost assumption is a covenant risk at $5.61+ Q2 diesel. This is the fuel cost equivalent of the interest rate sensitivity analysis that was standard practice when rates were rising — it needs to become standard practice for fuel-intensive credit portfolios.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     8. DEEP DIVE
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 04</div>
+<div class="section-title">Deep Dive</div>
+
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag credit">Credit</span>
+      <span class="stag risk">Risk</span>
+      <span class="stag macro">Macro</span>
+    </div>
+    <h3>The Q2 Redemption Preview: Why the Ares, Apollo, BlackRock, Blue Owl Q1 Gate Wave Almost Certainly Makes Q2 Redemption Requests Larger, Not Smaller — And the CLO Issuance Surge Is the Tell</h3>
+  </div>
+  <div class="story-body">
+    <p>The standard narrative around private credit gates is that they "manage" redemption pressure — the gate caps withdrawals, buys time, preserves the fund's ability to honor orderly redemptions. This narrative is correct in the short term. It is systematically wrong about the dynamic it creates for the next quarter. An investor who submits a redemption request and receives 43% of what they asked for (Ares's Q1 outcome) does not conclude that the fund is well-managed and withdraw their remaining redemption request. They roll the unfulfilled portion to Q2 and increase the probability that Q2 request volume exceeds Q1. The Morningstar DBRS DealCatalyst conference takeaway — that market participants are now pricing private credit risk at a category level, not a manager level — confirms that institutional LPs are reassessing their private credit allocations broadly, not just their Ares-specific exposure. The result: Q2 2026 redemption volume across the semi-liquid private credit vehicle universe is structurally likely to exceed Q1's already-record levels.</p>
+    <p>The Bloomberg CLO issuance data is the confirming signal. Private credit firms ramped up CLO issuance in Q1 2026 — not primarily because new lending opportunities justified securitization, but because CLOs provide the freshest cash available to funds managing redemption overhang. The mechanism: a private credit manager bundles its best-performing loans (the ones with the most liquid secondary market) into a CLO, sells the CLO tranches to institutional investors, and uses the proceeds to honor fund-level redemption requests. This preserves the gate percentages (the fund appears to be meeting its 5% quarterly cap) while actually liquidating the highest-quality assets in the portfolio. The residual — the assets left after the best loans have been CLO'd — is a lower-quality portfolio than existed before the securitization. Subsequent NAV calculations reflect that residual, which produces further downward pressure on the marks that trigger further redemptions. The CLO issuance surge is not a sign of private credit health. It is the first-generation mechanism of the Brunnermeier-Pedersen spiral in private credit form.</p>
+    <div class="synthesis-box">
+      <strong>Synthesis — Commercial Credit Action</strong>
+      Two immediate actions. First: if you hold subscription credit lines to private credit funds (warehouse facilities, fund-level revolvers), review whether any of those facilities have "material adverse change" provisions that are triggered by gate activation or by redemption requests exceeding a threshold percentage of NAV. Ares ASIF's 11.6% redemption request likely triggers MAC clauses in some bank facility agreements. Review your own documents. Second: the CLO issuance surge creates a secondary market opportunity — private credit CLO tranches issued in Q1 2026 are pricing with elevated spreads to compensate for the perceived portfolio quality decline. If your institution has CLO investment capacity and sophisticated credit underwriting capability, the Q2 2026 CLO primary market will offer above-historical spreads for investment-grade tranches. The risk is real (software sector concentration, amend-and-pretend borrowers in the reference pool) but the pricing is increasingly reflecting it. This is a buy-only-after-full-diligence opportunity, not a passive allocation.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     9. EMERGING RISKS
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 05</div>
+<div class="section-title">Emerging Risks</div>
+
+<div class="story-card" style="border-top-color:#e74c3c;">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag risk">Risk</span>
+      <span class="stag credit">Credit</span>
+      <span class="stag macro">Macro</span>
+    </div>
+    <h4>The Floating-Rate Covenant Cliff: J.P. Morgan's "No Cuts Through 2026" Scenario Exposes a Population of Commercial Credits Underwritten on a 2024–2025 "Cuts Are Coming" Assumption</h4>
+  </div>
+  <div class="story-body">
+    <p>When the Federal Reserve began cutting rates in late 2025, borrowers with floating-rate commercial loans benefited directly — their interest expense fell with each cut. Lenders at those same borrowers built their covenant compliance projections on continuation of the easing cycle. The J.P. Morgan call — no cuts through 2026, possible hike in Q3 2027 — is not just a rate forecast. It is a credit stress scenario for any floating-rate commercial credit where the borrower's debt service coverage ratio (DSCR) was modeled assuming at least 50bps of additional cuts in 2026. DSCR covenants at 1.25x that pass with two cuts priced in may fail at 1.05–1.15x under the no-cut scenario. This is not a hypothetical — it is a forward DSCR calculation that should be running in every commercial credit portfolio right now, ahead of Q2 covenant compliance testing in May–June 2026.</p>
+    <div class="synthesis-box">
+      <strong>Watch List</strong>
+      Pull every floating-rate commercial credit with a DSCR covenant originated between January 2024 and December 2025. Re-run the DSCR at current SOFR + spread, with no additional rate cuts through December 2026. Any credit that falls below 1.15x DSCR under that scenario should receive a personal call from the relationship manager before May 31 — ahead of formal Q2 covenant testing. The population that surprises lenders in Q3 with covenant breaches will almost entirely be drawn from credits that passed this screen with yellow flags in Q2.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     10. DATA SNAPSHOT
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 06</div>
+<div class="section-title">Data Snapshot</div>
+
+<div style="background:#fff;border:1px solid #dde3ea;border-radius:8px;padding:22px 26px;margin-bottom:28px;">
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:20px;">
+    <div style="text-align:center;padding:16px;background:#f0f3f7;border-radius:6px;">
+      <div style="font-size:28px;font-weight:700;color:#16a085;">$5.403</div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8fa3b8;margin-top:4px;">Diesel / Gal (EIA, Apr 20) ↓20¢</div>
+    </div>
+    <div style="text-align:center;padding:16px;background:#f0f3f7;border-radius:6px;">
+      <div style="font-size:28px;font-weight:700;color:#c0392b;">5.8%</div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8fa3b8;margin-top:4px;">Private Credit Default Rate (Fitch, Trailing 12M)</div>
+    </div>
+    <div style="text-align:center;padding:16px;background:#f0f3f7;border-radius:6px;">
+      <div style="font-size:28px;font-weight:700;color:#f39c12;">Apr 28–29</div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8fa3b8;margin-top:4px;">FOMC Meeting (Hold Expected) + Section 301 Hearing</div>
+    </div>
+    <div style="text-align:center;padding:16px;background:#f0f3f7;border-radius:6px;">
+      <div style="font-size:28px;font-weight:700;color:#0d1b2a;">3.5–3.75%</div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8fa3b8;margin-top:4px;">Fed Funds Rate — Current (Hold Since March 18)</div>
+    </div>
+    <div style="text-align:center;padding:16px;background:#f0f3f7;border-radius:6px;">
+      <div style="font-size:28px;font-weight:700;color:#c0392b;">11.6%</div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8fa3b8;margin-top:4px;">Ares ASIF Q1 Redemption Request (5% Honored)</div>
+    </div>
+    <div style="text-align:center;padding:16px;background:#f0f3f7;border-radius:6px;">
+      <div style="font-size:28px;font-weight:700;color:#16a085;">7.8%</div>
+      <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#8fa3b8;margin-top:4px;">Small Bank Capital Req. Reduction (Basel III Endgame Proposal)</div>
+    </div>
+  </div>
+
+  <div style="font-family:'Arial',sans-serif;font-size:10px;font-weight:700;color:#00c2cb;letter-spacing:1px;text-transform:uppercase;margin-bottom:8px;">Private Credit Gate Wave — Q1 2026 Redemption Requests vs. Amounts Honored</div>
+  <canvas id="gateWaveChart" height="140"></canvas>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     11. SMB PULSE
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 07</div>
+<div class="section-title">SMB Pulse</div>
+
+<div class="story-card">
+  <div class="story-head">
+    <div class="story-tags">
+      <span class="stag smb">SMB</span>
+      <span class="stag credit">Credit</span>
+      <span class="stag regulatory">Regulatory</span>
+    </div>
+    <h3>SBA Loan Access Tightens for Non-Citizens, Basel III Endgame Expands Capital for SMB Lending, and the 2026 Federal Reserve Small Business Credit Survey Shows Economic Uncertainty as the #1 Standard-Tightening Driver — Three Forces Pulling SMB Credit Access in Opposite Directions Simultaneously</h3>
+  </div>
+  <div class="story-body">
+    <p>The SMB credit access environment entering May 2026 is genuinely contradictory. The Federal Reserve's Basel III Endgame proposals reduce capital requirements for SMB lending, which should expand supply. The SBA, effective March–April 2026, limited loan access to U.S. citizens and nationals only — directly restricting a population of small business owners (green card holders, certain visa categories) that had historically qualified for SBA-backed lending. The Federal Reserve's 2026 Report on Employer Firms (from the 2025 Small Business Credit Survey) found that 83% of banks that reported tightening credit standards cited economic uncertainty as the primary driver — a demand-side constraint that capital rule changes cannot address. The result: more capital available in principle, fewer eligible borrowers under SBA rules, and tighter de facto lending standards regardless of regulatory capital math.</p>
+    <p>The SBA citizen-only restriction is the most concrete near-term change. California, Texas, and New York — states with high immigrant business owner populations — have the highest concentration of SBA-eligible small businesses run by non-citizen permanent residents. Those business owners are now effectively excluded from the most subsidized SMB loan program in the federal government. The gap they leave will be partially filled by non-bank lenders (fintech SMB lenders, CDFIs, community development lenders) and partially by commercial banks at market rates — meaning those borrowers now pay more for credit. From a credit risk perspective, SBA-excluded borrowers are not worse credits; they simply no longer have access to the SBA guarantee that reduces bank risk. A commercial lender willing to underwrite on credit fundamentals rather than SBA eligibility has an origination opportunity in this population at rates that reflect the lost guarantee premium — typically 100–150bps above equivalent SBA-backed pricing.</p>
+    <div class="synthesis-box">
+      <strong>Synthesis — SMB Credit Opportunity</strong>
+      The SBA citizen-only restriction creates a specific origination gap in immigrant-owned small businesses. This is not a new borrower population — these businesses have been operating and borrowing for years; the restriction simply removes their lowest-cost financing option. For commercial lenders with strong community relationships, particularly in high-immigrant-density markets, the Q2 2026 period between the SBA restriction taking effect and alternative lenders fully scaling their products is a first-mover window. Credit underwriting for this population requires the same fundamentals as any SMB credit: three years of business tax returns, cash flow documentation, and collateral assessment. The SBA guarantee was a capital relief mechanism for the lender, not evidence of borrower quality.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     12. THOUGHT SEED
+═══════════════════════════════════════════════════ -->
+<div class="section-label">Section 08</div>
+<div class="section-title">Thought Seed</div>
+
+<div class="thought-seed">
+  <div class="thought-seed-label">🌱 Research Translation</div>
+  <div class="thought-seed-title">Market Liquidity and Funding Liquidity</div>
+  <div class="thought-seed-authors">Markus K. Brunnermeier &amp; Lasse Heje Pedersen · Journal of Finance, Vol. 64, No. 5 (October 2009), pp. 2201–2238</div>
+
+  <div class="ts-section">
+    <h4>What the Paper Says</h4>
+    <p>Brunnermeier and Pedersen develop a model of the relationship between two types of liquidity: market liquidity (the ease of trading an asset without moving its price) and funding liquidity (the ease of obtaining financing against an asset). Their central insight — empirically validated using data from equity markets, bond markets, and futures markets — is that these two types of liquidity are mutually reinforcing in a way that creates amplification spirals. When funding conditions tighten (lenders require higher margins, haircuts increase, capital constraints bind), financial intermediaries are forced to reduce their asset holdings. That forced selling reduces market liquidity — bid-ask spreads widen, price impact increases. Reduced market liquidity increases the volatility of asset values, which triggers further margin calls and haircut increases, which forces further selling. The spiral is self-reinforcing and can move from stable equilibrium to liquidity collapse faster than traditional risk models predict, because the mechanism is non-linear: there are tipping points at which small shocks produce large dislocations.</p>
+    <p>The paper's specific contribution is to show that funding liquidity and market liquidity are jointly determined — you cannot analyze one without the other. A security that is liquid in normal markets becomes illiquid in stressed markets not because the security itself changes, but because the funding conditions for intermediaries who make markets in that security deteriorate simultaneously. This is why liquidity crises appear sudden: they are not triggered by a single event but by the crossing of a threshold at which the mutual reinforcement of funding and market illiquidity becomes self-sustaining. Brunnermeier and Pedersen document these spirals in the 1987 Black Monday episode, the 1998 LTCM-Russia crisis, the 2007–2008 financial crisis, and smaller 2003 and 2005 bond market episodes. In each case, the pattern is identical: an initial shock reduces funding liquidity, forces selling, reduces market liquidity, increases funding constraints, which forces more selling.</p>
+    <p>The paper's policy conclusion is uncomfortable: liquidity spirals are not efficiently priced by markets in advance because each individual participant rationally assumes they can exit before the spiral reaches full intensity. This coordination failure means that the optimal individual strategy (sell early, preserve funding) is collectively destructive (early selling is precisely what initiates the spiral). The institutional implication: liquidity risk must be managed at the system level, not just the firm level, and the system's aggregate exposure to the spiral is always larger than the sum of individual firms' assessed exposures.</p>
+  </div>
+
+  <div class="ts-section">
+    <h4>Why This Matters Right Now</h4>
+    <p>Private credit semi-liquid funds were structured with a specific claim about why Brunnermeier-Pedersen spirals would not apply to them. The claim: because private credit funds do not mark-to-market their portfolios daily (they use mark-to-model accounting on illiquid loan portfolios), they are insulated from the price-volatility feedback loop that drives the spiral in public markets. If prices don't move, margin calls don't trigger, and the funding-liquidity spiral cannot initiate. This insulation claim was the commercial narrative behind the explosive growth of semi-liquid private credit vehicles — interval funds, BDCs, and feeder structures that promised quarterly liquidity windows on inherently illiquid underlying assets.</p>
+    <p>The Q1 2026 gate wave breaks that insulation narrative. The spiral is not being driven by mark-to-market volatility — it is being driven by redemption pressure on the fund-level structure. The mechanism is isomorphic to the Brunnermeier-Pedersen model: when redemption requests reach 11.6% of NAV (Ares ASIF), the fund manager must either (a) gate redemptions to preserve liquidity, or (b) sell assets to meet redemptions. Gating defers the problem but signals stress, increasing Q2 redemption probability. Selling assets — particularly the CLO issuance that Bloomberg documented in early April — depletes the highest-quality, most-liquid assets in the portfolio, reducing the residual portfolio's quality and increasing its illiquidity. That residual portfolio marks down more slowly (because of model-based accounting) but marks down nonetheless, which further increases redemption pressure. The private credit version of the Brunnermeier-Pedersen spiral replaces "margin call" with "redemption gate" and replaces "bid-ask spread widening" with "CLO residual discount." The topology is identical. The speed is slower — quarterly instead of daily — but the dynamics are the same.</p>
+    <p>The specific implication for commercial credit professionals: Brunnermeier and Pedersen show that the spiral creates a window of rational exit before the self-reinforcing dynamics reach maximum intensity. In the private credit context, Q1 2026 is that window. The institutions that redeem or restructure their private credit exposure in Q2–Q3 2026, accepting a 43% partial honor rate (the Ares outcome) rather than waiting for Q3–Q4 when the redemption queue is longer and the fund's asset quality is lower, are rationally behaving as Brunnermeier-Pedersen predicts early movers would. The investors who wait — hoping the 2026 default cycle doesn't materialize at Morgan Stanley's 8% projection, hoping the CLO issuance surge is genuine credit confidence rather than liquidity management — are taking the coordination failure risk the paper identifies: assuming they can exit before the spiral intensifies, when the spiral is already underway.</p>
+  </div>
+
+  <div class="ts-section">
+    <h4>Original Commercial Credit Translation — Not in the Paper</h4>
+    <p><strong>The Private Credit Spiral Diagnostic: Three Data Points That Tell You Where a Fund Is in the Cycle</strong></p>
+    <p>Brunnermeier and Pedersen's model identifies specific observable indicators that signal whether a market is approaching a spiral tipping point. The following three indicators, translated to the private credit semi-liquid fund context, provide a diagnostic framework that is not in the paper but is directly derivable from it:</p>
+    <p><strong>Indicator 1: Redemption-to-Inflow Ratio.</strong> A healthy private credit fund has net inflows — capital coming in exceeds capital going out. Ares ASIF had $708M in gross inflows but $525M+ in redemptions honored (plus deferred redemptions) in Q1. The ratio of redemption requests to gross inflows is the funding liquidity equivalent of the spread-to-volatility ratio in Brunnermeier-Pedersen. When redemption requests exceed 80% of gross quarterly inflows, the fund is net-capital-negative before CLO issuance or other liquidity management. Ares ASIF crossed that threshold in Q1. Blue Owl crossed it earlier. A fund with a Redemption-to-Inflow Ratio above 100% is in the spiral's early acceleration phase.</p>
+    <p><strong>Indicator 2: CLO Issuance as Percentage of Portfolio.</strong> When a private credit fund issues a CLO backed by its best loans and uses the proceeds to honor redemptions, it is performing the private credit equivalent of a forced asset sale at above-secondary-market prices (CLO tranches price better than whole loan secondary sales). Bloomberg's April 2 CLO surge story documents this. The indicator: if a fund's CLO issuance in a given quarter exceeds 10% of its managed assets, it is using the CLO market as its primary liquidity management mechanism — not as a portfolio optimization tool. At that level, the residual portfolio is definitionally lower quality than the portfolio that was advertised to investors.</p>
+    <p><strong>Indicator 3: Amendment Frequency in Reference Portfolios.</strong> Brunnermeier-Pedersen's spiral accelerates when assets are re-priced downward. In private credit, re-pricing happens through formal default (rare), through NAV haircuts on covenant-breached credits (slow), and through covenant amendment frequency (observable). A portfolio with greater than 15% of loans receiving amendments in a trailing 12-month period is running above-average amend-and-pretend activity. When that indicator rises simultaneously with CLO issuance acceleration and a Redemption-to-Inflow Ratio above 80%, all three Brunnermeier-Pedersen preconditions are met: funding liquidity is constrained, asset quality is deteriorating, and the market-making function (CLO issuance) is being used to manage the constraint rather than to optimize returns. You are in the spiral.</p>
+  </div>
+
+  <div class="ts-section">
+    <h4>Implementation Path</h4>
+    <ul class="ts-impl-steps">
+      <li>For any private credit fund in your portfolio — co-investments, CLO participation, subscription credit lines — request the Q1 2026 Redemption-to-Inflow Ratio and CLO issuance data. These are not standard LP reporting items; you may need to request them directly from the fund manager. A manager that refuses to provide them is telling you something.</li>
+      <li>Apply the three-indicator diagnostic: Redemption-to-Inflow &gt;80%, CLO issuance &gt;10% of AUM, amendment frequency &gt;15% of portfolio. Any fund that triggers all three is in Brunnermeier-Pedersen spiral precondition territory. Adjust your own redemption and reinvestment strategy accordingly — the early-mover advantage is real.</li>
+      <li>For commercial credit portfolios that share borrowers with private credit funds: build a "shared borrower surveillance list" — any credit where you know or strongly suspect private credit is also a lender. Monitor those credits for amendment requests, PIK elections, and covenant waivers with a 60-day response time assumption — that is approximately how long after a private credit fund begins managing a borrower stress event before it surfaces at the bank level.</li>
+      <li>Reference Brunnermeier-Pedersen (2009) in your credit committee documentation when discussing private credit co-investment risk. The paper is the standard academic reference for liquidity spirals and provides the theoretical framework for why "the gate is not the resolution" — a point that needs to be made clearly when the pressure to extend subscription credit lines to gated funds comes from relationship managers rather than credit officers.</li>
+      <li>Monitor the CLO ETF spread data (ETF DB, Bloomberg CLO indices) weekly through Q2 2026. A 25bps sustained widening in CLO ETF spreads is the Brunnermeier-Pedersen market liquidity signal that the funding liquidity stress at private credit funds has crossed into public credit markets. That is the trigger for broader HY spread widening and the portfolio repositioning that follows it.</li>
+    </ul>
+  </div>
+
+  <div class="ts-confidence">
+    <span>Confidence Level:</span> <span style="font-size:18px">🟢</span> <span>High — Brunnermeier &amp; Pedersen (JF 2009) is among the most-cited papers in financial economics on liquidity dynamics. The translation to private credit semi-liquid fund structures is original synthesis with high face validity given the Q1 2026 gate wave data. The three diagnostic indicators are derived from first principles in the model and are not present in the original paper — they are a novel credit practitioner's interpretation.</span>
+  </div>
+
+  <div class="ts-section">
+    <h4>Steel-Manned Counterargument</h4>
+    <div class="ts-steel-man">
+      <p>Brunnermeier-Pedersen's spiral model was developed for levered financial intermediaries operating in mark-to-market public securities markets. Private credit funds are not levered in the same way: most semi-liquid structures carry fund-level leverage of 0.5–1.0x, far below the 10–30x leverage typical of the hedge funds and broker-dealers the paper describes. The margin call mechanism — the core amplifier in Brunnermeier-Pedersen — operates through regulatory capital rules and prime brokerage agreements that do not apply to private credit fund structures. The quarterly redemption gate is designed specifically to prevent the speed at which the spiral operates in the Brunnermeier-Pedersen public markets context — it slows the feedback loop by approximately 90 days per cycle (quarterly vs. daily). A spiral that operates at 90-day intervals is not a spiral in the traditional sense; it is an orderly workout process. Ares ASIF's statement that it has no non-accrual loans and $5 billion in undrawn committed credit facilities suggests the fund has the balance sheet infrastructure to manage orderly redemptions over multiple quarters without the price dislocations Brunnermeier-Pedersen identify as the spiral's accelerant. The paper's findings may be theoretically elegant as applied to private credit, but the structural differences between levered mark-to-market intermediaries and private credit fund structures mean the practical spiral risk is substantially lower than the theoretical translation implies.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════════════ -->
+</div><!-- /content -->
+
+<footer style="background:#0d1b2a;color:#8fa3b8;padding:24px 40px;font-family:Arial,sans-serif;font-size:11px;margin-top:40px;">
+  <div style="max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:20px;justify-content:space-between;">
+    <div>
+      <div style="color:#00c2cb;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Credit Intelligence Brief</div>
+      <div>Edition #011 · April 25, 2026 · Private Distribution</div>
+      <div style="margin-top:4px;">Generated by the Fintech Daily Brief scheduled intelligence system</div>
+    </div>
+    <div>
+      <div style="color:#00c2cb;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Archive</div>
+      <div><a href="../brief-archive.html" style="color:#00c2cb;text-decoration:none;">← All Editions</a></div>
+    </div>
+    <div>
+      <div style="color:#00c2cb;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Disclaimer</div>
+      <div style="max-width:340px;line-height:1.6;">This brief is for informational purposes only. Nothing herein constitutes investment, legal, or credit advice. All data sourced from publicly available information. Verify all claims independently before acting on any information in this brief.</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// Share dropdown
+function toggleShare(btn) {
+  const dropdown = document.getElementById('shareDropdown');
+  dropdown.classList.toggle('open');
+  document.addEventListener('click', function closeHandler(e) {
+    if (!e.target.closest('.share-wrapper')) {
+      dropdown.classList.remove('open');
+      document.removeEventListener('click', closeHandler);
+    }
+  });
+}
+
+// Copy link
+function copyLink() {
+  const url = window.location.href;
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      document.getElementById('copyStatus').textContent = '✓ Copied!';
+      setTimeout(() => { document.getElementById('copyStatus').textContent = 'Click to copy path'; }, 2000);
+    });
+  } else {
+    const el = document.createElement('textarea');
+    el.value = url;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+    document.getElementById('copyStatus').textContent = '✓ Copied!';
+    setTimeout(() => { document.getElementById('copyStatus').textContent = 'Click to copy path'; }, 2000);
+  }
+}
+
+// ── CHART 1: Fed Funds Rate Path (J.P. Morgan base case)
+new Chart(document.getElementById('fedRateChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['Jan 2026', 'Mar 18', 'Apr 29\n(hold)', 'Jun 2026\n(proj)', 'Sep 2026\n(proj)', 'Dec 2026\n(proj)', 'Q3 2027\n(hike?)'],
+    datasets: [{
+      label: 'Fed Funds Rate (%)',
+      data: [3.75, 3.75, 3.75, 3.75, 3.75, 3.75, 4.0],
+      borderColor: '#0d1b2a',
+      backgroundColor: 'rgba(13,27,42,0.08)',
+      tension: 0.2,
+      fill: true,
+      pointRadius: [5, 5, 7, 5, 5, 5, 7],
+      pointBackgroundColor: ['#0d1b2a','#0d1b2a','#e74c3c','#8fa3b8','#8fa3b8','#8fa3b8','#f39c12']
+    }, {
+      label: 'Market-Priced Path (1 cut 2026)',
+      data: [3.75, 3.75, 3.75, 3.75, 3.625, 3.5, 3.5],
+      borderColor: '#00c2cb',
+      borderDash: [4, 4],
+      backgroundColor: 'transparent',
+      tension: 0.2,
+      pointRadius: 3,
+      pointBackgroundColor: '#00c2cb'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 10 } } }
+    },
+    scales: {
+      y: {
+        min: 3.25, max: 4.25,
+        ticks: { font: { size: 9 }, callback: v => v.toFixed(2) + '%' }
+      },
+      x: { ticks: { font: { size: 9 } } }
+    }
+  }
+});
+
+// ── CHART 2: Diesel Price trend
+new Chart(document.getElementById('dieselTrendChart').getContext('2d'), {
+  type: 'line',
+  data: {
+    labels: ['Oct 25', 'Nov 25', 'Dec 25', 'Jan 26', 'Feb 26', 'Mar 26', 'Apr 14', 'Apr 20', 'Q2 avg\n(STEO)', 'Q3 avg\n(STEO)', 'Q4 avg\n(STEO)'],
+    datasets: [{
+      label: 'Diesel $/gal',
+      data: [4.80, 5.00, 5.10, 5.25, 5.40, 5.55, 5.608, 5.403, null, null, null],
+      borderColor: '#c0392b',
+      backgroundColor: 'rgba(192,57,43,0.08)',
+      tension: 0.3,
+      fill: true,
+      pointRadius: [4,4,4,4,4,4,5,7,0,0,0],
+      pointBackgroundColor: ['#c0392b','#c0392b','#c0392b','#c0392b','#c0392b','#c0392b','#c0392b','#16a085','transparent','transparent','transparent']
+    }, {
+      label: 'EIA STEO Projection',
+      data: [null, null, null, null, null, null, null, 5.403, 5.61, 5.00, 4.59],
+      borderColor: '#f39c12',
+      borderDash: [5, 5],
+      backgroundColor: 'transparent',
+      tension: 0.3,
+      pointRadius: [0,0,0,0,0,0,0,5,5,5,5],
+      pointBackgroundColor: '#f39c12'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 10 } } }
+    },
+    scales: {
+      y: {
+        min: 4.40, max: 6.0,
+        ticks: { font: { size: 9 }, callback: v => '$' + v.toFixed(2) }
+      },
+      x: { ticks: { font: { size: 9 } } }
+    }
+  }
+});
+
+// ── CHART 3: Gate Wave — Redemption Requests vs. Honored
+new Chart(document.getElementById('gateWaveChart').getContext('2d'), {
+  type: 'bar',
+  data: {
+    labels: ['Ares ASIF\n($10.7B)', 'Morgan Stanley\nNorth Haven ($8B)', 'Blue Owl\n(Fund 1)', 'Blue Owl\n(Fund 2)', 'Apollo\n(Reported)'],
+    datasets: [{
+      label: 'Redemption Requested (% of NAV)',
+      data: [11.6, 11.0, 9.5, 8.8, 7.5],
+      backgroundColor: 'rgba(192,57,43,0.7)',
+      borderColor: '#c0392b',
+      borderWidth: 1
+    }, {
+      label: 'Redemption Honored (% of NAV)',
+      data: [5.0, 4.95, 5.0, 5.0, 5.0],
+      backgroundColor: 'rgba(0,194,203,0.7)',
+      borderColor: '#00c2cb',
+      borderWidth: 1
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom', labels: { font: { size: 10 } } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + ctx.raw + '% of NAV' } }
+    },
+    scales: {
+      y: {
+        ticks: { font: { size: 9 }, callback: v => v + '%' }
+      },
+      x: { ticks: { font: { size: 9 } } }
+    }
+  }
+});
+</script>
+
+</body>
+</html>

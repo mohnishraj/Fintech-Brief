@@ -1,0 +1,83 @@
+name: Credit Intelligence Brief — Daily Generation
+
+on:
+  schedule:
+    # 7:00 AM ET (11:00 UTC summer / 12:00 UTC winter)
+    # Runs Monday–Friday. Remove the weekday filter if you want weekends too.
+    - cron: '0 11 * * 1-5'
+  workflow_dispatch:
+    # Allows manual trigger from GitHub → Actions → Run workflow
+
+jobs:
+  generate-brief:
+    name: Generate and Publish Brief
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write   # Required to commit and push the new brief
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Claude Code CLI
+        run: npm install -g @anthropic-ai/claude-code
+
+      - name: Configure Git
+        run: |
+          git config user.email "mohnishraj77@gmail.com"
+          git config user.name "Mohnish"
+
+      - name: Generate Credit Intelligence Brief
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          claude \
+            --allowedTools "Bash,Read,Write,Edit,WebSearch,WebFetch" \
+            --model claude-opus-4-6 \
+            --max-turns 80 \
+            -p "$(cat PROMPT.md)"
+
+      - name: Verify brief was created
+        run: |
+          TODAY=$(date +"%Y-%m-%d")
+          BRIEF="briefs/brief-${TODAY}.html"
+          if [ ! -f "$BRIEF" ]; then
+            echo "❌ Brief file not found: $BRIEF"
+            echo "Files in briefs/:"
+            ls -la briefs/ | tail -5
+            exit 1
+          fi
+          LINES=$(wc -l < "$BRIEF")
+          echo "✅ Brief created: $BRIEF ($LINES lines)"
+
+      - name: Verify archive was updated
+        run: |
+          TODAY=$(date +"%Y-%m-%d")
+          if ! grep -q "$TODAY" brief-archive.html; then
+            echo "⚠️  brief-archive.html may not have been updated for today"
+          else
+            echo "✅ Archive updated"
+          fi
+
+      - name: Push to GitHub (if Claude didn't already)
+        run: |
+          TODAY=$(date +"%Y-%m-%d")
+          BRIEF="briefs/brief-${TODAY}.html"
+          # Only commit+push if there are uncommitted changes
+          if git status --porcelain | grep -q .; then
+            git add "$BRIEF" brief-archive.html
+            git commit -m "Add brief — $(date +'%B %-d, %Y') [auto-push fallback]" || true
+            git push origin main
+            echo "✅ Pushed via fallback step"
+          else
+            echo "✅ Already committed and pushed by Claude"
+          fi
